@@ -1,0 +1,40 @@
+.card {
+  &:hover > .calendar {
+    visibility: visible;
+  }
+  &:first-child > .calendar {
+    @apply rounded-r-md -right-96;
+  }
+  &:last-child > .calendar {
+    @apply rounded-l-md -left-96;
+  }
+  @apply max-w-xs relative
+    transition hover:scale-125 hover:z-10
+    flex flex-row;
+  .card-container {
+    @apply rounded shadow-xl shadow-black bg-slate-700
+      overflow-hidden cursor-default;
+    img {
+      @apply w-full top-0 m-0 cursor-pointer;
+    }
+    .text {
+      @apply px-6 py-4;
+      .text__description_head {
+        @apply font-bold text-xl mb-2;
+      }
+      .text__description_body {
+        @apply text-gray-200 text-base;
+      }
+    }
+    .tags {
+      @apply px-6 pt-4 pb-2;
+    }
+  }
+}
+.calendar {
+  visibility: hidden;
+  height: calc(100% - 4rem);
+  @apply absolute
+  w-96 my-8 p-10
+  bg-slate-600 shadow-inner shadow-slate-900;
+}

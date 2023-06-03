@@ -1,0 +1,26 @@
+.main {
+  @apply flex-row 2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10 p-2 
+    max-w-screen-xl prose-lg prose-headings:text-center mx-auto;
+  .cards {
+    @apply container flex flex-wrap gap-6 w-fit justify-center 
+      my-0 mx-auto;
+    &:hover > div:not(:hover) {
+      filter: blur(5px);
+    }
+  }
+}
+
+.dialog {
+  @apply flex-col justify-center items-center 
+    overflow-x-hidden overflow-y-auto 
+    fixed inset-0 z-50 outline-none focus:outline-none
+    w-full h-full p-0 bg-slate-900;
+  .button_close {
+    @apply absolute 
+      right-5 top-5 h-10 w-10 
+      rounded-full 
+      bg-slate-500 hover:bg-slate-300 
+      flex justify-center items-center 
+      font-extrabold text-slate-300 hover:text-slate-950;
+  }
+}

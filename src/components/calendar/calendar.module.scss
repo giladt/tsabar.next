@@ -1,0 +1,84 @@
+.calNav,
+.calHead,
+.calContainer {
+  @apply select-none;
+}
+.calHead,
+.calContainer {
+  @apply w-full grid grid-cols-7;
+  .calDay,
+  .calHeadDay {
+    @apply grid place-content-center
+    text-gray-50 h-11 w-11 cursor-default;
+  }
+  .calHeadDay {
+    @apply font-bold text-stone-400 text-sm;
+  }
+}
+.calNav {
+  @apply flex justify-between;
+  .selectDates {
+    @apply flex items-center gap-5;
+  }
+  .today {
+    @apply px-2 rounded-sm;
+  }
+  .today,
+  .arrows {
+    &:hover {
+      @apply bg-slate-700;
+    }
+    &.disabled {
+      @apply cursor-not-allowed;
+    }
+  }
+  .arrows {
+    @apply w-5 h-5;
+    polyline {
+      @apply stroke-inherit;
+    }
+  }
+  & > * {
+    @apply cursor-pointer;
+  }
+}
+.calContainer {
+  .calDay {
+    @apply border-t-[1px];
+    &:not(.currentMonth) {
+      @apply text-gray-950;
+    }
+    &.today {
+      @apply bg-red-500 text-red-50;
+    }
+    &.booked {
+      background-image: linear-gradient(
+        -45deg,
+        transparent 0%,
+        transparent 49%,
+        red 49%,
+        red 50%,
+        transparent 50%,
+        transparent 100%
+      );
+
+      &:not(.currentMonth) {
+        background-image: linear-gradient(
+          -45deg,
+          transparent 0%,
+          transparent 49%,
+          grey 49%,
+          grey 50%,
+          transparent 50%,
+          transparent 100%
+        );
+      }
+    }
+    &:hover {
+      @apply bg-slate-700;
+      &.today {
+        @apply bg-red-700;
+      }
+    }
+  }
+}
