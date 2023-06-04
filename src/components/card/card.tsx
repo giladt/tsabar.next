@@ -1,6 +1,6 @@
 import { Calendar } from "@/components/calendar/calendar";
 import styles from "./card.module.scss";
-import { TBookings } from "@/app/page";
+import { TBookings } from "@/utils/types.d";
 
 type TCardProps = {
   apartment: {
@@ -51,7 +51,7 @@ export const Card = ({ apartment, onClick }: TCardProps) => {
         )}
       </div>
       <Calendar
-        apartment={apartment.id.toString()}
+        apartment={apartment.name}
         bookings={apartment.bookings}
         className={styles.calendar}
       />

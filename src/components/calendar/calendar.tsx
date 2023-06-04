@@ -5,7 +5,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr/index.js";
 
 import dayjs from "dayjs";
 import styles from "./calendar.module.scss";
-import { TBookings } from "@/app/page";
+import { TBookings } from "@/utils/types.d";
 
 interface TCalendarProps {
   apartment: string;

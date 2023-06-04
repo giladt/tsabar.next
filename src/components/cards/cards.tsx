@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { TBookings } from "@/app/page";
+import { TBookings } from "@/utils/types.d";
 import { Card } from "@/components/card/card";
 import { Carousel } from "@/components/carousel/carousel";
-import apartments from "@/assets/images.json";
+import apartments from "@/assets/apartments.json";
 import styles from "./cards.module.scss";
 
 type TCardsProps = {

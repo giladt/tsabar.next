@@ -25,3 +25,11 @@ export const MONTHS = [
   "December",
 ];
 
+type TApartment = "Le Soleil" | "La Lune";
+export type TApartments = TApartment[];
+
+export type TBooking = { start: Dayjs; end: Dayjs };
+export type TBookings = {
+  [apartment: string]: { [year: string]: { [month: string]: TBooking[] } };
+};
+

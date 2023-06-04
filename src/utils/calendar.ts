@@ -1,4 +1,4 @@
-import { TBookings } from "@/app/page";
+import { TBookings } from "@/utils/types.d";
 import dayjs, { type Dayjs } from "dayjs";
 import { TDateItem, Range, MONTHS } from "./types.d";
 
