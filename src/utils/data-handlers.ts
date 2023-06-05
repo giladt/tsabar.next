@@ -1,5 +1,5 @@
 import dayjs, { type Dayjs } from "dayjs";
-import { MONTHS, TApartment } from "@/utils/types.d";
+import { MONTHS } from "@/utils/types.d";
 import { TApartments, TBookings } from "@/utils/types.d";
 
 export const getData = async (apartments: TApartments) => {
@@ -34,12 +34,12 @@ export const getData = async (apartments: TApartments) => {
             parsedBookings[apartment] = {};
           }
           if (!parsedBookings[apartment][day.year()]) {
-            parsedBookings[apartment][day.year()] = {};
+            parsedBookings[day.year()] = {};
           }
-          if (!parsedBookings[apartment][day.year()][MONTHS[day.month()]]) {
-            parsedBookings[apartment][day.year()][MONTHS[day.month()]] = [];
+          if (!parsedBookings[day.year()][MONTHS[day.month()]]) {
+            parsedBookings[day.year()][MONTHS[day.month()]] = [];
           }
-          parsedBookings[apartment][day.year()][MONTHS[day.month()]].push({
+          parsedBookings[day.year()][MONTHS[day.month()]].push({
             start: event.start.isAfter(firstDateOfMonth)
               ? event.start
               : firstDateOfMonth,

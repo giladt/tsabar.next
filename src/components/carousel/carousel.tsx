@@ -103,7 +103,7 @@ export const Carousel = ({ images }: TCarouselProps) => {
             return (
               <CarouselImage
                 url={wfImage(image.id, "th")}
-                description={image.description}
+                description={image.description || ""}
                 key={index}
                 isActive={index === currentImage}
                 index={index}
