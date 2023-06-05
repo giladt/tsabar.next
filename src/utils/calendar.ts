@@ -7,14 +7,14 @@ export const generateDate = (apartment: string, bookings: TBookings, month: Rang
   const lastDateOfMonth = dayjs().year(year).month(month).endOf("month");
   const arrayOfDate: TDateItem[] = [];
 
-  if (!bookings[apartment] || Object.entries(!bookings[apartment]).length) return [];
+  if (!bookings || Object.entries(!bookings).length) return [];
   const isBooked = (currentDay: Dayjs): boolean => {
     const year = currentDay.year().toString();
     const month = currentDay.month() as Range<0, 11>;
     const day = currentDay.date();
 
-    if (!bookings || !bookings[apartment] || !bookings[apartment][year] || !bookings[apartment][year][MONTHS[month]]) return false;
-    const currentMonthBookings = bookings[apartment][year][MONTHS[month]];
+    if (!bookings || !bookings[year] || !bookings[year][MONTHS[month]]) return false;
+    const currentMonthBookings = bookings[year][MONTHS[month]];
     let isBooked = false;
 
     if (currentMonthBookings) {

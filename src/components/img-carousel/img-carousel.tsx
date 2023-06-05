@@ -1,16 +1,22 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import styles from "./carousel.module.scss";
+import styles from "./img-carousel.module.scss";
+import { Carousel } from "../carousel/carousel";
 
 type TCarouselProps = {
   images: { id: string; description?: string }[] | null;
 };
 
-export const Carousel = ({ images }: TCarouselProps) => {
+export const ImgCarousel = ({ images }: TCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
   const [maxScrollWidth, setMaxScrollWidth] = useState(0);
   const carouselRef = useRef<HTMLUListElement>(null);
+
+  const [modalImages, setModalImages] = useState<
+    { id: string; description?: string }[] | null
+  >(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const wfImage = (id: string, size: "th" | "lg") =>
     `https://wunderflatsng.blob.core.windows.net/imagesproduction/${id}${
@@ -67,25 +73,10 @@ export const Carousel = ({ images }: TCarouselProps) => {
 
   if (!images || !images.length) return null;
   return (
-    <section id="ts-carousel" className={styles.carousel}>
-      <div
-        className={styles.carousel__figure}
-        style={{
-          backgroundImage: `url(${
-            wfImage(images[currentImage].id, "lg") || ""
-          })`,
-        }}
-      >
-        {images[currentImage].description && (
-          <h2 className={styles.carousel__figure_header}>
-            {images[currentImage].description}
-          </h2>
-        )}
-      </div>
-
-      <div className="relative overflow-hidden">
+    <section id="ts-img-carousel" className={styles.carousel}>
+      <div className={styles.nav}>
         {maxScrollWidth > 0 && (
-          <div className="flex justify-between absolute top left w-full h-full">
+          <div className={styles.navButtons}>
             <NavButton
               direction="prev"
               onClick={movePrev}
@@ -103,19 +94,27 @@ export const Carousel = ({ images }: TCarouselProps) => {
             return (
               <CarouselImage
                 url={wfImage(image.id, "th")}
-                description={image.description}
+                description={image.description || ""}
                 key={index}
-                isActive={index === currentImage}
                 index={index}
                 currentImage={currentImage}
-                onClick={() => {
+                onChange={() => {
                   setCurrentImage(index);
+                }}
+                onClick={() => {
+                  setModalImages(images);
+                  setIsOpen(true);
                 }}
               />
             );
           })}
         </ul>
       </div>
+      <Dialog
+        images={modalImages}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      />
     </section>
   );
 };
@@ -151,18 +150,18 @@ const NavButton = ({ direction, onClick, disabled }: TNavButtonProps) => (
 type TCarouselImage = {
   url: string;
   description: string;
-  isActive: boolean;
   index: number;
   currentImage: number;
+  onChange: () => void;
   onClick: () => void;
 };
 const CarouselImage = ({
   url,
   description,
-  isActive,
   currentImage,
   index,
-  onClick,
+  onChange: onChange,
+  onClick: onClick,
 }: TCarouselImage) => {
   return (
     <li className={styles.carousel__image}>
@@ -172,7 +171,8 @@ const CarouselImage = ({
         name={`carousel-image`}
         id={`carousel-image-${index}`}
         checked={currentImage === index}
-        onChange={onClick}
+        onChange={onChange}
+        onClick={onClick}
         value={index}
         className="hidden"
       />
@@ -180,9 +180,22 @@ const CarouselImage = ({
         htmlFor={`carousel-image-${index}`}
         style={{ backgroundImage: `url(${url || ""})` }}
       />
-      <div className={isActive ? "opacity-100" : "opacity-0"} onClick={onClick}>
-        <h3>{description}</h3>
-      </div>
     </li>
+  );
+};
+
+type TDialogProps = {
+  images?: { id: string; description?: string }[] | null;
+  isOpen?: boolean;
+  onClose: () => void;
+};
+const Dialog = ({ images = null, isOpen = false, onClose }: TDialogProps) => {
+  return (
+    <dialog open={isOpen} className={styles.dialog}>
+      <button className={styles.button_close} onClick={onClose}>
+        X
+      </button>
+      <Carousel images={images} />
+    </dialog>
   );
 };

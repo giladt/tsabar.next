@@ -28,8 +28,16 @@ export const MONTHS = [
 type TApartment = "Le Soleil" | "La Lune";
 export type TApartments = TApartment[];
 
+export interface IApartmentData {
+  id: number;
+  name: string;
+  info: string;
+  images: { id: string; description?: string }[];
+  bookings?: TBookings;
+  tags?: string[];
+}
+
 export type TBooking = { start: Dayjs; end: Dayjs };
 export type TBookings = {
-  [apartment: string]: { [year: string]: { [month: string]: TBooking[] } };
+  [year: string]: { [month: string]: TBooking[] }
 };
-

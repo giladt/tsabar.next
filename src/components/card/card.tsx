@@ -1,36 +1,46 @@
-import { Calendar } from "@/components/calendar/calendar";
-import styles from "./card.module.scss";
+"use client";
+import React from "react";
 import { TBookings } from "@/utils/types.d";
+import { ImgCarousel } from "../img-carousel/img-carousel";
+
+import { useDispatch, useSelector } from "react-redux";
+import { TypedUseSelectorHook } from "react-redux";
+import { RootState, AppDispatch } from "@/store";
+
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+import styles from "./card.module.scss";
+
+import { setIsOpen, setStartupDialogContent } from "@/store/dialogSlice";
 
 type TCardProps = {
   apartment: {
-    bookings: TBookings;
     id: number;
     name: string;
     info: string;
-    image: {
+    images: {
       id: string;
       description?: string;
-    };
+    }[];
+    bookings?: TBookings;
     tags?: string[];
   };
-  onClick: () => void;
 };
 
-export const Card = ({ apartment, onClick }: TCardProps) => {
+export default function Card({ apartment }: TCardProps) {
   const wfImage = (id: string, size: "th" | "lg") =>
     `https://wunderflatsng.blob.core.windows.net/imagesproduction/${id}${
       size === "th" ? "-thumbnail" : size === "lg" ? "-large" : ""
     }.jpg`;
 
+  const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state) => state.dialog.isOpen);
+
   return (
     <div className={styles.card}>
       <div className={styles["card-container"]}>
-        <img
-          src={wfImage(apartment.image.id, "th")}
-          alt={apartment.image.description}
-          onClick={onClick}
-        />
+        <ImgCarousel images={apartment.images} />
         <div className={styles.text}>
           <h3 className={styles.text__description_head}>{apartment.name}</h3>
           {apartment.info && (
@@ -49,12 +59,16 @@ export const Card = ({ apartment, onClick }: TCardProps) => {
             ))}
           </div>
         )}
+        <button
+          className={styles.button}
+          onClick={() => {
+            dispatch(setIsOpen(true));
+            dispatch(setStartupDialogContent(`calendar|${apartment.name}`));
+          }}
+        >
+          Check Availability
+        </button>
       </div>
-      <Calendar
-        apartment={apartment.name}
-        bookings={apartment.bookings}
-        className={styles.calendar}
-      />
     </div>
   );
-};
+}

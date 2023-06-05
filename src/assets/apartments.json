@@ -1,5 +1,50 @@
 [
   {
+    "id": 4,
+    "name": "Le Soleil",
+    "info": "A bright and cosy apartment. Wonderful balcony to relax after a long day at work.",
+    "images": [
+      {
+        "id": "mmA5tEUkUSTyuGYfNQD81",
+        "description": "Living room"
+      },
+      {
+        "id": "BQ7IP_ZmkhH1hjpgMb6VB",
+        "description": "Living room"
+      },
+      {
+        "id": "YHqCtg1xhgQ2kkOUKAPuG",
+        "description": "Flowers"
+      },
+      {
+        "id": "4OE5KX41OgoElTBKdh0ll",
+        "description": "Kitchen"
+      },
+      {
+        "id": "VlXdia_SUxhXx-QZAkEdO",
+        "description": "Sweets"
+      },
+      {
+        "id": "B7iXfM0u21SxS0QZMja_U",
+        "description": "Bathroom"
+      },
+      {
+        "id": "S2HJTU7A_xdmwrhprIPhC",
+        "description": "Corridor"
+      },
+      {
+        "id": "rwb3nr9PIy1PSAHmV8ohs",
+        "description": "Street"
+      },
+      {
+        "id": "Vy9j0SAWa9JsGQa34kSTI",
+        "description": "Street"
+      }
+    ],
+    "bookings": {},
+    "tags": []
+  },
+  {
     "id": 7,
     "name": "La Lune",
     "info": "New! Designer apartment. Equipped with every bit of what you'll need.",
@@ -44,49 +89,8 @@
         "id": "Vy9j0SAWa9JsGQa34kSTI",
         "description": "Street"
       }
-    ]
-  },
-  {
-    "id": 4,
-    "name": "Le Soleil",
-    "info": "A bright and cosy apartment. Wonderful balcony to relax after a long day at work.",
-    "images": [
-      {
-        "id": "mmA5tEUkUSTyuGYfNQD81",
-        "description": "Living room"
-      },
-      {
-        "id": "BQ7IP_ZmkhH1hjpgMb6VB",
-        "description": "Living room"
-      },
-      {
-        "id": "YHqCtg1xhgQ2kkOUKAPuG",
-        "description": "Flowers"
-      },
-      {
-        "id": "4OE5KX41OgoElTBKdh0ll",
-        "description": "Kitchen"
-      },
-      {
-        "id": "VlXdia_SUxhXx-QZAkEdO",
-        "description": "Sweets"
-      },
-      {
-        "id": "B7iXfM0u21SxS0QZMja_U",
-        "description": "Bathroom"
-      },
-      {
-        "id": "S2HJTU7A_xdmwrhprIPhC",
-        "description": "Corridor"
-      },
-      {
-        "id": "rwb3nr9PIy1PSAHmV8ohs",
-        "description": "Street"
-      },
-      {
-        "id": "Vy9j0SAWa9JsGQa34kSTI",
-        "description": "Street"
-      }
-    ]
+    ],
+    "bookings": {},
+    "tags": []
   }
 ]

@@ -9,14 +9,10 @@
     @apply rounded-l-md -left-96;
   }
   @apply max-w-xs relative
-    transition hover:scale-125 hover:z-10
     flex flex-row;
   .card-container {
-    @apply rounded shadow-xl shadow-black bg-slate-700
-      overflow-hidden cursor-default;
-    img {
-      @apply w-full top-0 m-0 cursor-pointer;
-    }
+    @apply shadow-xl shadow-black bg-transparent
+      cursor-default hover:z-10;
     .text {
       @apply px-6 py-4;
       .text__description_head {
@@ -29,12 +25,8 @@
     .tags {
       @apply px-6 pt-4 pb-2;
     }
+    .button {
+      @apply w-full h-16 bg-slate-600 hover:bg-slate-400 active:bg-slate-500 rounded-lg;
+    }
   }
-}
-.calendar {
-  visibility: hidden;
-  height: calc(100% - 4rem);
-  @apply absolute
-  w-96 my-8 p-10
-  bg-slate-600 shadow-inner shadow-slate-900;
 }
