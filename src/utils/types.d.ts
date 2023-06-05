@@ -33,7 +33,7 @@ export interface IApartmentData {
   name: string;
   info: string;
   images: { id: string; description?: string }[];
-  bookings?: TBookings;
+  bookings: TBookings;
   tags?: string[];
 }
 

@@ -11,19 +11,20 @@ import Preloader from "@/components/preloader/preloader";
 import { Dialog } from "@/components/dialog/dialog";
 
 async function Home() {
-  const apartmentsNames: TApartments = ["La Lune", "Le Soleil"];
-  const bookings = await JSON.parse(
-    JSON.stringify(await getData(apartmentsNames))
-  );
-
   const apartments: IApartmentData[] = [];
   const dialog: { isOpen: boolean; startupDialogContent: string } = {
     isOpen: false,
     startupDialogContent: "",
   };
-  apartmentsData.forEach((apartment: IApartmentData) => {
-    apartments.push({ ...apartment, bookings: bookings[apartment.name] });
-  });
+
+  for (let apartment of apartmentsData) {
+    const url = `https://www.airbnb.com/calendar/ical/${
+      process.env["ICAL_ID_APT_" + apartment.id]
+    }.ics?s=${process.env["ICAL_SECRET_APT_" + apartment.id]}`;
+    const bookings = JSON.parse(JSON.stringify(await getData(url)));
+
+    apartments.push({ ...apartment, bookings });
+  }
 
   store.dispatch(setStartupApartments(apartments));
   store.dispatch(setStartupDialogContent(dialog.startupDialogContent));
