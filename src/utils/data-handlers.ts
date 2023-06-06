@@ -9,7 +9,9 @@ export const getData = async (icalUrl: string) => {
       "\n"
     );
 
+    console.log("GET-DATA:", { data });
     const events = parseICalData(data);
+    console.log("GET-DATA:", { events });
 
     if (!events || !Object.entries(events).length) return {};
     for (let event of events) {
@@ -25,6 +27,9 @@ export const getData = async (icalUrl: string) => {
           .year(day.year())
           .month(day.month())
           .endOf("month");
+
+        console.log("GET-DATA:", { firstDateOfMonth, lastDateOfMonth });
+
         if (!parsedBookings[day.year()]) {
           parsedBookings[day.year()] = {};
         }
@@ -39,7 +44,9 @@ export const getData = async (icalUrl: string) => {
             ? event.end
             : lastDateOfMonth,
         });
+        console.log("GET-DATA:", { parsedBookings });
 
+        console.log("GET-DATA:", { day });
         day = day.add(1, "month");
       }
     }
