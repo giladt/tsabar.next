@@ -1,7 +1,7 @@
 .carousel {
-  @apply flex flex-col gap-[2px] m-0 h-full;
+  @apply flex flex-col gap-[2px] h-full w-[100svw];
   .carousel__figure {
-    @apply h-full bg-center bg-cover;
+    @apply h-full bg-center bg-cover rounded-t-sm;
     .carousel__figure_header {
       @apply text-4xl leading-8 font-semibold mb-12 text-slate-800;
     }
@@ -25,8 +25,8 @@
 }
 
 .carousel__image {
-  @apply text-center relative w-32 h-32 snap-start cursor-pointer 
-    transition hover:-rotate-6 hover:scale-105;
+  @apply text-center relative w-32 h-32 snap-start cursor-pointer
+  transition hover:scale-95;
   input {
     @apply hidden;
   }
@@ -36,7 +36,9 @@
       z-0 rounded-b-md;
   }
   div {
-    @apply h-full w-full aspect-square block absolute top-0 left-0 transition-opacity duration-300 hover:opacity-100 bg-blue-800/75 z-10;
+    @apply h-full w-full aspect-square block absolute top-0 left-0 
+      transition-opacity duration-300 hover:opacity-100 
+      bg-slate-800/75 z-10;
     h3 {
       @apply text-white py-6 px-3 mx-auto text-xl;
     }

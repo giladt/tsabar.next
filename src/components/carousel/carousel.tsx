@@ -1,14 +1,24 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import styles from "./carousel.module.scss";
 
 type TCarouselProps = {
   images: { id: string; description?: string }[] | null;
+  currentImage: number;
+  setCurrentImage: Dispatch<SetStateAction<number>>;
 };
 
-export const Carousel = ({ images }: TCarouselProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentImage, setCurrentImage] = useState(0);
+export const Carousel = ({
+  images,
+  currentImage,
+  setCurrentImage,
+}: TCarouselProps) => {
   const [maxScrollWidth, setMaxScrollWidth] = useState(0);
   const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -18,38 +28,38 @@ export const Carousel = ({ images }: TCarouselProps) => {
     }.jpg`;
 
   const movePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prevState) => prevState - 1);
+    if (currentImage > 0) {
+      setCurrentImage((prevState) => prevState - 1);
     }
   };
 
   const moveNext = () => {
     if (
       carouselRef.current !== null &&
-      carouselRef.current.offsetWidth * currentIndex < maxScrollWidth
+      carouselRef.current.offsetWidth * currentImage < maxScrollWidth
     ) {
-      setCurrentIndex((prevState) => prevState + 1);
+      setCurrentImage((prevState) => prevState + 1);
     }
   };
 
   const isDisabled = (direction: string) => {
     if (direction === "prev") {
-      return currentIndex <= 0;
+      return currentImage <= 0;
     }
 
     if (direction === "next" && carouselRef.current !== null) {
-      return carouselRef.current.offsetWidth * currentIndex >= maxScrollWidth;
+      return carouselRef.current.offsetWidth * currentImage >= maxScrollWidth;
     }
 
     return false;
   };
 
   useEffect(() => {
-    if (carouselRef !== null && carouselRef.current !== null) {
+    if (carouselRef?.current) {
       carouselRef.current.scrollLeft =
-        carouselRef.current.offsetWidth * currentIndex;
+        carouselRef.current.offsetWidth * currentImage;
     }
-  }, [currentIndex]);
+  }, [currentImage]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -106,7 +116,7 @@ export const Carousel = ({ images }: TCarouselProps) => {
                 description={image.description || ""}
                 key={index}
                 isActive={index === currentImage}
-                index={index}
+                currentIndex={index}
                 currentImage={currentImage}
                 onClick={() => {
                   setCurrentImage(index);
@@ -152,7 +162,7 @@ type TCarouselImage = {
   url: string;
   description: string;
   isActive: boolean;
-  index: number;
+  currentIndex: number;
   currentImage: number;
   onClick: () => void;
 };
@@ -161,7 +171,7 @@ const CarouselImage = ({
   description,
   isActive,
   currentImage,
-  index,
+  currentIndex: index,
   onClick,
 }: TCarouselImage) => {
   return (

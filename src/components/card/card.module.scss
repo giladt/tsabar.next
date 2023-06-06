@@ -30,3 +30,7 @@
     }
   }
 }
+
+.calendar {
+  @apply h-auto w-96 min-h-fit p-10 inline-block bg-slate-600;
+}

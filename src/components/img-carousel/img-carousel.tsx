@@ -2,21 +2,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./img-carousel.module.scss";
 import { Carousel } from "../carousel/carousel";
+import { Dialog } from "../dialog/dialog";
 
 type TCarouselProps = {
   images: { id: string; description?: string }[] | null;
 };
 
 export const ImgCarousel = ({ images }: TCarouselProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
   const [maxScrollWidth, setMaxScrollWidth] = useState(0);
-  const carouselRef = useRef<HTMLUListElement>(null);
-
-  const [modalImages, setModalImages] = useState<
-    { id: string; description?: string }[] | null
-  >(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const refCarousel = useRef<HTMLUListElement>(null);
+  const refDialogGallery = useRef<HTMLDialogElement | null>(null);
 
   const wfImage = (id: string, size: "th" | "lg") =>
     `https://wunderflatsng.blob.core.windows.net/imagesproduction/${id}${
@@ -24,44 +20,44 @@ export const ImgCarousel = ({ images }: TCarouselProps) => {
     }.jpg`;
 
   const movePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prevState) => prevState - 1);
+    if (currentImage > 0) {
+      setCurrentImage((prevState) => prevState - 1);
     }
   };
 
   const moveNext = () => {
     if (
-      carouselRef.current !== null &&
-      carouselRef.current.offsetWidth * currentIndex < maxScrollWidth
+      refCarousel.current !== null &&
+      refCarousel.current.offsetWidth * currentImage < maxScrollWidth
     ) {
-      setCurrentIndex((prevState) => prevState + 1);
+      setCurrentImage((prevState) => prevState + 1);
     }
   };
 
   const isDisabled = (direction: string) => {
     if (direction === "prev") {
-      return currentIndex <= 0;
+      return currentImage <= 0;
     }
 
-    if (direction === "next" && carouselRef.current !== null) {
-      return carouselRef.current.offsetWidth * currentIndex >= maxScrollWidth;
+    if (direction === "next" && refCarousel.current !== null) {
+      return refCarousel.current.offsetWidth * currentImage >= maxScrollWidth;
     }
 
     return false;
   };
 
   useEffect(() => {
-    if (carouselRef !== null && carouselRef.current !== null) {
-      carouselRef.current.scrollLeft =
-        carouselRef.current.offsetWidth * currentIndex;
+    if (refCarousel !== null && refCarousel.current !== null) {
+      refCarousel.current.scrollLeft =
+        refCarousel.current.offsetWidth * currentImage;
     }
-  }, [currentIndex]);
+  }, [currentImage]);
 
   useEffect(() => {
     const handleResize = () => {
       setMaxScrollWidth(
-        carouselRef.current
-          ? carouselRef.current.scrollWidth - carouselRef.current.offsetWidth
+        refCarousel.current
+          ? refCarousel.current.scrollWidth - refCarousel.current.offsetWidth
           : 0
       );
     };
@@ -89,7 +85,14 @@ export const ImgCarousel = ({ images }: TCarouselProps) => {
             />
           </div>
         )}
-        <ul ref={carouselRef} className={styles.carousel__container}>
+        <ul
+          ref={refCarousel}
+          className={styles.carousel__container}
+          onClick={(e) => {
+            e.preventDefault();
+            refDialogGallery.current?.showModal();
+          }}
+        >
           {images.map((image, index) => {
             return (
               <CarouselImage
@@ -101,20 +104,18 @@ export const ImgCarousel = ({ images }: TCarouselProps) => {
                 onChange={() => {
                   setCurrentImage(index);
                 }}
-                onClick={() => {
-                  setModalImages(images);
-                  setIsOpen(true);
-                }}
               />
             );
           })}
         </ul>
       </div>
-      <Dialog
-        images={modalImages}
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-      />
+      <Dialog ref={refDialogGallery} type="gallery">
+        <Carousel
+          images={images}
+          currentImage={currentImage}
+          setCurrentImage={setCurrentImage}
+        />
+      </Dialog>
     </section>
   );
 };
@@ -153,7 +154,6 @@ type TCarouselImage = {
   index: number;
   currentImage: number;
   onChange: () => void;
-  onClick: () => void;
 };
 const CarouselImage = ({
   url,
@@ -161,7 +161,6 @@ const CarouselImage = ({
   currentImage,
   index,
   onChange: onChange,
-  onClick: onClick,
 }: TCarouselImage) => {
   return (
     <li className={styles.carousel__image}>
@@ -172,7 +171,6 @@ const CarouselImage = ({
         id={`carousel-image-${index}`}
         checked={currentImage === index}
         onChange={onChange}
-        onClick={onClick}
         value={index}
         className="hidden"
       />
@@ -181,21 +179,5 @@ const CarouselImage = ({
         style={{ backgroundImage: `url(${url || ""})` }}
       />
     </li>
-  );
-};
-
-type TDialogProps = {
-  images?: { id: string; description?: string }[] | null;
-  isOpen?: boolean;
-  onClose: () => void;
-};
-const Dialog = ({ images = null, isOpen = false, onClose }: TDialogProps) => {
-  return (
-    <dialog open={isOpen} className={styles.dialog}>
-      <button className={styles.button_close} onClick={onClose}>
-        X
-      </button>
-      <Carousel images={images} />
-    </dialog>
   );
 };

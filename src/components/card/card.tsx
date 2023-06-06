@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { useRef } from "react";
 import { TBookings } from "@/utils/types.d";
 import { ImgCarousel } from "../img-carousel/img-carousel";
 
@@ -12,7 +12,8 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 import styles from "./card.module.scss";
 
-import { setIsOpen, setStartupDialogContent } from "@/store/dialogSlice";
+import { Dialog } from "@/components/dialog/dialog";
+import Calendar from "../calendar/calendar";
 
 type TCardProps = {
   apartment: {
@@ -29,13 +30,7 @@ type TCardProps = {
 };
 
 export default function Card({ apartment }: TCardProps) {
-  const wfImage = (id: string, size: "th" | "lg") =>
-    `https://wunderflatsng.blob.core.windows.net/imagesproduction/${id}${
-      size === "th" ? "-thumbnail" : size === "lg" ? "-large" : ""
-    }.jpg`;
-
-  const dispatch = useAppDispatch();
-  const isOpen = useAppSelector((state) => state.dialog.isOpen);
+  const refDialogCalendar = useRef<HTMLDialogElement | null>(null);
 
   return (
     <div className={styles.card}>
@@ -61,14 +56,15 @@ export default function Card({ apartment }: TCardProps) {
         )}
         <button
           className={styles.button}
-          onClick={() => {
-            dispatch(setIsOpen(true));
-            dispatch(setStartupDialogContent(`calendar|${apartment.name}`));
-          }}
+          onClick={() => refDialogCalendar.current?.showModal()}
         >
           Check Availability
         </button>
       </div>
+      <Dialog ref={refDialogCalendar} type="calendar">
+        <h1>{apartment.name} Availability</h1>
+        <Calendar apartment={apartment.name} className={styles.calendar} />
+      </Dialog>
     </div>
   );
 }
