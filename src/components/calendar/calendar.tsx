@@ -49,7 +49,7 @@ export default function Calendar({ apartment, className }: TCalendarProps) {
               className={styles.today}
               role="button"
               onClick={() => {
-                setToday(today.month(dayjs().month()));
+                setToday(today.month(dayjs().month()).year(dayjs().year()));
               }}
             >
               Today
