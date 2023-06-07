@@ -1,26 +1,18 @@
 "use client";
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from "react";
-import styles from "./carousel.module.scss";
+import React, { useState, useRef, useEffect } from "react";
+import styles from "./img-carousel.module.scss";
+import { Carousel } from "../carousel/carousel";
+import { Dialog } from "../dialog/dialog";
 
 type TCarouselProps = {
   images: { id: string; description?: string }[] | null;
-  currentImage: number;
-  setCurrentImage: Dispatch<SetStateAction<number>>;
 };
 
-export const Carousel = ({
-  images,
-  currentImage,
-  setCurrentImage,
-}: TCarouselProps) => {
+export const ImgCarousel = ({ images }: TCarouselProps) => {
+  const [currentImage, setCurrentImage] = useState(0);
   const [maxScrollWidth, setMaxScrollWidth] = useState(0);
-  const carouselRef = useRef<HTMLUListElement>(null);
+  const refCarousel = useRef<HTMLUListElement>(null);
+  const refDialogGallery = useRef<HTMLDialogElement | null>(null);
 
   const wfImage = (id: string, size: "th" | "lg") =>
     `https://wunderflatsng.blob.core.windows.net/imagesproduction/${id}${
@@ -35,8 +27,8 @@ export const Carousel = ({
 
   const moveNext = () => {
     if (
-      carouselRef.current !== null &&
-      carouselRef.current.offsetWidth * currentImage < maxScrollWidth
+      refCarousel.current !== null &&
+      refCarousel.current.offsetWidth * currentImage < maxScrollWidth
     ) {
       setCurrentImage((prevState) => prevState + 1);
     }
@@ -47,25 +39,25 @@ export const Carousel = ({
       return currentImage <= 0;
     }
 
-    if (direction === "next" && carouselRef.current !== null) {
-      return carouselRef.current.offsetWidth * currentImage >= maxScrollWidth;
+    if (direction === "next" && refCarousel.current !== null) {
+      return refCarousel.current.offsetWidth * currentImage >= maxScrollWidth;
     }
 
     return false;
   };
 
   useEffect(() => {
-    if (carouselRef?.current) {
-      carouselRef.current.scrollLeft =
-        carouselRef.current.offsetWidth * currentImage;
+    if (refCarousel !== null && refCarousel.current !== null) {
+      refCarousel.current.scrollLeft =
+        refCarousel.current.offsetWidth * currentImage;
     }
   }, [currentImage]);
 
   useEffect(() => {
     const handleResize = () => {
       setMaxScrollWidth(
-        carouselRef.current
-          ? carouselRef.current.scrollWidth - carouselRef.current.offsetWidth
+        refCarousel.current
+          ? refCarousel.current.scrollWidth - refCarousel.current.offsetWidth
           : 0
       );
     };
@@ -77,25 +69,10 @@ export const Carousel = ({
 
   if (!images || !images.length) return null;
   return (
-    <section id="ts-carousel" className={styles.carousel}>
-      <div
-        className={styles.carousel__figure}
-        style={{
-          backgroundImage: `url(${
-            wfImage(images[currentImage].id, "lg") || ""
-          })`,
-        }}
-      >
-        {images[currentImage].description && (
-          <h2 className={styles.carousel__figure_header}>
-            {images[currentImage].description}
-          </h2>
-        )}
-      </div>
-
-      <div className="relative overflow-hidden">
+    <section id="ts-img-carousel" className={styles.carousel}>
+      <div className={styles.nav}>
         {maxScrollWidth > 0 && (
-          <div className="flex justify-between absolute top left w-full h-full">
+          <div className={styles.navButtons}>
             <NavButton
               direction="prev"
               onClick={movePrev}
@@ -108,17 +85,23 @@ export const Carousel = ({
             />
           </div>
         )}
-        <ul ref={carouselRef} className={styles.carousel__container}>
+        <ul
+          ref={refCarousel}
+          className={styles.carousel__container}
+          onClick={(e) => {
+            e.preventDefault();
+            refDialogGallery.current?.showModal();
+          }}
+        >
           {images.map((image, index) => {
             return (
               <CarouselImage
                 url={wfImage(image.id, "th")}
                 description={image.description || ""}
                 key={index}
-                isActive={index === currentImage}
-                currentIndex={index}
+                index={index}
                 currentImage={currentImage}
-                onClick={() => {
+                onChange={() => {
                   setCurrentImage(index);
                 }}
               />
@@ -126,6 +109,13 @@ export const Carousel = ({
           })}
         </ul>
       </div>
+      <Dialog ref={refDialogGallery} type="gallery">
+        <Carousel
+          images={images}
+          currentImage={currentImage}
+          setCurrentImage={setCurrentImage}
+        />
+      </Dialog>
     </section>
   );
 };
@@ -161,18 +151,16 @@ const NavButton = ({ direction, onClick, disabled }: TNavButtonProps) => (
 type TCarouselImage = {
   url: string;
   description: string;
-  isActive: boolean;
-  currentIndex: number;
+  index: number;
   currentImage: number;
-  onClick: () => void;
+  onChange: () => void;
 };
 const CarouselImage = ({
   url,
   description,
-  isActive,
   currentImage,
-  currentIndex: index,
-  onClick,
+  index,
+  onChange: onChange,
 }: TCarouselImage) => {
   return (
     <li className={styles.carousel__image}>
@@ -182,7 +170,7 @@ const CarouselImage = ({
         name={`carousel-image`}
         id={`carousel-image-${index}`}
         checked={currentImage === index}
-        onChange={onClick}
+        onChange={onChange}
         value={index}
         className="hidden"
       />
@@ -190,9 +178,6 @@ const CarouselImage = ({
         htmlFor={`carousel-image-${index}`}
         style={{ backgroundImage: `url(${url || ""})` }}
       />
-      <div className={isActive ? "opacity-100" : "opacity-0"} onClick={onClick}>
-        <h3>{description}</h3>
-      </div>
     </li>
   );
 };
