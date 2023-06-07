@@ -12,8 +12,6 @@ export const getData = async (icalUrl: string) => {
     if (!events || !Object.entries(events).length) return {};
     if (events[0].start.isBefore(dayjs())) events[0].start = events[0].start.subtract(1, "month");
 
-    console.log("GET DATA:", { icalUrl, res: { status: await res.status, data, events: JSON.stringify(events) } })
-
     for (let event of events) {
       if (!event || !event.start || !event.end) continue;
 

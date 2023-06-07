@@ -36,8 +36,6 @@ export const generateDate = (bookings: TBookings, month: Range<0, 11> = dayjs().
     const booked = isBooked(date);
     const today = date.toDate().toDateString() === dayjs().toDate().toDateString();
 
-    console.log("prefix:", { date: date.toISOString(), today, booked });
-
     arrayOfDate.push({
       currentMonth: false,
       today,
@@ -51,8 +49,6 @@ export const generateDate = (bookings: TBookings, month: Range<0, 11> = dayjs().
     const date = firstDateOfMonth.date(i);
     const today = date.toDate().toDateString() === dayjs().toDate().toDateString();
     const booked = isBooked(date);
-
-    console.log("month dates:", { date: date.toISOString(), today, booked });
 
     arrayOfDate.push({
       currentMonth: true,
@@ -68,8 +64,6 @@ export const generateDate = (bookings: TBookings, month: Range<0, 11> = dayjs().
     const date = firstDateOfMonth.date(i);
     const today = date.toDate().toDateString() === dayjs().toDate().toDateString();
     const booked = isBooked(date);
-
-    console.log("suffix:", { date: date.toISOString(), today, booked });
 
     arrayOfDate.push({
       currentMonth: false,
