@@ -2,7 +2,7 @@ import { TBookings } from "@/utils/types.d";
 import dayjs, { type Dayjs } from "dayjs";
 import { TDateItem, Range, MONTHS } from "./types.d";
 
-export const generateDate = (apartment: string, bookings: TBookings, month: Range<0, 11> = dayjs().month() as Range<0, 11>, year: number = dayjs().year()) => {
+export const generateDate = (bookings: TBookings, month: Range<0, 11> = dayjs().month() as Range<0, 11>, year: number = dayjs().year()) => {
   const firstDateOfMonth = dayjs().year(year).month(month).startOf("month");
   const lastDateOfMonth = dayjs().year(year).month(month).endOf("month");
   const arrayOfDate: TDateItem[] = [];
@@ -20,7 +20,8 @@ export const generateDate = (apartment: string, bookings: TBookings, month: Rang
 
     if (currentMonthBookings) {
       for (let { start, end } of currentMonthBookings) {
-        if (day >= dayjs(start).date() && day <= dayjs(end).date()) {
+        if (currentDay.isSame(start) || currentDay.isSame(end) ||
+          (currentDay.isAfter(start) && currentDay.isBefore(end))) {
           return isBooked = true;
         }
       }
@@ -78,5 +79,5 @@ export const generateDate = (apartment: string, bookings: TBookings, month: Rang
     });
   }
 
-  return arrayOfDate;
+  return [...arrayOfDate];
 }

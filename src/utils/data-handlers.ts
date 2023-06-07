@@ -1,6 +1,9 @@
 import dayjs, { type Dayjs } from "dayjs";
 import { MONTHS } from "@/utils/types.d";
 import { TBookings } from "@/utils/types.d";
+import utc from "dayjs/plugin/utc"
+
+dayjs.extend(utc);
 
 export const getData = async (icalUrl: string) => {
   try {
@@ -75,11 +78,10 @@ export const parseICalData = (data: string[]) => {
       if (match) {
         const [_, key, value]: string[] = match;
 
-        const eventKey = key.toLowerCase();
-        const eventValue = dayjs(value);
+        const eventKey = key.toLowerCase() as "start" | "end";
+        const eventValue = dayjs.utc(value, "YYYY-MM-DD");
 
-        if (eventKey === "start") event.start = eventValue.add(eventValue.utcOffset(), "minutes");
-        if (eventKey === "end") event.end = eventValue.add(eventValue.utcOffset(), "minutes");
+        event[eventKey] = eventValue;
       }
     }
   }
