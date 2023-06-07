@@ -9,8 +9,10 @@ export default function Cards({}: TCardsProps) {
 
   return (
     <main id="main" className={styles.main}>
-      <h1>Le Petit Moabit</h1>
-      <h2>
+      <h1 className="text-3xl text-teal-800 dark:text-teal-200 font-extrabold font-sans">
+        Le Petit Moabit
+      </h1>
+      <h2 className="text-xl">
         Modern, fully renovated, all-inclusive apartments for rent in the heart
         of Berlin
       </h2>

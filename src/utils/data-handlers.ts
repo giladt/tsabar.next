@@ -5,15 +5,17 @@ import { TBookings } from "@/utils/types.d";
 export const getData = async (icalUrl: string) => {
   try {
     const parsedBookings: TBookings = {};
-    const data = (await (await fetch(icalUrl)).text()).split(
-      "\n"
-    );
+    const res = await fetch(icalUrl, { next: { revalidate: 60 } })
+    const data = await (res).text();
+    const events = parseICalData(data.split("\n"));
 
     console.log("GET-DATA:", { data });
-    const events = parseICalData(data);
     console.log("GET-DATA:", { events });
 
     if (!events || !Object.entries(events).length) return {};
+    if (events[0].start.isBefore(dayjs())) events[0].start = events[0].start.subtract(1, "month");
+    console.log("GET-DATA:", { firstEvent: events[0] });
+
     for (let event of events) {
       if (!event || !event.start || !event.end) continue;
 

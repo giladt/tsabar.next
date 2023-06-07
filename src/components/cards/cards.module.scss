@@ -1,8 +1,16 @@
 .main {
-  @apply flex-row 2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10 p-2 
-    max-w-screen-xl prose-lg prose-headings:text-center mx-auto;
+  @apply flex flex-col justify-center items-center h-[100svh]
+    p-2 
+    mx-auto
+    max-w-screen-xl 
+    2xl:container 
+    2xl:px-0;
+  & > h1,
+  & > h2 {
+    @apply text-center my-3;
+  }
   .cards {
     @apply container flex flex-wrap gap-6 w-fit justify-center 
-      my-0 mx-auto;
+        my-0 mx-auto;
   }
 }
