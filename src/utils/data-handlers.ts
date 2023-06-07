@@ -9,12 +9,10 @@ export const getData = async (icalUrl: string) => {
     const data = await (res).text();
     const events = parseICalData(data.split("\n"));
 
-    console.log("GET-DATA:", { data });
-    console.log("GET-DATA:", { events });
-
     if (!events || !Object.entries(events).length) return {};
     if (events[0].start.isBefore(dayjs())) events[0].start = events[0].start.subtract(1, "month");
-    console.log("GET-DATA:", { firstEvent: events[0] });
+
+    console.log("GET DATA:", { icalUrl, res: { status: await res.status, data, events: JSON.stringify(events) } })
 
     for (let event of events) {
       if (!event || !event.start || !event.end) continue;
@@ -30,8 +28,6 @@ export const getData = async (icalUrl: string) => {
           .month(day.month())
           .endOf("month");
 
-        console.log("GET-DATA:", { firstDateOfMonth, lastDateOfMonth });
-
         if (!parsedBookings[day.year()]) {
           parsedBookings[day.year()] = {};
         }
@@ -46,9 +42,7 @@ export const getData = async (icalUrl: string) => {
             ? event.end
             : lastDateOfMonth,
         });
-        console.log("GET-DATA:", { parsedBookings });
 
-        console.log("GET-DATA:", { day });
         day = day.add(1, "month");
       }
     }
@@ -84,8 +78,8 @@ export const parseICalData = (data: string[]) => {
         const eventKey = key.toLowerCase();
         const eventValue = dayjs(value);
 
-        if (eventKey === "start") event.start = eventValue;
-        if (eventKey === "end") event.end = eventValue;
+        if (eventKey === "start") event.start = eventValue.add(eventValue.utcOffset(), "minutes");
+        if (eventKey === "end") event.end = eventValue.add(eventValue.utcOffset(), "minutes");
       }
     }
   }

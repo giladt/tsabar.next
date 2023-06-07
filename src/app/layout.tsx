@@ -35,6 +35,7 @@ export default async function RootLayout({
     const url = `https://www.airbnb.com/calendar/ical/${
       process.env["ICAL_ID_APT_" + apartment.id]
     }.ics?s=${process.env["ICAL_SECRET_APT_" + apartment.id]}`;
+    console.log(url);
     const bookings = JSON.parse(JSON.stringify(await getData(url)));
 
     apartments.push({ ...apartment, bookings });

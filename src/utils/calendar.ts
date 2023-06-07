@@ -8,6 +8,7 @@ export const generateDate = (apartment: string, bookings: TBookings, month: Rang
   const arrayOfDate: TDateItem[] = [];
 
   if (!bookings || Object.entries(!bookings).length) return [];
+
   const isBooked = (currentDay: Dayjs): boolean => {
     const year = currentDay.year().toString();
     const month = currentDay.month() as Range<0, 11>;
@@ -30,35 +31,50 @@ export const generateDate = (apartment: string, bookings: TBookings, month: Rang
 
   // create prefix dates
   for (let i = 0; i < firstDateOfMonth.day(); i++) {
-    const currentDay = firstDateOfMonth.day(i);
+    const date = firstDateOfMonth.day(i);
+    const booked = isBooked(date);
+    const today = date.toDate().toDateString() === dayjs().toDate().toDateString();
+
+    console.log("prefix:", { date: date.toISOString(), today, booked });
+
     arrayOfDate.push({
       currentMonth: false,
-      today: currentDay.toDate().toDateString() === dayjs().toDate().toDateString(),
-      date: firstDateOfMonth.day(i),
-      booked: isBooked(currentDay)
+      today,
+      date,
+      booked
     })
   }
 
   // generate month dates
   for (let i = firstDateOfMonth.date(); i <= lastDateOfMonth.date(); i++) {
-    const currentDay = firstDateOfMonth.date(i);
+    const date = firstDateOfMonth.date(i);
+    const today = date.toDate().toDateString() === dayjs().toDate().toDateString();
+    const booked = isBooked(date);
+
+    console.log("month dates:", { date: date.toISOString(), today, booked });
+
     arrayOfDate.push({
       currentMonth: true,
-      today: currentDay.toDate().toDateString() === dayjs().toDate().toDateString(),
-      date: currentDay,
-      booked: isBooked(currentDay),
+      today,
+      date: date,
+      booked,
     });
   }
 
   // create suffix dates
   const remaining = 42 - arrayOfDate.length;
   for (let i = lastDateOfMonth.date() + 1; i <= lastDateOfMonth.date() + remaining; i++) {
-    const currentDay = firstDateOfMonth.date(i);
+    const date = firstDateOfMonth.date(i);
+    const today = date.toDate().toDateString() === dayjs().toDate().toDateString();
+    const booked = isBooked(date);
+
+    console.log("suffix:", { date: date.toISOString(), today, booked });
+
     arrayOfDate.push({
       currentMonth: false,
-      today: currentDay.toDate().toDateString() === dayjs().toDate().toDateString(),
-      date: currentDay,
-      booked: isBooked(currentDay),
+      today,
+      date: date,
+      booked,
     });
   }
 
