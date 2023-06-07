@@ -33,29 +33,29 @@ export default function Card({ apartment }: TCardProps) {
   const refDialogCalendar = useRef<HTMLDialogElement | null>(null);
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} text-left text-sm`}>
       <div className={styles["card-container"]}>
         <ImgCarousel images={apartment.images} />
-        <div className={styles.text}>
-          <h3 className={styles.text__description_head}>{apartment.name}</h3>
-          {apartment.info && (
-            <p className={styles.text__description_body}>{apartment.info}</p>
-          )}
+        <div className="px-0 py-4">
+          <h1 className="prose text-gray-900 dark:text-gray-100 font-bold text-xl m-0 mb-2">
+            {apartment.name}
+          </h1>
+          {apartment.info && <p className="text-base my-2">{apartment.info}</p>}
         </div>
         {apartment.tags && (
           <div className={styles.tags}>
             {apartment.tags.map((tag, index) => (
-              <span
-                key={`tag-${index}`}
-                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >
+              <span key={`tag-${index}`} className={styles.tag}>
                 {tag}
               </span>
             ))}
           </div>
         )}
         <button
-          className={styles.button}
+          className="w-full h-10 rounded-lg
+          bg-teal-800 text-teal-50 hover:bg-teal-700 focus:bg-teal-600
+          dark:bg-teal-200 dark:text-teal-950 dark:hover:bg-teal-300 dark:focus:bg-teal-400
+          active:ring-2 ring-offset-2 ring-black dark:ring-stone-400"
           onClick={() => refDialogCalendar.current?.showModal()}
         >
           Check Availability

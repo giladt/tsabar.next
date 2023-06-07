@@ -5,13 +5,13 @@ import { TBookings } from "@/utils/types.d";
 export const getData = async (icalUrl: string) => {
   try {
     const parsedBookings: TBookings = {};
-    const data = (await (await fetch(icalUrl)).text()).split(
-      "\n"
-    );
-
-    const events = parseICalData(data);
+    const res = await fetch(icalUrl, { next: { revalidate: 60 } })
+    const data = await (res).text();
+    const events = parseICalData(data.split("\n"));
 
     if (!events || !Object.entries(events).length) return {};
+    if (events[0].start.isBefore(dayjs())) events[0].start = events[0].start.subtract(1, "month");
+
     for (let event of events) {
       if (!event || !event.start || !event.end) continue;
 
@@ -25,6 +25,7 @@ export const getData = async (icalUrl: string) => {
           .year(day.year())
           .month(day.month())
           .endOf("month");
+
         if (!parsedBookings[day.year()]) {
           parsedBookings[day.year()] = {};
         }
@@ -72,11 +73,10 @@ export const parseICalData = (data: string[]) => {
       if (match) {
         const [_, key, value]: string[] = match;
 
-        const eventKey = key.toLowerCase();
+        const eventKey = key.toLowerCase() as "start" | "end";
         const eventValue = dayjs(value);
 
-        if (eventKey === "start") event.start = eventValue;
-        if (eventKey === "end") event.end = eventValue;
+        event[eventKey] = eventValue;
       }
     }
   }
