@@ -1,22 +1,17 @@
-@layer {
+@tailwind components;
+@layer components {
   .card {
-    @apply max-w-xs relative flex flex-row;
-
-    &:hover {
-      @apply shadow-sm;
+    @apply max-w-xs relative flex flex-col;
+    @apply shadow-lg rounded-md overflow-hidden;
+    @apply cursor-default;
+    & > div {
+      @apply p-5;
     }
-    .card-container {
-      @apply cursor-default hover:z-10;
-      .tags {
-        @apply px-6 pt-4 pb-2;
-        .tag {
-          @apply inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2;
-        }
+    .tags {
+      @apply px-6 pt-4 pb-2;
+      .tag {
+        @apply inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2;
       }
     }
-  }
-
-  .calendar {
-    @apply h-auto w-96 min-h-fit p-10 inline-block bg-slate-600;
   }
 }

@@ -1,83 +1,89 @@
-.calNav,
-.calHead,
-.calContainer {
-  @apply select-none;
-}
-.calHead,
-.calContainer {
-  @apply w-full grid grid-cols-7;
-  .calDay,
-  .calHeadDay {
-    @apply grid place-content-center
-    text-gray-50 h-11 w-11 cursor-default;
+@tailwind components;
+@layer components {
+  .calendar {
+    width: calc(100vmin - 5rem);
+    @apply min-h-fit 
+      p-1 md:h-96 md:w-96 md:p-10 inline-block 
+      text-gray-950 dark:text-gray-50;
   }
-  .calHeadDay {
-    @apply font-bold text-stone-400 text-sm;
+  .calNav,
+  .calHead,
+  .calContainer {
+    @apply select-none;
   }
-}
-.calNav {
-  @apply flex justify-between;
-  .selectDates {
-    @apply flex items-center gap-5;
-  }
-  .today {
-    @apply px-2 rounded-sm;
-  }
-  .today,
-  .arrows {
-    &:hover {
-      @apply bg-slate-700;
+  .calHead,
+  .calContainer {
+    @apply w-full grid grid-cols-7;
+    .calDay,
+    .calHeadDay {
+      @apply w-[11.95vmin] h-[11.95vmin] grid place-content-center
+      md:h-11 md:w-11 cursor-default;
     }
-    &.disabled {
-      @apply cursor-not-allowed;
+    .calHeadDay {
+      @apply font-bold text-sm;
     }
   }
-  .arrows {
-    @apply w-5 h-5;
-    polyline {
-      @apply stroke-inherit;
+  .calNav {
+    @apply flex justify-between;
+    .selectDates {
+      @apply flex items-center gap-5;
+    }
+    .today {
+      @apply px-2 rounded-sm;
+    }
+    .today,
+    .arrows {
+      &:hover {
+        @apply bg-slate-700;
+      }
+      &.disabled {
+        @apply cursor-not-allowed;
+      }
+    }
+    .arrows {
+      @apply w-5 h-5;
+      polyline {
+        @apply stroke-inherit;
+      }
+    }
+    & > * {
+      @apply cursor-pointer;
     }
   }
-  & > * {
-    @apply cursor-pointer;
-  }
-}
-.calContainer {
-  .calDay {
-    @apply border-t-[1px];
-    &:not(.currentMonth) {
-      @apply text-gray-950;
-    }
-    &.today {
-      @apply bg-red-500 text-red-50;
-    }
-    &.booked {
-      background-image: linear-gradient(
-        -45deg,
-        transparent 0%,
-        transparent 49%,
-        red 49%,
-        red 50%,
-        transparent 50%,
-        transparent 100%
-      );
-
-      &:not(.currentMonth) {
+  .calContainer {
+    .calDay {
+      @apply border-t-[1px];
+      &.today {
+        @apply bg-red-500 text-red-50;
+      }
+      &.booked {
         background-image: linear-gradient(
           -45deg,
           transparent 0%,
           transparent 49%,
-          grey 49%,
-          grey 50%,
+          red 49%,
+          red 50%,
           transparent 50%,
           transparent 100%
         );
+
+        &:not(.currentMonth) {
+          background-image: linear-gradient(
+            -45deg,
+            transparent 0%,
+            transparent 49%,
+            grey 49%,
+            grey 50%,
+            transparent 50%,
+            transparent 100%
+          );
+        }
       }
-    }
-    &:hover {
-      @apply bg-slate-700;
-      &.today {
-        @apply bg-red-700;
+      &:hover {
+        @apply bg-slate-700;
+        &.today {
+          @apply bg-red-700;
+        }
       }
     }
   }

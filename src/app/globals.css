@@ -7,6 +7,10 @@
   --tertiary-dark: #eb8a90;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer base {
   body {
     @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
@@ -16,7 +20,20 @@
   ::selection {
     @apply text-white bg-indigo-500;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-stone-700 dark:text-stone-400
+    m-0 mb-2
+    font-bold;
+  }
+
+  button {
+    @apply w-full h-10 rounded-lg
+      active:ring-2 ring-offset-2 ring-black dark:ring-stone-400;
+  }
 }
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

@@ -16,10 +16,9 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 interface TCalendarProps {
   apartment: string;
-  className: string;
 }
 
-export default function Calendar({ apartment, className }: TCalendarProps) {
+export default function Calendar({ apartment }: TCalendarProps) {
   const currentDate = dayjs();
   const [today, setToday] = useState(currentDate);
   const apartments = useAppSelector(
@@ -30,7 +29,7 @@ export default function Calendar({ apartment, className }: TCalendarProps) {
   const bookings = apartmentData?.bookings;
 
   return (
-    <div className={className}>
+    <div className={styles.calendar}>
       <div>
         <div className={styles.calNav}>
           {MONTHS[today.month()]}, {today.year()}
@@ -82,7 +81,10 @@ export default function Calendar({ apartment, className }: TCalendarProps) {
                 key={index}
                 className={`
                   ${styles.calDay} ${
-                  (currentMonth && styles.currentMonth) || ""
+                  (currentMonth &&
+                    styles.currentMonth +
+                      " font-bold text-gray-950 dark:text-gray-50") ||
+                  "text-gray-500"
                 } 
                   ${(today && styles.today) || ""}
                   ${(booked && styles.booked) || ""}
