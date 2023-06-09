@@ -12,7 +12,7 @@ async function Home() {
           content="Furnished apartments for rent in the heart of Berlin."
         />
       </Head>
-      <main className={`${styles.main} md:justify-center`}>
+      <div className={`${styles.page} md:justify-center`}>
         <header className={styles.header}>
           <h1>Le Petit Moabit</h1>
           <h2>
@@ -21,7 +21,7 @@ async function Home() {
           </h2>
         </header>
         <Cards />
-      </main>
+      </div>
     </>
   );
 }

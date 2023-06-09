@@ -16,16 +16,16 @@ export const ThemeSwitcher = () => {
   if (!mounted) return null;
 
   return (
-    <span className="absolute top-2 right-2">
+    <span className="absolute top-2 right-2" aria-label="Switch color theme">
       {(currentTheme === "dark" && (
         <SunIcon
-          className="w-10 h-10 text-yellow-500 "
+          className="w-7 h-7 text-gray-100"
           role="button"
           onClick={() => setTheme("light")}
         />
       )) || (
         <MoonIcon
-          className="w-10 h-10 text-gray-900 "
+          className="w-7 h-7 text-gray-900 "
           role="button"
           onClick={() => setTheme("dark")}
         />

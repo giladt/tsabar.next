@@ -9,8 +9,8 @@ export default function Cards({}: TCardsProps) {
 
   return (
     <main id="main" className={styles.cards}>
-      {apartments.map((apartment) => (
-        <Card key={apartment.id} apartment={apartment} />
+      {apartments.map(({ id, name, info, images, tags }) => (
+        <Card key={id} name={name} info={info} images={images} tags={tags} />
       ))}
     </main>
   );

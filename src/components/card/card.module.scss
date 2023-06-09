@@ -4,8 +4,11 @@
     @apply max-w-xs relative flex flex-col;
     @apply shadow-lg rounded-md overflow-hidden;
     @apply cursor-default;
-    & > div {
+    .card__info {
       @apply p-5;
+      p {
+        @apply min-h-[5rem];
+      }
     }
     .tags {
       @apply px-6 pt-4 pb-2;
@@ -13,5 +16,12 @@
         @apply inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2;
       }
     }
+  }
+
+  .card__fs_gallery_image {
+    height: 100svh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 }

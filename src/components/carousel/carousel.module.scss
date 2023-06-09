@@ -35,6 +35,9 @@
 }
 
 @media not ((hover: hover) and (pointer: fine)) {
+  .carousel__figure {
+    @apply hidden;
+  }
   .carousel__slider_nav {
     @apply hidden;
   }
