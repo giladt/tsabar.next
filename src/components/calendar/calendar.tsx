@@ -1,32 +1,25 @@
 "use client";
 import { useState } from "react";
-import { DAYS, MONTHS, type Range, TDateItem } from "@/utils/types.d";
+import {
+  DAYS,
+  MONTHS,
+  type Range,
+  TDateItem,
+  TBookings,
+} from "@/utils/types.d";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr/index.js";
 import dayjs from "dayjs";
 
 import { generateDate } from "@/utils/calendar";
 import styles from "./calendar.module.scss";
 
-import { useSelector } from "react-redux";
-import { TypedUseSelectorHook } from "react-redux";
-
-import { RootState } from "@/store";
-
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
 interface TCalendarProps {
-  apartment: string;
+  bookings: TBookings;
 }
 
-export default function Calendar({ apartment }: TCalendarProps) {
+export const Calendar = ({ bookings }: TCalendarProps) => {
   const currentDate = dayjs();
   const [today, setToday] = useState(currentDate);
-  const apartments = useAppSelector(
-    (state) => state.apartments.startupApartments
-  );
-
-  const apartmentData = apartments.find((apt) => apt.name === apartment);
-  const bookings = apartmentData?.bookings;
 
   return (
     <div className={styles.calendar}>
@@ -98,4 +91,4 @@ export default function Calendar({ apartment }: TCalendarProps) {
       </div>
     </div>
   );
-}
+};

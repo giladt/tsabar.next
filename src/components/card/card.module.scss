@@ -10,6 +10,9 @@
         @apply min-h-[5rem];
       }
     }
+    .card__gallery {
+      cursor: zoom-in;
+    }
     .tags {
       @apply px-6 pt-4 pb-2;
       .tag {
