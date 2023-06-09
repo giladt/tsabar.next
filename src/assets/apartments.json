@@ -6,7 +6,8 @@
     "images": [
       {
         "id": "mmA5tEUkUSTyuGYfNQD81",
-        "description": "Living room"
+        "description": "Living room",
+        "priority": true
       },
       {
         "id": "BQ7IP_ZmkhH1hjpgMb6VB",
@@ -51,7 +52,8 @@
     "images": [
       {
         "id": "xGBUbNWOKQbeZTFJtHdlB",
-        "description": "Living room"
+        "description": "Living room",
+        "priority": true
       },
       {
         "id": "vEpshEHlEH-SNL2Z390To",

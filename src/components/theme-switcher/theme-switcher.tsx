@@ -1,7 +1,7 @@
 "use client";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
+import { TbBulb, TbBulbOff } from "react-icons/tb";
 
 export const ThemeSwitcher = () => {
   const { systemTheme, theme, setTheme } = useTheme();
@@ -18,13 +18,13 @@ export const ThemeSwitcher = () => {
   return (
     <span className="absolute top-2 right-2" aria-label="Switch color theme">
       {(currentTheme === "dark" && (
-        <SunIcon
+        <TbBulb
           className="w-7 h-7 text-gray-100"
           role="button"
           onClick={() => setTheme("light")}
         />
       )) || (
-        <MoonIcon
+        <TbBulbOff
           className="w-7 h-7 text-gray-900 "
           role="button"
           onClick={() => setTheme("dark")}
