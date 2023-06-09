@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
@@ -34,6 +34,7 @@ export default function Card({
 }: TCardProps) {
   const refDialogCalendar = useRef<HTMLDialogElement | null>(null);
   const refDialogGallery = useRef<HTMLDialogElement | null>(null);
+  const [currentImage, setCurrentImage] = useState<number>(0);
 
   return (
     <>
@@ -44,7 +45,10 @@ export default function Card({
           showThumbs={false}
           showIndicators={true}
           showArrows={true}
-          onClickItem={() => refDialogGallery.current?.showModal()}
+          onClickItem={(index: number) => {
+            setCurrentImage(index);
+            refDialogGallery.current?.showModal();
+          }}
           showStatus={false}
           emulateTouch={true}
           useKeyboardArrows
@@ -95,6 +99,7 @@ export default function Card({
           centerMode={false}
           showStatus={false}
           emulateTouch={true}
+          selectedItem={currentImage || 0}
           useKeyboardArrows
         >
           {images.map((image) => (
