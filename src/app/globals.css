@@ -35,7 +35,7 @@
   }
 
   .btn-root {
-    @apply w-full h-10 rounded-lg
+    @apply flex justify-center items-center gap-2 w-full h-10 rounded-lg
       active:ring-2 ring-offset-2 ring-black dark:ring-stone-400;
   }
 

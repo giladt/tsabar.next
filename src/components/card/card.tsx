@@ -11,6 +11,7 @@ import { TBookings } from "@/utils/types.d";
 
 import styles from "./card.module.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { TbCalendar } from "react-icons/tb";
 
 type TCardProps = {
   name: string;
@@ -76,7 +77,7 @@ export default function Card({
             dark:bg-teal-200 dark:text-teal-950 dark:hover:bg-teal-300 dark:focus:bg-teal-400"
             onClick={() => refDialogCalendar.current?.showModal()}
           >
-            Check Availability
+            <TbCalendar /> Check Availability
           </button>
         </div>
       </section>
