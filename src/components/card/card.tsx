@@ -1,22 +1,17 @@
 "use client";
-import { useRef } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { useRef, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
-
-import { useDispatch, useSelector } from "react-redux";
-import { TypedUseSelectorHook } from "react-redux";
-import { RootState, AppDispatch } from "@/store";
 import { v4 as uuidv4 } from "uuid";
-
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
-import styles from "./card.module.scss";
+import Image from "next/image";
 
 import { Dialog } from "@/components/dialog/dialog";
-import Calendar from "../calendar/calendar";
-import Image from "next/image";
+import { Calendar } from "@/components/calendar/calendar";
 import { wfImageUrl } from "@/utils/images";
+import { TBookings } from "@/utils/types.d";
+
+import styles from "./card.module.scss";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { TbCalendar } from "react-icons/tb";
 
 type TCardProps = {
   name: string;
@@ -24,24 +19,36 @@ type TCardProps = {
   images: {
     id: string;
     description?: string;
+    priority?: boolean;
   }[];
   tags?: string[];
+  bookings?: TBookings;
 };
 
-export default function Card({ name, info, images, tags }: TCardProps) {
+export default function Card({
+  name,
+  info,
+  images,
+  tags = [],
+  bookings = {},
+}: TCardProps) {
   const refDialogCalendar = useRef<HTMLDialogElement | null>(null);
   const refDialogGallery = useRef<HTMLDialogElement | null>(null);
+  const [currentImage, setCurrentImage] = useState<number>(0);
 
   return (
     <>
       <section className={`${styles.card} bg-slate-100 dark:bg-slate-900`}>
         <Carousel
-          className={`${styles.card__gallery} presentation-mode`}
+          className={styles.card__gallery}
           ariaLabel={`Apartment ${name} photos.`}
           showThumbs={false}
           showIndicators={true}
           showArrows={true}
-          onClickItem={() => refDialogGallery.current?.showModal()}
+          onClickItem={(index: number) => {
+            setCurrentImage(index);
+            refDialogGallery.current?.showModal();
+          }}
           showStatus={false}
           emulateTouch={true}
           useKeyboardArrows
@@ -53,6 +60,7 @@ export default function Card({ name, info, images, tags }: TCardProps) {
               alt={image.description || ""}
               width={320}
               height={320}
+              priority={image.priority || false}
             />
           ))}
         </Carousel>
@@ -73,24 +81,25 @@ export default function Card({ name, info, images, tags }: TCardProps) {
             dark:bg-teal-200 dark:text-teal-950 dark:hover:bg-teal-300 dark:focus:bg-teal-400"
             onClick={() => refDialogCalendar.current?.showModal()}
           >
-            Check Availability
+            <TbCalendar /> Check Availability
           </button>
         </div>
       </section>
       <Dialog ref={refDialogCalendar} type="calendar">
         <h1>{name} Availability</h1>
-        <Calendar apartment={name} />
+        <Calendar bookings={bookings} />
       </Dialog>
       <Dialog ref={refDialogGallery} type="gallery">
         <Carousel
-          className={`${styles.card__gallery} presentation-mode max-[80%]`}
+          className="max-[80%]"
           ariaLabel={`Apartment ${name} photos.`}
-          showThumbs={true}
+          showThumbs={false}
           showIndicators={true}
           showArrows={true}
           centerMode={false}
           showStatus={false}
           emulateTouch={true}
+          selectedItem={currentImage || 0}
           useKeyboardArrows
         >
           {images.map((image) => (
