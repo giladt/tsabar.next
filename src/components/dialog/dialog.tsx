@@ -21,7 +21,7 @@ export const Dialog = forwardRef<HTMLDialogElement | null, TDialogProps>(
             ref.current = node;
           }
         }}
-        className={`${styles.dialog} ${styles[type]}`}
+        className={`${styles.dialog} ${styles[type]} bg-stone-300 dark:bg-stone-700`}
         onCancel={() => refDialog.current?.close()}
       >
         {children}

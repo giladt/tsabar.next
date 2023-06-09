@@ -1,5 +1,5 @@
 .carousel {
-  @apply flex flex-col gap-[2px] m-0 h-[320px] w-[320px] overflow-hidden;
+  @apply flex flex-col gap-[2px] m-0 h-80 w-80 overflow-hidden;
   .carousel__figure {
     @apply h-full bg-center bg-cover;
     .carousel__figure_header {
@@ -7,9 +7,10 @@
     }
   }
   .carousel__container {
-    @apply relative flex gap-1 overflow-hidden scroll-smooth rounded
-      snap-x snap-mandatory touch-pan-x z-0 
-      prose-li:p-0 p-0 prose-li:m-0 m-0;
+    @apply relative flex gap-1 
+      overflow-hidden max-sm:overflow-x-auto 
+      scroll-smooth snap-x snap-mandatory touch-auto
+      z-0 p-0 m-0;
   }
 }
 .nav {
@@ -41,7 +42,7 @@
   label {
     @apply w-[320px] aspect-square block 
       bg-origin-padding bg-left-top bg-cover bg-no-repeat 
-      z-0 rounded-b-md cursor-zoom-in;
+      z-0 cursor-zoom-in;
   }
 }
 

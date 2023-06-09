@@ -1,0 +1,14 @@
+.page {
+  @apply flex flex-col items-center h-[100svh]
+    p-2 
+    mx-auto
+    max-w-screen-xl 
+    2xl:container 
+    2xl:px-0;
+  .header {
+    @apply text-center my-3;
+    h1 {
+      @apply text-6xl;
+    }
+  }
+}

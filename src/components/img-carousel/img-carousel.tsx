@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import { v5 as uuidv5 } from "uuid";
 import styles from "./img-carousel.module.scss";
 import { Carousel } from "../carousel/carousel";
 import { Dialog } from "../dialog/dialog";
@@ -162,22 +163,20 @@ const CarouselImage = ({
   index,
   onChange: onChange,
 }: TCarouselImage) => {
+  const elId = uuidv5(url, "c5cd61c8-c5b8-442c-9d60-d66c180a857a");
   return (
     <li className={styles.carousel__image}>
       <input
         type="radio"
         title={description}
         name={`carousel-image`}
-        id={`carousel-image-${index}`}
+        id={elId}
         checked={currentImage === index}
         onChange={onChange}
         value={index}
         className="hidden"
       />
-      <label
-        htmlFor={`carousel-image-${index}`}
-        style={{ backgroundImage: `url(${url || ""})` }}
-      />
+      <label htmlFor={elId} style={{ backgroundImage: `url(${url || ""})` }} />
     </li>
   );
 };
