@@ -44,7 +44,7 @@ export default async function RootLayout({
   store.dispatch(setStartupApartments(apartments));
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={roboto.className}>
         <NextThemeProvider>
           <Preloader apartments={apartments} />
