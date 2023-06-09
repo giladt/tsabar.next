@@ -7,6 +7,7 @@ import React, {
   SetStateAction,
 } from "react";
 import styles from "./carousel.module.scss";
+import { v5 as uuidv5 } from "uuid";
 
 type TCarouselProps = {
   images: { id: string; description?: string }[] | null;
@@ -77,7 +78,7 @@ export const Carousel = ({
 
   if (!images || !images.length) return null;
   return (
-    <section id="ts-carousel" className={styles.carousel}>
+    <section id="ts-carousel" className={`${styles.carousel}`}>
       <div
         className={styles.carousel__figure}
         style={{
@@ -93,9 +94,11 @@ export const Carousel = ({
         )}
       </div>
 
-      <div className="relative overflow-hidden">
+      <div className={`${styles.carousel__slider}`}>
         {maxScrollWidth > 0 && (
-          <div className="flex justify-between absolute top left w-full h-full">
+          <div
+            className={`${styles.carousel__slider__nav} flex justify-between absolute top left w-full h-full max-sm`}
+          >
             <NavButton
               direction="prev"
               onClick={movePrev}
@@ -108,7 +111,10 @@ export const Carousel = ({
             />
           </div>
         )}
-        <ul ref={carouselRef} className={styles.carousel__container}>
+        <ul
+          ref={carouselRef}
+          className={`${styles.carousel__slider__container}`}
+        >
           {images.map((image, index) => {
             return (
               <CarouselImage
@@ -174,22 +180,20 @@ const CarouselImage = ({
   currentIndex: index,
   onClick,
 }: TCarouselImage) => {
+  const elId = uuidv5(url, "c5cd61c8-c5b8-442c-9d60-d66c180a857a");
   return (
     <li className={styles.carousel__image}>
       <input
         type="radio"
         title={description}
         name={`carousel-image`}
-        id={`carousel-image-${index}`}
+        id={elId}
         checked={currentImage === index}
         onChange={onClick}
         value={index}
         className="hidden"
       />
-      <label
-        htmlFor={`carousel-image-${index}`}
-        style={{ backgroundImage: `url(${url || ""})` }}
-      />
+      <label htmlFor={elId} style={{ backgroundImage: `url(${url || ""})` }} />
       <div className={isActive ? "opacity-100" : "opacity-0"} onClick={onClick}>
         <h3>{description}</h3>
       </div>

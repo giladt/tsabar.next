@@ -1,3 +1,5 @@
+@mport "the-new-css-reset/css/reset.css";
+
 :root {
   --primary-light: #07004d;
   --secondary-light: #1a4182;
@@ -7,16 +9,39 @@
   --tertiary-dark: #eb8a90;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer base {
   body {
-    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
+    @apply bg-white text-gray-900 dark:bg-gray-800 dark:text-white;
     @apply min-h-screen;
   }
 
   ::selection {
     @apply text-white bg-indigo-500;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-stone-700 dark:text-stone-200
+    m-0 mb-2
+    font-bold;
+  }
+
+  .btn-root {
+    @apply w-full h-10 rounded-lg
+      active:ring-2 ring-offset-2 ring-black dark:ring-stone-400;
+  }
+
+  dialog:modal {
+    max-height: 100svh;
+    max-width: 100svw;
+    margin: auto;
+  }
 }
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
