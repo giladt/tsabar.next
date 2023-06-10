@@ -43,7 +43,6 @@ async function Home() {
           of Berlin!
         </p>
       </section>
-      {/* @ts-expect-error Server Component */}
       <Cards />
       <footer className={styles.footer}>
         <span>

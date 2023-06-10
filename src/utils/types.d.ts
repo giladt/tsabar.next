@@ -1,3 +1,7 @@
+import * as ReactMdIcon from "react-icons/md";
+
+export type TMdIcons = keyof typeof ReactMdIcon;
+
 type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
   ? Acc[number]
   : Enumerate<N, [...Acc, Acc['length']]>
@@ -34,7 +38,7 @@ export interface IApartmentData {
   info: string;
   images: { id: string; description?: string }[];
   bookings: TBookings;
-  tags?: string[];
+  tags?: { icon: TMdIcons, text: string }[];
 }
 
 export type TBooking = { start: Dayjs; end: Dayjs };

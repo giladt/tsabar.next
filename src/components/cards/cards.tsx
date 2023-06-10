@@ -8,7 +8,7 @@ type TCardsProps = {};
 export default async function Cards({}: TCardsProps) {
   const apartments: IApartmentData[] = [];
 
-  for (let apartment of apartmentsData) {
+  for (let apartment of apartmentsData as IApartmentData[]) {
     const url = `https://www.airbnb.com/calendar/ical/${
       process.env["ICAL_ID_APT_" + apartment.id]
     }.ics?s=${process.env["ICAL_SECRET_APT_" + apartment.id]}`;
