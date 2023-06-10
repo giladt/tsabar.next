@@ -1,20 +1,9 @@
 import Cards from "@/components/cards/cards";
-import Head from "next/head";
 import styles from "./page.module.scss";
 
 async function Home() {
   return (
     <main className={`${styles.page} md:justify-center`}>
-      <Head>
-        <title>
-          Le Petit Moabit - Furnished apartments for rent in the heart of Berlin
-          - Moabit
-        </title>
-        <meta
-          name="description"
-          content="Need a place to stay in Berlin? Search no more! Furnished, fully-equipped, all-inclusive one-room apartments for rent in the heart of Berlin - Moabit."
-        />
-      </Head>
       <header className={styles.header}>
         <h2>Le Petit Moabit</h2>
         <h1>

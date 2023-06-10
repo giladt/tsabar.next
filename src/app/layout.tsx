@@ -8,12 +8,33 @@ import { ThemeSwitcher } from "@/components/theme-switcher/theme-switcher";
 const roboto = Roboto({ subsets: ["latin"], weight: "400", preload: true });
 
 export const metadata = {
-  title: "Le Petit Moabit",
+  title: {
+    default:
+      "Le Petit Moabit - Furnished apartments for rent in the heart of Berlin Moabit",
+    template: "%s | Le Petit Moabit",
+  },
   description:
-    "Modern, fully renovated, all-inclusive apartments for rent in the heart of Berlin",
+    "Need a place to stay in Berlin? Search no more! Furnished, fully-equipped, all-inclusive one-room apartments for rent in the heart of Berlin - Moabit.",
+  creator: "Family Tsabar",
+  keywords: [
+    "rent",
+    "apartment",
+    "berlin",
+    "bedroom",
+    "mitte",
+    "tiergarten",
+    "furnished",
+    "sleep",
+    "wunderflats",
+    "airbnb",
+    "homelike",
+  ],
   icons: {
     icon: "./favicon.ico",
   },
+  generator: "Next.js",
+  applicationName: "Next.js",
+  referrer: "origin-when-cross-origin",
 };
 
 export default async function RootLayout({
