@@ -2,21 +2,36 @@
 @layer components {
   .card {
     @apply max-w-xs relative flex flex-col;
-    @apply shadow-lg rounded-md overflow-hidden;
+    @apply shadow-lg rounded-md;
     @apply cursor-default;
     .card__info {
-      @apply p-5;
+      @apply p-2;
       p {
         @apply min-h-[5rem];
       }
     }
     .card__gallery {
       cursor: zoom-in;
+      @apply overflow-hidden rounded-t-md;
     }
     .tags {
-      @apply px-6 pt-4 pb-2;
+      @apply text-xl w-full text-center;
       .tag {
-        @apply inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2;
+        @apply inline-flex gap-1 rounded-full p-1
+          font-semibold relative;
+        &:hover {
+          @apply text-gray-700 bg-gray-200;
+        }
+        .tag__icon {
+          @apply inline-block;
+        }
+        .tag__text {
+          @apply text-xs hidden absolute top-0;
+        }
+        &:hover .tag__text {
+          @apply visible flex absolute -translate-x-[calc(50%-0.5rem)] -translate-y-[30px]
+            w-max text-center bg-inherit p-1 rounded-full;
+        }
       }
     }
   }

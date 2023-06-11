@@ -3,11 +3,12 @@ import { useRef, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
+import * as ReactMdIcon from "react-icons/md";
 
 import { Dialog } from "@/components/dialog/dialog";
 import { Calendar } from "@/components/calendar/calendar";
 import { wfImageUrl } from "@/utils/images";
-import { TBookings } from "@/utils/types.d";
+import { TBookings, TMdIcons } from "@/utils/types.d";
 
 import styles from "./card.module.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -21,7 +22,7 @@ type TCardProps = {
     description?: string;
     priority?: boolean;
   }[];
-  tags?: string[];
+  tags?: { icon: TMdIcons; text: string }[];
   bookings?: TBookings;
 };
 
@@ -65,15 +66,21 @@ export default function Card({
           ))}
         </Carousel>
         <div className={styles.card__info}>
-          <h1>{name}</h1>
+          <h3>{name}</h3>
           {info && <p>{info}</p>}
           {tags && (
             <div className={styles.tags}>
-              {tags.map((tag, index) => (
-                <span key={`tag-${index}`} className={styles.tag}>
-                  {tag}
-                </span>
-              ))}
+              {tags.map(
+                ({ icon, text }: { icon: TMdIcons; text: string }, index) => {
+                  const MdIcon = ReactMdIcon[icon];
+                  return (
+                    <span key={`tag-${index}`} className={styles.tag}>
+                      <MdIcon className={styles.tag__icon} />
+                      <div className={styles.tag__text}>{text}</div>
+                    </span>
+                  );
+                }
+              )}
             </div>
           )}
           <button
@@ -86,7 +93,7 @@ export default function Card({
         </div>
       </section>
       <Dialog ref={refDialogCalendar} type="calendar">
-        <h1>{name} Availability</h1>
+        <h3>{name} Availability</h3>
         <Calendar bookings={bookings} />
       </Dialog>
       <Dialog ref={refDialogGallery} type="gallery">
