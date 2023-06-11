@@ -36,7 +36,7 @@
 
   .btn-root {
     @apply flex justify-center items-center gap-2 
-    w-full h-10 rounded-lg whitespace-nowrap
+      w-full h-10 rounded-lg whitespace-nowrap
       active:ring-2 ring-offset-2 ring-black dark:ring-stone-400;
   }
 
