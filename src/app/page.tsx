@@ -1,11 +1,18 @@
+import { Dancing_Script } from "next/font/google";
 import Cards from "@/components/cards/cards";
 import styles from "./page.module.scss";
+
+const dancing = Dancing_Script({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  preload: true,
+});
 
 async function Home() {
   return (
     <main className="md:justify-center">
       <header className={styles.header}>
-        <h2>Le Petit Moabit</h2>
+        <h2 className={dancing.className}>Le Petit Moabit</h2>
         <h1>
           Modern, fully furnished, all-inclusive apartments for rent in the
           heart of Berlin

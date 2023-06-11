@@ -1,15 +1,15 @@
 .header {
-  @apply text-center my-3;
+  @apply text-center my-14 max-md:px-5;
   h2 {
-    @apply text-6xl;
+    @apply text-6xl mb-7;
   }
   h1 {
     @apply text-2xl;
   }
 }
 .section {
+  @apply flex flex-col py-5 max-md:px-5 gap-2;
   strong {
     @apply font-bold text-lg py-2;
   }
-  @apply flex flex-col py-5 max-md:px-5 gap-2;
 }

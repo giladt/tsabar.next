@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
+import { Dancing_Script } from "next/font/google";
 import * as ReactMdIcon from "react-icons/md";
 
 import { Dialog } from "@/components/dialog/dialog";
@@ -13,6 +14,12 @@ import { TBookings, TMdIcons } from "@/utils/types.d";
 import styles from "./card.module.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { TbCalendar } from "react-icons/tb";
+
+const dancing = Dancing_Script({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  preload: true,
+});
 
 type TCardProps = {
   name: string;
@@ -44,13 +51,13 @@ export default function Card({
           className={styles.card__gallery}
           ariaLabel={`Apartment ${name} photos.`}
           showThumbs={false}
-          showIndicators={true}
+          showIndicators={false}
+          showStatus={false}
           showArrows={true}
           onClickItem={(index: number) => {
             setCurrentImage(index);
             refDialogGallery.current?.showModal();
           }}
-          showStatus={false}
           emulateTouch={true}
           useKeyboardArrows
         >
@@ -66,7 +73,7 @@ export default function Card({
           ))}
         </Carousel>
         <div className={styles.card__info}>
-          <h3>{name}</h3>
+          <h3 className={dancing.className}>{name}</h3>
           {info && <p>{info}</p>}
           {tags && (
             <div className={styles.tags}>
