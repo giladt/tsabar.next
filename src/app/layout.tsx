@@ -4,6 +4,8 @@ import { Roboto } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { NextThemeProvider } from "@/components/provider/provider";
 import { ThemeSwitcher } from "@/components/theme-switcher/theme-switcher";
+import styles from "./layout.module.scss";
+import Link from "next/link";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "400", preload: true });
 
@@ -46,8 +48,20 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.className}>
         <NextThemeProvider>
-          <ThemeSwitcher />
-          {children}
+          <div className={styles.page}>
+            <ThemeSwitcher />
+            {children}
+          </div>
+          <footer className={styles.footer}>
+            <div>
+              <small>Made with 💓 in Berlin</small>
+            </div>
+            <div>
+              <Link href="/imprint">Imprint</Link>
+              {" | "}
+              <small>© TSABAR.net 2023</small>
+            </div>
+          </footer>
         </NextThemeProvider>
         <Analytics />
       </body>
