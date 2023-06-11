@@ -3,8 +3,7 @@
   .calendar {
     width: calc(100vmin - 5rem);
     @apply min-h-fit 
-      p-1 md:h-96 md:w-96 md:p-10 inline-block 
-      text-gray-950 dark:text-gray-50;
+      p-1 md:h-96 md:w-96 md:p-10 inline-block;
   }
   .calNav,
   .calHead,

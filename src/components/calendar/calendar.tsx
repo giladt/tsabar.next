@@ -22,7 +22,7 @@ export const Calendar = ({ bookings }: TCalendarProps) => {
   const [today, setToday] = useState(currentDate);
 
   return (
-    <div className={styles.calendar}>
+    <div className={`${styles.calendar} text-gray-950 dark:text-gray-50`}>
       <div>
         <div className={styles.calNav}>
           {MONTHS[today.month()]}, {today.year()}
