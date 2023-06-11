@@ -3,7 +3,7 @@ import styles from "./page.module.scss";
 
 async function Home() {
   return (
-    <main className={`${styles.page} md:justify-center`}>
+    <main className="md:justify-center">
       <header className={styles.header}>
         <h2>Le Petit Moabit</h2>
         <h1>
@@ -33,14 +33,6 @@ async function Home() {
         </p>
       </section>
       <Cards />
-      <footer className={styles.footer}>
-        <span>
-          <small>Made with 💓 in Berlin</small>
-        </span>
-        <span>
-          <small>© TSABAR.net 2023</small>
-        </span>
-      </footer>
     </main>
   );
 }
