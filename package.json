@@ -19,6 +19,7 @@
     "@types/uuid": "^9.0.1",
     "@vercel/analytics": "^1.0.1",
     "autoprefixer": "10.4.14",
+    "client-only": "^0.0.1",
     "dayjs": "^1.11.8",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
@@ -37,6 +38,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/gtag.js": "^0.0.12",
     "postcss-import": "^15.1.0"
   }
 }

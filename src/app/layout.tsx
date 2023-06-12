@@ -4,6 +4,9 @@ import { Roboto } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { NextThemeProvider } from "@/components/provider/provider";
 import { ThemeSwitcher } from "@/components/theme-switcher/theme-switcher";
+import GoogleAnalytics from "@/components/google-analytics/google-analytics";
+import CookieBanner from "@/components/cookie-banner/cookie-banner";
+
 import styles from "./layout.module.scss";
 import Link from "next/link";
 
@@ -46,6 +49,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <GoogleAnalytics GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`} />
       <body className={roboto.className}>
         <NextThemeProvider>
           <div className={styles.page}>
@@ -64,6 +68,7 @@ export default async function RootLayout({
           </footer>
         </NextThemeProvider>
         <Analytics />
+        <CookieBanner />
       </body>
     </html>
   );
