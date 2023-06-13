@@ -47,8 +47,8 @@ function Imprint() {
         <h2>Description of Service</h2>
         <p>
           This is a web analytics service. With this, the user can measure the
-          advertising return on investment "ROI" as well as track user behavior
-          with flash, video, websites and applications.
+          advertising return on investment {'"'}ROI{'"'} as well as track user
+          behavior with flash, video, websites and applications.
         </p>
 
         <h2>Processing Company</h2>
@@ -92,8 +92,8 @@ function Imprint() {
 
         <h2>Data Collected</h2>
         <p>
-          This list represents all (personal) data that is collected by or
-          through the use of this service.
+          This list represents all {"("}personal{")"} data that is collected by
+          or through the use of this service.
         </p>
         <ul>
           <li>Click path</li>
