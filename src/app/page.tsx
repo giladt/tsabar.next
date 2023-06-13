@@ -1,5 +1,6 @@
 import { Dancing_Script } from "next/font/google";
 import Cards from "@/components/cards/cards";
+import { GoogleMaps } from "@/components/google-map/google-map";
 import styles from "./page.module.scss";
 
 const dancing = Dancing_Script({
@@ -40,6 +41,13 @@ async function Home() {
         </p>
       </section>
       <Cards />
+      <GoogleMaps
+        center={{
+          lat: 52.529124,
+          lng: 13.341555,
+        }}
+        zoom={14}
+      />
     </main>
   );
 }
