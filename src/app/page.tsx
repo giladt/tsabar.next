@@ -47,6 +47,7 @@ async function Home() {
           lng: 13.341555,
         }}
         zoom={14}
+        googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}
       />
     </main>
   );

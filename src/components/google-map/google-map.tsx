@@ -21,21 +21,24 @@ const MapLoadError = ({ message }: { message: string }) => (
   </>
 );
 
+type TGoogleMapsProps = {
+  center: Coordinates;
+  zoom: number;
+  googleMapsApiKey: string | undefined;
+};
+
 export const GoogleMaps = ({
   center,
   zoom,
-}: {
-  center: Coordinates;
-  zoom: number;
-}): JSX.Element => {
-  const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-  if (googleMapsApiKey === undefined) {
+  googleMapsApiKey,
+}: TGoogleMapsProps): JSX.Element => {
+  if (typeof googleMapsApiKey === "undefined") {
     return <MapLoadError message="Invalid or missing API key." />;
   }
   return (
     <div className={styles.map}>
       <LoadScript
-        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
+        googleMapsApiKey={googleMapsApiKey}
         mapIds={["e1acf1f72565fcfc", "21b6c08e77b1f04a"]}
       >
         <Map coordinates={center} zoom={zoom} />
