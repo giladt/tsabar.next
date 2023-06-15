@@ -17,7 +17,7 @@ const roboto = Roboto({ subsets: ["latin"], weight: "400", preload: true });
 export const metadata: Metadata = {
   title: {
     default:
-      "Le Petit Moabit - Furnished apartments for rent in the heart of Berlin Moabit",
+      "🏠 Le Petit Moabit | Furnished apartments for rent in the heart of Berlin Moabit",
     template: "%s | Le Petit Moabit",
   },
   description:

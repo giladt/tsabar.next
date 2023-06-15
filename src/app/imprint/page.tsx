@@ -23,14 +23,9 @@ export const metadata: Metadata = {
 function Imprint() {
   return (
     <main className={styles.imprint}>
-      <Link href="/" className="flex">
-        <span
-          className="flex items-center gap-2 border-b border-b-transparent border-dashed
-        hover:border-b-gray-500"
-        >
-          <MdArrowBack />
-          Back home
-        </span>
+      <Link href="/">
+        <MdArrowBack />
+        Back home
       </Link>
 
       <br />
@@ -191,14 +186,9 @@ function Imprint() {
         </p>
       </section>
       <br />
-      <Link href="/" className="flex">
-        <span
-          className="flex items-center gap-2 border-b border-b-transparent border-dashed
-        hover:border-b-gray-500"
-        >
-          <MdArrowBack />
-          Back home
-        </span>
+      <Link href="/">
+        <MdArrowBack />
+        Back home
       </Link>
     </main>
   );

@@ -1,8 +1,9 @@
+import { Metadata } from "next";
 import { Dancing_Script } from "next/font/google";
+
 import Cards from "@/components/cards/cards";
 import { GoogleMaps } from "@/components/google-map/google-map";
 import styles from "./page.module.scss";
-import { Metadata } from "next";
 
 const dancing = Dancing_Script({
   subsets: ["latin"],
@@ -11,7 +12,6 @@ const dancing = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Welcome Home!",
   robots: {
     index: true,
     follow: true,

@@ -14,10 +14,5 @@
   }
   p {
     @apply overflow-hidden text-ellipsis;
-
-    a {
-      text-decoration: underline;
-      @apply font-bold font-mono decoration-slate-500;
-    }
   }
 }
