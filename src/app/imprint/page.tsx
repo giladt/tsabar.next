@@ -15,6 +15,9 @@ export const metadata: Metadata = {
       nocache: true,
     },
   },
+  alternates: {
+    canonical: "/imprint",
+  },
 };
 
 function Imprint() {

@@ -1,12 +1,30 @@
 import { Dancing_Script } from "next/font/google";
 import Cards from "@/components/cards/cards";
 import styles from "./page.module.scss";
+import { Metadata } from "next";
 
 const dancing = Dancing_Script({
   subsets: ["latin"],
   weight: ["400", "700"],
   preload: true,
 });
+
+export const metadata: Metadata = {
+  title: "Welcome Home!",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      nocache: false,
+    },
+  },
+  alternates: {
+    canonical: "/",
+  },
+};
 
 async function Home() {
   return (
