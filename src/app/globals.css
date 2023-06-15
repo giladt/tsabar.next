@@ -16,7 +16,7 @@
 @layer base {
   body {
     @apply bg-white text-gray-900 dark:bg-gray-800 dark:text-white;
-    @apply min-h-screen;
+    @apply min-h-screen leading-8;
   }
 
   ::selection {
