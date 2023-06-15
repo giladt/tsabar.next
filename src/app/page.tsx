@@ -1,8 +1,12 @@
 import { Metadata } from "next";
 import { Dancing_Script } from "next/font/google";
+import { TbExternalLink } from "react-icons/tb";
 
 import Cards from "@/components/cards/cards";
+import { GoogleMaps } from "@/components/google-map/google-map";
+
 import styles from "./page.module.scss";
+import Link from "next/link";
 
 const dancing = Dancing_Script({
   subsets: ["latin"],
@@ -58,6 +62,22 @@ async function Home() {
         </p>
       </section>
       <Cards />
+      <GoogleMaps
+        center={{
+          lat: 52.529124,
+          lng: 13.341555,
+        }}
+        zoom={14}
+        googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}
+      />
+      <Link
+        title="Open on google maps"
+        target="_blank"
+        href="https://goo.gl/maps/pqVN4qM8mPQG2uhs6"
+      >
+        <address>Wilhelmshavener Straße 9, 10551 Berlin, DE</address>
+        <TbExternalLink />
+      </Link>
     </main>
   );
 }
