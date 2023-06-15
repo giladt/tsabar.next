@@ -1,8 +1,9 @@
 "use client";
 import { useTheme } from "next-themes";
 import { LoadScript, GoogleMap, MarkerF } from "@react-google-maps/api";
-import React, { useState } from "react";
+import React from "react";
 import MapThemes from "./MapTheme";
+import { ImSpinner } from "react-icons/im";
 import styles from "./google-map.module.scss";
 
 type Coordinates = {
@@ -15,10 +16,18 @@ type MapProps = {
 };
 
 const MapLoadError = ({ message }: { message: string }) => (
-  <>
+  <div className={styles.mapContainer}>
     <h3>Error loading map</h3>
     <p>{message}</p>
-  </>
+  </div>
+);
+
+const MapLoad = () => (
+  <div className={styles.mapContainer}>
+    <span>
+      <ImSpinner className={styles.spinner} /> Loading Map...
+    </span>
+  </div>
 );
 
 type TGoogleMapsProps = {
@@ -36,10 +45,11 @@ export const GoogleMaps = ({
     return <MapLoadError message="Invalid or missing API key." />;
   }
   return (
-    <div className={styles.map}>
+    <div className={styles.mapContainer}>
       <LoadScript
         googleMapsApiKey={googleMapsApiKey}
         mapIds={["e1acf1f72565fcfc", "21b6c08e77b1f04a"]}
+        loadingElement={<MapLoad />}
       >
         <Map coordinates={center} zoom={zoom} />
       </LoadScript>
@@ -48,44 +58,21 @@ export const GoogleMaps = ({
 };
 
 const Map = ({ coordinates, zoom }: MapProps) => {
-  const [map, setMap] = React.useState<google.maps.Map | null>(null);
-
   const theme = useTheme();
-
-  const onLoad = React.useCallback(
-    (map: google.maps.Map) => {
-      map.setOptions({
-        disableDefaultUI: true,
-        keyboardShortcuts: false,
-        styles: MapThemes[theme?.theme as "dark" | "light"],
-        zoom,
-      });
-      setMap(map);
-    },
-    [theme.theme, zoom]
-  );
-
-  const onUnMount = React.useCallback(() => {
-    setMap(null);
-  }, []);
-
-  React.useEffect(() => {
-    if (map) {
-      map.setOptions({
-        styles: MapThemes[theme?.theme as "dark" | "light"],
-        zoom,
-      });
-    }
-  }, [theme.theme, map, zoom]);
+  const mapOptions = {
+    styles: MapThemes[theme?.theme as "dark" | "light"],
+    center: coordinates,
+    zoom,
+    disableDefaultUI: true,
+    disableDoubleClickZoom: true,
+    clickableIcons: false,
+    backgroundColor: "transparent",
+    gestureHandling: "auto",
+    keyboardShortcuts: false,
+  };
 
   return (
-    <GoogleMap
-      mapContainerClassName={styles.map}
-      zoom={zoom}
-      center={coordinates}
-      onLoad={onLoad}
-      onUnmount={onUnMount}
-    >
+    <GoogleMap mapContainerClassName={styles.map} options={mapOptions}>
       {coordinates.lat !== 0 && coordinates.lng !== 0 && (
         <MarkerF position={coordinates} />
       )}
