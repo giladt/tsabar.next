@@ -60,7 +60,7 @@ export const GoogleMaps = ({
 const Map = ({ coordinates, zoom }: MapProps) => {
   const theme = useTheme();
   const mapOptions = {
-    styles: MapThemes[theme?.theme as "dark" | "light"],
+    styles: MapThemes[theme.resolvedTheme as "dark" | "light"],
     center: coordinates,
     zoom,
     disableDefaultUI: true,
