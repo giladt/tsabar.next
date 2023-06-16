@@ -3,7 +3,7 @@ import { Dancing_Script } from "next/font/google";
 import { TbExternalLink } from "react-icons/tb";
 
 import Cards from "@/components/cards/cards";
-import { GoogleMaps } from "@/components/google-map/google-map";
+import GoogleMaps from "@/components/google-map/google-map";
 
 import styles from "./page.module.scss";
 import Link from "next/link";
@@ -75,7 +75,10 @@ async function Home() {
         target="_blank"
         href="https://goo.gl/maps/pqVN4qM8mPQG2uhs6"
       >
-        <address>Wilhelmshavener Straße 9, 10551 Berlin, DE</address>
+        <address>
+          <span>Wilhelmshavener Straße 9, </span>
+          <span>10551 Berlin, DE</span>
+        </address>
         <TbExternalLink />
       </Link>
     </main>

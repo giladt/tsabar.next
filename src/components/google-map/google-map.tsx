@@ -36,11 +36,11 @@ type TGoogleMapsProps = {
   googleMapsApiKey: string | undefined;
 };
 
-export const GoogleMaps = ({
+export default function GoogleMaps({
   center,
   zoom,
   googleMapsApiKey,
-}: TGoogleMapsProps): JSX.Element => {
+}: TGoogleMapsProps): JSX.Element {
   if (typeof googleMapsApiKey === "undefined") {
     return <MapLoadError message="Invalid or missing API key." />;
   }
@@ -55,7 +55,7 @@ export const GoogleMaps = ({
       </LoadScript>
     </div>
   );
-};
+}
 
 const Map = ({ coordinates, zoom }: MapProps) => {
   const theme = useTheme();
