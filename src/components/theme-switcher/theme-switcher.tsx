@@ -16,7 +16,7 @@ export const ThemeSwitcher = () => {
   if (!mounted) return null;
 
   return (
-    <span className="absolute top-2 right-2" aria-label="Switch color theme">
+    <span className="fixed top-2 right-2" aria-label="Switch color theme">
       {(currentTheme === "dark" && (
         <TbBulb
           className="w-7 h-7 text-gray-100"
