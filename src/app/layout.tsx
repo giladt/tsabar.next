@@ -2,7 +2,6 @@ import { type ReactNode } from "react";
 import { Roboto } from "next/font/google";
 import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
-import Link from "next/link";
 
 import { NextThemeProvider } from "@/components/provider/provider";
 import { ThemeSwitcher } from "@/components/theme-switcher/theme-switcher";
@@ -11,6 +10,7 @@ import CookieBanner from "@/components/cookie-banner/cookie-banner";
 
 import styles from "./layout.module.scss";
 import "./globals.css";
+import { Footer } from "@/components/footer/footer";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "400", preload: true });
 
@@ -37,7 +37,7 @@ export default async function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning={true}>
       <GoogleAnalytics GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`} />
       <body className={roboto.className}>
         <NextThemeProvider>
@@ -45,16 +45,7 @@ export default async function RootLayout({
             <ThemeSwitcher />
             {children}
           </div>
-          <footer className={styles.footer}>
-            <div>
-              <small>Made with 💓 in Berlin</small>
-            </div>
-            <div>
-              <Link href="/imprint">Imprint</Link>
-              {" | "}
-              <small>© TSABAR.net 2023</small>
-            </div>
-          </footer>
+          <Footer />
         </NextThemeProvider>
         <Analytics />
         <CookieBanner />

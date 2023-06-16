@@ -1,7 +1,7 @@
 .page {
   @apply flex flex-col justify-center
-    max-w-screen-md min-h-[calc(100svh-3.75rem)]
-    p-2 m-auto;
+    max-w-screen-md min-h-[calc(100svh-2rem)]
+    p-2 m-auto mb-20;
 
   a {
     @apply inline-flex gap-2 items-center;
@@ -9,7 +9,4 @@
       text-decoration: underline teal 2px;
     }
   }
-}
-.footer {
-  @apply h-10 flex w-full p-2 mt-5 justify-between;
 }

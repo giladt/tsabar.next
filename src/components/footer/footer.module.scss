@@ -1,0 +1,25 @@
+.footer {
+  @apply flex h-8 px-2 mt-5 justify-between
+    max-w-screen-md m-auto items-center text-sm
+    fixed bg-inherit left-0 right-0 bottom-0 z-10;
+  .love {
+    @apply max-[420px]:hidden;
+  }
+  .navigation {
+    @apply flex ml-auto items-center mr-1;
+
+    & > a {
+      @apply flex items-center;
+      & > span {
+        @apply mx-1;
+      }
+      &:hover > :first-child {
+        @apply font-bold;
+      }
+    }
+  }
+
+  .active {
+    @apply font-extrabold;
+  }
+}
