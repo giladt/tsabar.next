@@ -10,7 +10,7 @@ import { IconType } from "react-icons/lib";
 type TFooterLinks = [string, React.ReactElement<IconType> | string][];
 
 const footerLinks: TFooterLinks = [
-  ["/", <TbHome />],
+  ["/", <TbHome key={1} />],
   ["/about", "About"],
   ["/imprint", "Imprint"],
 ];
