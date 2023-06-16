@@ -29,9 +29,9 @@ export default function CookieBanner() {
   return (
     <div
       className={`my-4 mx-2 md:mx-auto max-w md:max-w-screen-sm 
-      fixed bottom-0 left-0 right-0 
+      fixed bottom-0 left-0 right-0 flex transition-transform duration-75
       ${
-        cookieConsent != null ? "hidden" : "flex"
+        cookieConsent != null ? "translate-y-36" : "translate-y-0"
       } px-3 md:px-4 py-3 justify-between items-center flex-col sm:flex-row gap-4
       bg-gray-700 rounded-lg shadow text-gray-200
     `}
