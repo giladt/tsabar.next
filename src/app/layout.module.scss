@@ -1,7 +1,7 @@
 .page {
   @apply flex flex-col justify-center
     max-w-screen-md min-h-[calc(100svh-2rem)]
-    p-2 m-auto mb-20;
+    m-auto mb-20;
 
   a {
     @apply inline-flex gap-2 items-center;
