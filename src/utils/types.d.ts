@@ -34,6 +34,7 @@ export type TApartments = TApartment[];
 
 export interface IApartmentData {
   id: number;
+  url: string;
   name: string;
   info: string;
   images: { id: string; description?: string }[];

@@ -22,6 +22,7 @@ const dancing = Dancing_Script({
 });
 
 type TCardProps = {
+  url: string;
   name: string;
   info: string;
   images: {
@@ -33,16 +34,7 @@ type TCardProps = {
   bookings?: TBookings;
 };
 
-export default function Card({
-  name,
-  info,
-  images,
-  tags = [],
-  bookings = {},
-}: TCardProps) {
-  const refDialogCalendar = useRef<HTMLDialogElement | null>(null);
-  const refDialogGallery = useRef<HTMLDialogElement | null>(null);
-  const [currentImage, setCurrentImage] = useState<number>(0);
+export default function Card({ url, name, info, images }: TCardProps) {
 
   return (
     <>
