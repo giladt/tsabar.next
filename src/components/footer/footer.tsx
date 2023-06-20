@@ -23,7 +23,6 @@ export const Footer = () => {
       <span className={styles.love}>Made with 💓 in Berlin</span>
       <span className={styles.navigation}>
         {footerLinks.map(([url, label]) => {
-          if (url === "/" && currentPath === "/") return null;
           return (
             <Link
               key={uuidv4()}
