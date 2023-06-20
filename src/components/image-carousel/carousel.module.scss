@@ -1,0 +1,10 @@
+.carousel {
+  height: clamp(81svh, 500px, calc(100svh - 5rem));
+  .images {
+    height: clamp(81svh, 500px, calc(100svh - 5rem));
+    @apply flex w-full items-center;
+    img {
+      @apply w-full h-full object-cover object-center bg-slate-700;
+    }
+  }
+}
