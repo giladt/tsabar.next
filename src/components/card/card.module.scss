@@ -2,37 +2,16 @@
 @layer components {
   .card {
     @apply max-w-xs relative flex flex-col;
-    @apply shadow-lg rounded-md;
+    @apply rounded-md;
     @apply cursor-default;
     .card__info {
       @apply p-2;
       h3 {
-        @apply text-3xl font-bold text-center;
+        @apply text-3xl font-bold;
       }
     }
     .card__gallery {
-      cursor: zoom-in;
-      @apply overflow-hidden rounded-t-md;
-    }
-    .tags {
-      @apply flex justify-between gap-1 text-xl w-full text-center my-4;
-      .tag {
-        @apply inline-flex gap-1 rounded-full p-1 cursor-pointer
-          font-semibold relative bg-transparent transition-colors;
-        &:hover {
-          @apply text-gray-700 bg-gray-200;
-        }
-        .tag__icon {
-          @apply inline-block;
-        }
-        .tag__text {
-          @apply text-xs hidden bg-transparent absolute top-0;
-        }
-        &:hover .tag__text {
-          @apply visible flex absolute -translate-x-[calc(50%-0.5rem)] -translate-y-[30px]
-            w-max text-center bg-inherit p-1 rounded-full;
-        }
-      }
+      @apply overflow-hidden rounded-md cursor-pointer shadow-lg;
     }
   }
 
