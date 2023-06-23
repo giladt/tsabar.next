@@ -31,12 +31,8 @@ export function Carousel({ images }: TCarouselProps) {
       useKeyboardArrows
     >
       {images.map((image: TImage) => (
-        <div className={styles.images}>
-          <img
-            key={uuidv4()}
-            src={wfImageUrl(image.id, "lg")}
-            alt={image.description || ""}
-          />
+        <div key={uuidv4()} className={styles.images}>
+          <img src={wfImageUrl(image.id, "lg")} alt={image.description || ""} />
         </div>
       ))}
     </ReactResponsiveCarousel>

@@ -1,0 +1,187 @@
+import { Metadata } from "next";
+import { Suspense } from "react";
+import { Dancing_Script, Karla } from "next/font/google";
+import { redirect } from "next/navigation";
+import * as ReactMdIcon from "react-icons/md";
+
+import { Carousel } from "@/components/image-carousel/carousel";
+import { Calendar } from "@/components/calendar/calendar";
+import { TMdIcons, IApartmentData } from "@/utils/types.d";
+import { getData } from "@/utils/data-handlers";
+import apartmentsData from "@/assets/apartments.json";
+
+import styles from "./apartment.module.scss";
+import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
+
+type TApartmentURLProps = {
+  apartmentURL: string;
+};
+
+type TPageParams = {
+  params: TApartmentURLProps;
+};
+
+export function generateStaticParams(): TApartmentURLProps[] {
+  return apartmentsData.map(
+    (apartmentData): TApartmentURLProps => ({
+      apartmentURL: apartmentData.url,
+    })
+  );
+}
+
+export function generateMetadata({ params }: TPageParams): Metadata {
+  const apartmentData = apartmentsData.find(
+    (apartmentData) => apartmentData.url === params.apartmentURL
+  );
+
+  return {
+    title: apartmentData?.name,
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        nocache: false,
+      },
+    },
+    alternates: {
+      canonical: `/${apartmentData?.url}`,
+    },
+  };
+}
+
+const dancing = Dancing_Script({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  preload: true,
+});
+
+const karla = Karla({
+  subsets: ["latin"],
+  weight: ["200", "400", "700"],
+  preload: true,
+});
+
+export default async function Apartment({ params }: TPageParams) {
+  const { apartmentURL } = params;
+
+  const data = apartmentsData.find(
+    (apartmentData) => apartmentData.url === encodeURI(apartmentURL || "-")
+  ) as IApartmentData;
+
+  if (!data) redirect("/");
+
+  const { id, name, images, tags } = data;
+
+  const iCalURL = `https://www.airbnb.com/calendar/ical/${
+    process.env["ICAL_ID_APT_" + id]
+  }.ics?s=${process.env["ICAL_SECRET_APT_" + id]}`;
+  const bookings: DateRangeType[] = await getData(iCalURL);
+
+  return (
+    <main className={`md:justify-center ${karla.className}`}>
+      {images && (
+        <section className={styles.carousel}>
+          <Carousel images={images} />
+        </section>
+      )}
+      <header className={styles.header}>
+        <h1 className={dancing.className}>{name}</h1>
+        <h2>Le Petit Moabit</h2>
+        <h3>
+          Modern, fully furnished, all-inclusive apartments for rent in the
+          heart of Berlin
+        </h3>
+      </header>
+      <section className={styles.section}>
+        {tags && (
+          <div className={styles.tags}>
+            {tags.map(
+              ({ icon, text }: { icon: TMdIcons; text: string }, index) => {
+                const MdIcon = ReactMdIcon[icon];
+                return (
+                  <span key={`tag-${index}`} className={styles.tag}>
+                    <MdIcon className={styles.tag__icon} />
+                    <div className={styles.tag__text}>{text}</div>
+                  </span>
+                );
+              }
+            )}
+          </div>
+        )}
+      </section>
+
+      <section>
+        <h3>
+          <strong>Welcome to your new home!</strong>
+        </h3>
+        <p>
+          These charming one bedroom apartments are located in the heart of
+          Moabit, Berlin. The apartments are fully furnished and equipped with
+          everything you need to make your stay comfortable and enjoyable.
+        </p>
+        <p>
+          The apartments features a cozy living room, a fully equipped kitchen,
+          a comfortable bedroom with a double bed and a modern bathroom.
+        </p>
+        <p>
+          The apartments are located in a quiet and peaceful neighborhood in
+          Moabit, yet close to all the amenities you need. You will find plenty
+          of shops, restaurants, cafes and bars within walking distance. The
+          apartment is also well connected to public transportation, making it
+          easy to explore the city. Book your stay today and experience the best
+          of Berlin!
+        </p>
+      </section>
+
+      <section className="max-sm:px-5 flex flex-col justify-center">
+        <h3>Inquiry</h3>
+        <form className={styles.form}>
+          <Suspense fallback={<>Looking for current availabilities...</>}>
+            <Calendar bookings={bookings} />
+          </Suspense>
+          <div>
+            <span className={styles.input_field}>
+              <input
+                type="text"
+                name="name_first"
+                placeholder=" "
+                title="First Name"
+              />
+              <label htmlFor="name_first">First Name</label>
+            </span>
+            <span className={styles.input_field}>
+              <input
+                type="text"
+                name="name_last"
+                placeholder=" "
+                title="Last Name"
+              />
+              <label htmlFor="name_last">Last Name</label>
+            </span>
+          </div>
+          <span className={styles.input_field}>
+            <input type="email" name="email" placeholder=" " title="EMail" />
+            <label htmlFor="email">EMail</label>
+          </span>
+          <span className={styles.input_field}>
+            <input
+              type="number"
+              min={1}
+              max={2}
+              name="guests"
+              placeholder=" "
+              title="Guests"
+            />
+            <label htmlFor="guests">Number of guests (Max 2)</label>
+          </span>
+          <span className={styles.input_field}>
+            <button type="submit">Send your inquiry</button>
+          </span>
+        </form>
+      </section>
+    </main>
+  );
+}

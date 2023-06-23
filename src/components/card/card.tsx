@@ -41,7 +41,7 @@ export default function Card({ url, name, info, images }: TCardProps) {
         showStatus={false}
         showArrows={true}
         onClickItem={(index: number) => {
-          router.push(`/${url}?img=${index}`);
+          router.push(`/${url}`);
         }}
         emulateTouch={true}
         useKeyboardArrows

@@ -14,6 +14,8 @@ import { Footer } from "@/components/footer/footer";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "400", preload: true });
 
+export const dynamicParams = false;
+
 export const metadata: Metadata = {
   title: {
     default:
@@ -39,7 +41,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <GoogleAnalytics GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`} />
-      <body className={roboto.className}>
+      <body className={roboto.className} suppressHydrationWarning={true}>
         <NextThemeProvider>
           <div className={styles.page}>
             <ThemeSwitcher />
