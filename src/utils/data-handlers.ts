@@ -15,8 +15,6 @@ export const getData = async (iCalURL: string): Promise<DateRangeType[]> => {
       if (!event || !event.start || !event.end) continue;
 
       parsedBookings.push({ startDate: event.start.toDate(), endDate: event.end.toDate() })
-      // for (let day = event.start; day.isBefore(event.end); day = day.add(1, "day")) {
-      // }
     }
 
     return parsedBookings;
