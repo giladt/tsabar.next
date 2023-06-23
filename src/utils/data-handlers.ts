@@ -1,54 +1,28 @@
 import dayjs, { type Dayjs } from "dayjs";
-import { MONTHS } from "@/utils/types.d";
-import { TBookings } from "@/utils/types.d";
+import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
 
-export const getData = async (icalUrl: string) => {
+export const getData = async (iCalURL: string): Promise<DateRangeType[]> => {
   try {
-    const parsedBookings: TBookings = {};
-    const res = await fetch(icalUrl, { next: { revalidate: 60 } })
+    const parsedBookings: DateRangeType[] = [];
+    const res = await fetch(iCalURL, { next: { revalidate: 60 } })
     const data = await (res).text();
     const events = parseICalData(data.split("\n"));
 
-    if (!events || !Object.entries(events).length) return {};
+    if (!events || !Object.entries(events).length) return [];
     if (events[0].start.isBefore(dayjs())) events[0].start = events[0].start.subtract(1, "month");
 
     for (let event of events) {
       if (!event || !event.start || !event.end) continue;
 
-      let day = event.start;
-      while (day <= event.end) {
-        const firstDateOfMonth = dayjs()
-          .year(day.year())
-          .month(day.month())
-          .startOf("month");
-        const lastDateOfMonth = dayjs()
-          .year(day.year())
-          .month(day.month())
-          .endOf("month");
-
-        if (!parsedBookings[day.year()]) {
-          parsedBookings[day.year()] = {};
-        }
-        if (!parsedBookings[day.year()][MONTHS[day.month()]]) {
-          parsedBookings[day.year()][MONTHS[day.month()]] = [];
-        }
-        parsedBookings[day.year()][MONTHS[day.month()]].push({
-          start: event.start.isAfter(firstDateOfMonth)
-            ? event.start
-            : firstDateOfMonth,
-          end: event.end.isBefore(lastDateOfMonth)
-            ? event.end
-            : lastDateOfMonth,
-        });
-
-        day = day.add(1, "month");
-      }
+      parsedBookings.push({ startDate: event.start.toDate(), endDate: event.end.toDate() })
+      // for (let day = event.start; day.isBefore(event.end); day = day.add(1, "day")) {
+      // }
     }
 
     return parsedBookings;
   } catch (err) {
     console.log({ err });
-    return {};
+    return [];
   }
 };
 

@@ -1,94 +1,72 @@
 "use client";
 import { useState } from "react";
-import {
-  DAYS,
-  MONTHS,
-  type Range,
-  TDateItem,
-  TBookings,
-} from "@/utils/types.d";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr/index.js";
-import dayjs from "dayjs";
 
-import { generateDate } from "@/utils/calendar";
+import Datepicker from "react-tailwindcss-datepicker";
+import {
+  DateRangeType,
+  DateValueType,
+} from "react-tailwindcss-datepicker/dist/types";
+import dayjs, { Dayjs } from "dayjs";
 import styles from "./calendar.module.scss";
 
 interface TCalendarProps {
-  bookings: TBookings;
+  bookings: DateRangeType[];
 }
 
 export const Calendar = ({ bookings }: TCalendarProps) => {
-  const currentDate = dayjs();
-  const [today, setToday] = useState(currentDate);
+  const [inquiryInput, setInquiryInput] = useState<DateValueType>({
+    startDate: null,
+    endDate: null,
+  });
+
+  const today: Dayjs = dayjs();
+  const maxBookingLength: [number, dayjs.ManipulateType | undefined] = [
+    3,
+    "years",
+  ];
+  const minDate = today.toDate();
+
+  const firstDateOfMonth = (date: Dayjs) =>
+    dayjs()
+      .year(date.get("year"))
+      .month(date.get("month"))
+      .startOf("month")
+      .toDate();
+
+  const handleValueChange = (newValue: DateValueType): void => {
+    if (
+      dayjs(newValue?.endDate).isAfter(
+        dayjs(newValue?.startDate).add(...maxBookingLength)
+      )
+    ) {
+      throw new Error("Booking period is too long.");
+    }
+    setInquiryInput(newValue);
+  };
 
   return (
-    <div className={`${styles.calendar} text-gray-950 dark:text-gray-50`}>
-      <div>
-        <div className={styles.calNav}>
-          {MONTHS[today.month()]}, {today.year()}
-          <div className={styles.selectDates}>
-            <GrFormPrevious
-              className={`${styles.arrows} ${
-                !today.isAfter(dayjs().endOf("month")) ? styles.disabled : ""
-              }`}
-              onClick={() => {
-                if (today.isAfter(dayjs().endOf("month"))) {
-                  setToday(today.month(today.month() - 1));
-                }
-              }}
-            />
-            <div
-              className={styles.today}
-              role="button"
-              onClick={() => {
-                setToday(today.month(dayjs().month()).year(dayjs().year()));
-              }}
-            >
-              Today
-            </div>
-            <GrFormNext
-              className={styles.arrows}
-              onClick={() => {
-                setToday(today.month(today.month() + 1));
-              }}
-            />
-          </div>
-        </div>
-      </div>
-      <div className={styles.calHead}>
-        {DAYS.map((day, index) => (
-          <div className={styles.calHeadDay} key={index}>
-            {day}
-          </div>
-        ))}
-      </div>
-      <div className={styles.calContainer}>
-        {generateDate(
-          bookings || {},
-          today.month() as Range<0, 11>,
-          today.year()
-        ).map(
-          ({ date, currentMonth, today, booked }: TDateItem, index: number) => {
-            return (
-              <div
-                key={index}
-                className={`
-                  ${styles.calDay} ${
-                  (currentMonth &&
-                    styles.currentMonth +
-                      " font-bold text-gray-950 dark:text-gray-50") ||
-                  "text-gray-500"
-                } 
-                  ${(today && styles.today) || ""}
-                  ${(booked && styles.booked) || ""}
-                `}
-              >
-                {date.date()}
-              </div>
-            );
-          }
-        )}
-      </div>
-    </div>
+    <Datepicker
+      containerClassName={`
+        ${styles.container}
+        placeholder-[var(--primary-light)] dark:placeholder-[var(--primary-dark)]
+        focus-within:border-[var(--primary-light)] dark:focus-within:border-[var(--primary-dark)]
+        focus-visible:border-[var(--primary-light)] dark:focus-visible:border-[var(--primary-dark)]
+        text-black dark:text-white
+        border-black/50 dark:border-white/50
+      `}
+      inputClassName={`
+        ${styles.input}
+        text-black dark:text-white 
+        placeholder-black dark:placeholder-white
+      `}
+      placeholder="Select wished stay dates"
+      value={inquiryInput}
+      startWeekOn="mon"
+      startFrom={firstDateOfMonth(today)}
+      minDate={minDate}
+      onChange={handleValueChange}
+      disabledDates={bookings}
+      showFooter
+    />
   );
 };
