@@ -3,7 +3,7 @@ import { Dancing_Script } from "next/font/google";
 import { TbExternalLink } from "react-icons/tb";
 
 import Cards from "@/components/cards/cards";
-import GoogleMaps from "@/components/google-map/google-map";
+import GoogleMaps from "@/components/google/map";
 
 import styles from "./page.module.scss";
 import Link from "next/link";

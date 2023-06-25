@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import { NextThemeProvider } from "@/components/provider/provider";
 import { ThemeSwitcher } from "@/components/theme-switcher/theme-switcher";
-import GoogleAnalytics from "@/components/google-analytics/google-analytics";
+import GoogleAnalytics from "@/components/google/analytics";
 import CookieBanner from "@/components/cookie-banner/cookie-banner";
 
 import styles from "./layout.module.scss";
