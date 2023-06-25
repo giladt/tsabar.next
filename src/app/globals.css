@@ -1,19 +1,19 @@
 @mport "the-new-css-reset/css/reset.css";
 
-:root {
-  --primary-light: #07004d;
-  --secondary-light: #1a4182;
-  --tertiary-light: #eb8a90;
-  --primary-dark: #42e2b8;
-  --secondary-dark: #f3dfbf;
-  --tertiary-dark: #eb8a90;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --primary-light: #07004d;
+    --secondary-light: #1a4182;
+    --tertiary-light: #eb8a90;
+    --primary-dark: #42e2b8;
+    --secondary-dark: #f3dfbf;
+    --tertiary-dark: #eb8a90;
+  }
+
   body {
     @apply bg-white text-gray-900 dark:bg-gray-800 dark:text-white;
     @apply min-h-screen leading-8;
