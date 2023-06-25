@@ -1,0 +1,43 @@
+.form {
+  @apply flex flex-col gap-4;
+
+  & > div {
+    @apply flex flex-row gap-4 flex-wrap;
+  }
+}
+
+.container {
+  @apply relative transition-all duration-150
+      w-full flex items-center
+      bg-transparent 
+      border-2 rounded-lg
+      outline-none
+      disabled:opacity-40 disabled:cursor-not-allowed;
+  @apply placeholder-[primary-light] 
+      focus-within:border-[primary-light] 
+      focus-visible:border-[primary-light] 
+      text-black 
+      border-black/50;
+}
+.input {
+  @apply relative transition-all duration-150
+      w-full py-2.5 pl-4 pr-14 
+      bg-transparent 
+      outline-none
+      disabled:opacity-40 disabled:cursor-not-allowed;
+  @apply text-black 
+      placeholder-black;
+}
+.form > div {
+  & > div:last-child {
+    & > div:first-child {
+      display: none;
+    }
+    & > div:last-child {
+      @apply text-base;
+      & > div:first-child button[disabled] {
+        @apply rounded-full text-tertiary-dark bg-gray-500/20;
+      }
+    }
+  }
+}

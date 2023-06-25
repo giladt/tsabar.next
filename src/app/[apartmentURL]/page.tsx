@@ -1,17 +1,16 @@
 import { Metadata } from "next";
-import { Suspense } from "react";
 import { Dancing_Script, Karla } from "next/font/google";
 import { redirect } from "next/navigation";
 import * as ReactMdIcon from "react-icons/md";
 
 import { Carousel } from "@/components/image-carousel/carousel";
-import { Calendar } from "@/components/calendar/calendar";
 import { TMdIcons, IApartmentData } from "@/utils/types.d";
-import { getData } from "@/utils/data-handlers";
 import apartmentsData from "@/assets/apartments.json";
 
 import styles from "./apartment.module.scss";
+import Inquiry from "@/components/forms/inquiry";
 import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
+import { getData } from "@/utils/data-handlers";
 
 type TApartmentURLProps = {
   apartmentURL: string;
@@ -138,49 +137,7 @@ export default async function Apartment({ params }: TPageParams) {
 
       <section className="max-sm:px-5 flex flex-col justify-center">
         <h3>Inquiry</h3>
-        <form className={styles.form}>
-          <Suspense fallback={<>Looking for current availabilities...</>}>
-            <Calendar bookings={bookings} />
-          </Suspense>
-          <div>
-            <span className={styles.input_field}>
-              <input
-                type="text"
-                name="name_first"
-                placeholder=" "
-                title="First Name"
-              />
-              <label htmlFor="name_first">First Name</label>
-            </span>
-            <span className={styles.input_field}>
-              <input
-                type="text"
-                name="name_last"
-                placeholder=" "
-                title="Last Name"
-              />
-              <label htmlFor="name_last">Last Name</label>
-            </span>
-          </div>
-          <span className={styles.input_field}>
-            <input type="email" name="email" placeholder=" " title="EMail" />
-            <label htmlFor="email">EMail</label>
-          </span>
-          <span className={styles.input_field}>
-            <input
-              type="number"
-              min={1}
-              max={2}
-              name="guests"
-              placeholder=" "
-              title="Guests"
-            />
-            <label htmlFor="guests">Number of guests (Max 2)</label>
-          </span>
-          <span className={styles.input_field}>
-            <button type="submit">Send your inquiry</button>
-          </span>
-        </form>
+        <Inquiry bookings={bookings} />
       </section>
     </main>
   );

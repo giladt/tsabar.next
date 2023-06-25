@@ -1,0 +1,22 @@
+.input_field {
+  @apply flex flex-col-reverse gap-2 grow;
+
+  & > label {
+    @apply text-base leading-5 
+        w-max -z-10 
+        transition-all duration-150 ease-out 
+        translate-x-4 translate-y-[2.85rem];
+  }
+  &:focus-within > label,
+  & > input:not(:placeholder-shown) + label {
+    @apply translate-x-0 translate-y-0 text-sm;
+  }
+
+  & > input {
+    @apply bg-transparent p-[0.625rem] rounded-lg border-2 border-solid border-gray-500 outline-none focus-visible:border-primary-dark;
+  }
+
+  & > button {
+    @apply p-2 rounded-lg border-2 border-solid border-primary-dark bg-transparent hover:bg-primary-dark mt-7 mb-8;
+  }
+}
