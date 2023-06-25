@@ -47,9 +47,9 @@ export default function Inquiry({ bookings }: TInquiryProps) {
       .toDate();
 
   const darkStyles = {
-    constainer: `dark:placeholder-[primary-dark]
-      dark:focus-within:border-[primary-dark]
-      dark:focus-visible:border-[primary-dark]
+    container: `dark:placeholder-primary-dark
+      dark:focus-within:border-primary-dark
+      dark:focus-visible:border-primary-dark
       dark:text-white
       dark:border-white/50
     `,
@@ -68,7 +68,7 @@ export default function Inquiry({ bookings }: TInquiryProps) {
           displayFormat="DD/MM/YYYY"
           containerClassName={`
             ${styles.container}
-            ${darkStyles.constainer}
+            ${darkStyles.container}
           `}
           inputClassName={`
             ${styles.input}
