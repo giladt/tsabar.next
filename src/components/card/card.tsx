@@ -60,13 +60,7 @@ export default function Card({ url, name, info, images }: TCardProps) {
       <div className={styles.card__info}>
         <h3 className={dancing.className}>{name}</h3>
         {info && <p>{info}</p>}
-        <Link
-          role="button"
-          type="button"
-          className="mt-5 btn-root outline outline-teal-300 hover:bg-teal-300 focus:bg-teal-400
-          dark:outline-teal-700 dark:hover:bg-teal-700 dark:focus:bg-teal-600"
-          href={url}
-        >
+        <Link role="button" type="button" href={url}>
           More details
         </Link>
       </div>
