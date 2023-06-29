@@ -19,6 +19,11 @@
       text-black 
       border-black/50;
 }
+
+.error {
+  @apply border-tertiary-dark;
+}
+
 .input {
   @apply relative transition-all duration-150
       w-full py-2.5 pl-4 pr-14 
@@ -28,14 +33,17 @@
   @apply text-black 
       placeholder-black;
 }
-.form > div {
-  & > div:last-child {
-    & > div:first-child {
-      display: none;
+
+.form > span > .container > div {
+  &:last-child > div {
+    &:first-child {
+      /* Remove popover arrow */
+      @apply hidden;
     }
-    & > div:last-child {
-      @apply text-base;
-      & > div:first-child button[disabled] {
+    &:last-child > div {
+      @apply text-base max-md:text-sm;
+      &:first-child button[disabled] {
+        /* overide disabled date style */
         @apply rounded-full text-tertiary-dark bg-gray-500/20;
       }
     }
