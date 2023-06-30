@@ -1,7 +1,22 @@
 .page {
   @apply flex flex-col justify-center
+    font-karla text-base
     max-w-screen-md min-h-[calc(100svh-2rem)]
     m-auto mb-20;
+
+  h1 {
+    @apply font-script text-6xl mb-7;
+  }
+  h2 {
+    @apply font-normal text-2xl;
+  }
+  h3 {
+    @apply font-script font-bold text-3xl py-2;
+  }
+
+  strong {
+    @apply font-bold;
+  }
 
   a {
     @apply inline-flex gap-2 items-center;

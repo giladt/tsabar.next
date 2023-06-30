@@ -10,7 +10,6 @@ import styles from "./apartment.module.scss";
 import Inquiry from "@/components/forms/inquiry";
 import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
 import { getData } from "@/utils/data-handlers";
-import Fonts from "@/utils/fonts";
 
 type TApartmentURLProps = {
   apartmentURL: string;
@@ -68,19 +67,22 @@ export default async function Apartment({ params }: TPageParams) {
   const bookings: DateRangeType[] = await getData(iCalURL);
 
   return (
-    <main className={`md:justify-center ${Fonts.cnKarla}`}>
+    <main className={styles.main}>
       {images && (
         <section className={styles.carousel}>
           <Carousel images={images} />
         </section>
       )}
       <header className={styles.header}>
-        <h1 className={Fonts.cnDancing}>{name}</h1>
-        <h2>Le Petit Moabit</h2>
-        <h3>
-          Modern, fully furnished, all-inclusive apartments for rent in the
-          heart of Berlin
-        </h3>
+        <h1>{name}</h1>
+        <h2>
+          Le Petit Moabit
+          <br />
+          <strong>
+            Modern, fully furnished, all-inclusive apartments for rent in the
+            heart of Berlin
+          </strong>
+        </h2>
       </header>
       <section className={styles.section}>
         {tags && (
@@ -100,10 +102,8 @@ export default async function Apartment({ params }: TPageParams) {
         )}
       </section>
 
-      <section>
-        <h3>
-          <strong>Welcome to your new home!</strong>
-        </h3>
+      <section className={styles.section}>
+        <h3>Welcome to your new home!</h3>
         <p>
           These charming one bedroom apartments are located in the heart of
           Moabit, Berlin. The apartments are fully furnished and equipped with
@@ -123,7 +123,9 @@ export default async function Apartment({ params }: TPageParams) {
         </p>
       </section>
 
-      <section className="max-sm:px-5 flex flex-col justify-center">
+      <section
+        className={`${styles.section} max-sm:px-5 flex flex-col justify-center`}
+      >
         <h3>Inquiry</h3>
         <Inquiry bookings={bookings} />
       </section>

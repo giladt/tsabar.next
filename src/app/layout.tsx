@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-import { Roboto } from "next/font/google";
 import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -11,8 +10,7 @@ import CookieBanner from "@/components/cookie-banner/cookie-banner";
 import styles from "./layout.module.scss";
 import "./globals.css";
 import { Footer } from "@/components/footer/footer";
-
-const roboto = Roboto({ subsets: ["latin"], weight: "400", preload: true });
+import Fonts from "@/utils/fonts";
 
 export const dynamicParams = false;
 
@@ -39,9 +37,13 @@ export default async function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html
+      lang="en"
+      suppressHydrationWarning={true}
+      className={`${Fonts.roboto.variable} ${Fonts.dancing.variable} ${Fonts.karla.variable}`}
+    >
       <GoogleAnalytics GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`} />
-      <body className={roboto.className} suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true}>
         <NextThemeProvider>
           <div className={styles.page}>
             <ThemeSwitcher />

@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { wfImageUrl } from "@/utils/images";
-import Fonts from "@/utils/fonts";
 
 import styles from "./card.module.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -52,7 +51,7 @@ export default function Card({ url, name, info, images }: TCardProps) {
         ))}
       </Carousel>
       <div className={styles.card__info}>
-        <h3 className={Fonts.cnDancing}>{name}</h3>
+        <h3>{name}</h3>
         {info && <p>{info}</p>}
         <Link role="button" type="button" href={url}>
           More details

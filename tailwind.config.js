@@ -15,6 +15,11 @@ module.exports = {
         "secondary-dark": "var(--secondary-dark)",
         "tertiary-dark": "var(--tertiary-dark)",
       },
+      fontFamily: {
+        default: ['var(--font-roboto)'],
+        script: ['var(--font-dancing)'],
+        karla: ['var(--font-karla)'],
+      }
     },
   },
   darkMode: "class",
