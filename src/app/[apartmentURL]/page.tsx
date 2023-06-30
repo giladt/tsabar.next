@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Dancing_Script, Karla } from "next/font/google";
 import { redirect } from "next/navigation";
 import * as ReactMdIcon from "react-icons/md";
 
@@ -11,6 +10,7 @@ import styles from "./apartment.module.scss";
 import Inquiry from "@/components/forms/inquiry";
 import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
 import { getData } from "@/utils/data-handlers";
+import Fonts from "@/utils/fonts";
 
 type TApartmentURLProps = {
   apartmentURL: string;
@@ -51,18 +51,6 @@ export function generateMetadata({ params }: TPageParams): Metadata {
   };
 }
 
-const dancing = Dancing_Script({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  preload: true,
-});
-
-const karla = Karla({
-  subsets: ["latin"],
-  weight: ["200", "400", "700"],
-  preload: true,
-});
-
 export default async function Apartment({ params }: TPageParams) {
   const { apartmentURL } = params;
 
@@ -80,14 +68,14 @@ export default async function Apartment({ params }: TPageParams) {
   const bookings: DateRangeType[] = await getData(iCalURL);
 
   return (
-    <main className={`md:justify-center ${karla.className}`}>
+    <main className={`md:justify-center ${Fonts.cnKarla}`}>
       {images && (
         <section className={styles.carousel}>
           <Carousel images={images} />
         </section>
       )}
       <header className={styles.header}>
-        <h1 className={dancing.className}>{name}</h1>
+        <h1 className={Fonts.cnDancing}>{name}</h1>
         <h2>Le Petit Moabit</h2>
         <h3>
           Modern, fully furnished, all-inclusive apartments for rent in the

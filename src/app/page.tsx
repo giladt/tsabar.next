@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Dancing_Script } from "next/font/google";
 import { TbExternalLink } from "react-icons/tb";
 
 import Cards from "@/components/cards/cards";
@@ -7,12 +6,7 @@ import GoogleMaps from "@/components/google/map";
 
 import styles from "./page.module.scss";
 import Link from "next/link";
-
-const dancing = Dancing_Script({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  preload: true,
-});
+import Fonts from "@/utils/fonts";
 
 export const metadata: Metadata = {
   robots: {
@@ -34,7 +28,7 @@ async function Home() {
   return (
     <main className="md:justify-center">
       <header className={styles.header}>
-        <h2 className={dancing.className}>Le Petit Moabit</h2>
+        <h2 className={Fonts.cnDancing}>Le Petit Moabit</h2>
         <h1>
           Modern, fully furnished, all-inclusive apartments for rent in the
           heart of Berlin
