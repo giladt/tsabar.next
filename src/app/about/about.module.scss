@@ -1,0 +1,15 @@
+.about {
+  @apply mt-10 max-sm:px-1;
+  ul {
+    @apply flex flex-wrap gap-2;
+    li {
+      @apply rounded-md px-1;
+    }
+  }
+  article {
+    @apply my-8;
+    p {
+      @apply py-2;
+    }
+  }
+}
