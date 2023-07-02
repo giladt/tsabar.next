@@ -44,7 +44,7 @@
       @apply text-base max-md:text-sm;
       &:first-child button[disabled] {
         /* overide disabled date style */
-        @apply rounded-full text-tertiary-dark bg-gray-500/20;
+        @apply rounded-full text-tertiary-dark bg-gray-500/20 h-[2.15rem] w-[2.15rem];
       }
     }
   }

@@ -104,22 +104,51 @@ export default async function Apartment({ params }: TPageParams) {
 
       <section className={styles.section}>
         <h3>Welcome to your new home!</h3>
+        <h4>
+          The <strong>entire apartment</strong> only for your self!
+        </h4>
         <p>
-          These charming one bedroom apartments are located in the heart of
-          Moabit, Berlin. The apartments are fully furnished and equipped with
-          everything you need to make your stay comfortable and enjoyable.
+          Welcome to your perfect home in the heart of Berlin! This fully
+          furnished, all-inclusive one-bedroom apartment in the vibrant
+          neighborhood of Moabit offers everything you need for a comfortable
+          and convenient living experience.
+        </p>
+        <h4>Apartment Features</h4>
+        <ul>
+          <li>Spacious and stylish one-bedroom apartment</li>
+          <li>Thoughtfully designed interiors with modern furnishings</li>
+          <li>Open-concept living and sleeping area for maximum comfort</li>
+          <li>Fully equipped kitchen</li>
+          <li>Cozy bedroom with a comfortable double-bed</li>
+          <li>Ample storage space throughout the apartment</li>
+          <li>High-speed internet</li>
+          <li>Convenient in-unit washer for your laundry needs</li>
+          <li>Central heating</li>
+        </ul>
+        <h4>All-Inclusive Amenities</h4>
+        <p>
+          We believe in hassle-free living, which is why all utilities
+          (including water, electricity, internet, and maintenance) are included
+          in the monthly rent
+        </p>
+        <h4>Address Registration (&apos;Anmeldung&apos;)</h4>
+        <p>
+          In order to ease your process of setting your base in the city, we can
+          provide you with the landlord approval form for your address
+          registration. This way you can move on with the german bureaucracy
+          more smoothly
+        </p>
+        <h4>Pricing and Availability:</h4>
+        <p>
+          The fully furnished, all-inclusive one-bedroom apartment in Moabit
+          might be available for immediate move-in. Rent for this apartment
+          starts at €1,500 per month, which includes all utilities and
+          amenities. Don&apos;t miss this opportunity to live in the heart of
+          Berlin with all the comfort and convenience you deserve.
         </p>
         <p>
-          The apartments features a cozy living room, a fully equipped kitchen,
-          a comfortable bedroom with a double bed and a modern bathroom.
-        </p>
-        <p>
-          The apartments are located in a quiet and peaceful neighborhood in
-          Moabit, yet close to all the amenities you need. You will find plenty
-          of shops, restaurants, cafes and bars within walking distance. The
-          apartment is also well connected to public transportation, making it
-          easy to explore the city. Book your stay today and experience the best
-          of Berlin!
+          Check the availability, and contact us for more information or reserve
+          your stay in your new home today!
         </p>
       </section>
 

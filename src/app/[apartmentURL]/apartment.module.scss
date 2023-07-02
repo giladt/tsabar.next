@@ -6,6 +6,9 @@
 
   .section {
     @apply flex flex-col py-5 max-md:px-5 gap-2;
+    ul {
+      @apply list-disc list-inside;
+    }
   }
 
   .carousel {
@@ -15,19 +18,13 @@
   .tags {
     @apply flex justify-center gap-2 flex-wrap;
     .tag {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      padding: 0.125rem 0.5rem;
-      border-radius: 9999px;
-      background: rgb(255, 255, 255, 0.25);
-      @apply inline-flex gap-1 rounded-full px-2 py-1 cursor-default
-            font-semibold bg-white/25 transition-colors;
+      @apply inline-flex items-center gap-1 rounded-full px-2 py-1 
+        cursor-default font-semibold bg-white/25 transition-colors;
       &:hover {
         @apply bg-white/50;
       }
       .tag__icon {
-        @apply h-9 w-9;
+        @apply h-5 w-5;
       }
     }
   }

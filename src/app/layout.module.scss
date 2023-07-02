@@ -11,7 +11,10 @@
     @apply font-normal text-2xl;
   }
   h3 {
-    @apply font-script font-bold text-3xl py-2;
+    @apply font-script font-bold text-4xl py-2;
+  }
+  h4 {
+    @apply font-bold text-xl pt-4;
   }
 
   strong {
