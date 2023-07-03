@@ -42,6 +42,13 @@ export default async function RootLayout({
       suppressHydrationWarning={true}
       className={`${Fonts.roboto.variable} ${Fonts.dancing.variable} ${Fonts.karla.variable}`}
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=optional"
+        />
+      </head>
       <GoogleAnalytics GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`} />
       <body suppressHydrationWarning={true}>
         <NextThemeProvider>
