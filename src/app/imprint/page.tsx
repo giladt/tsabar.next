@@ -75,18 +75,19 @@ async function Imprint() {
 
   return (
     <div className={styles.imprint}>
-      <Link href="/">
+      <Link
+        href="/"
+        role="button"
+        className="bg-black/25
+        hover:bg-black/50
+        text-black dark:text-white"
+      >
         <MdArrowBack />
         Back home
       </Link>
 
       <br />
       <main dangerouslySetInnerHTML={{ __html: data?.data || "" }} />
-      <br />
-      <Link href="/">
-        <MdArrowBack />
-        Back home
-      </Link>
     </div>
   );
 }

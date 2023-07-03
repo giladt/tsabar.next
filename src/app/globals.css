@@ -38,6 +38,11 @@
     font-bold;
   }
 
+  [align="center"] {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .btn-root {
     @apply flex justify-center items-center gap-2 
       w-full h-10 rounded-lg whitespace-nowrap

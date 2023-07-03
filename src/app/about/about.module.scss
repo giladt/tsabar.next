@@ -1,7 +1,11 @@
 .about {
-  @apply mt-10;
+  @apply max-sm:p-4;
+  & > a[role="button"] {
+    @apply fixed top-2 left-2 h-9 px-2 rounded-full z-10
+      flex items-center gap-1;
+  }
   main {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-2 mt-10;
     h1,
     h2,
     h3,
@@ -13,18 +17,19 @@
     ul {
       @apply flex flex-wrap gap-2;
       li {
-        @apply rounded-md px-1;
+        @apply rounded-md outline-1 outline-dashed px-1;
       }
     }
-    article {
-      @apply my-8;
-    }
     p {
-      @apply py-2;
+      @apply overflow-hidden text-ellipsis py-2;
     }
-    a[target="_blank"]:after {
-      @apply -translate-x-2 -translate-y-1 text-xs text-primary-dark content-["\e89e"];
-      font-family: "Material Symbols Rounded";
+    a[target="_blank"] {
+      @apply gap-1;
+      &:after {
+        @apply -translate-x-1 -translate-y-1 text-xs 
+          text-primary-dark content-["\e89e"];
+        font-family: "Material Symbols Rounded";
+      }
     }
   }
 }

@@ -22,14 +22,15 @@ export default function RadioInput({
   onChange,
 }: TTextInputProps) {
   return (
-    <FormField error={value.error}>
-      <div>
+    <FormField error={value.error} forwardClassRef="radio_buttons">
+      <div className={styles.radioButtons}>
         {options.map((option) => {
           const id = `${name}-${option.value}`;
           return (
             <Fragment key={uuidv4()}>
               <input
                 id={id}
+                className={styles.radioInput}
                 type="radio"
                 name={name}
                 value={option.value}
@@ -38,11 +39,15 @@ export default function RadioInput({
               />
               <label
                 htmlFor={id}
-                className={
-                  value.error
-                    ? styles.error
-                    : "border-black/50 dark:border-white/50"
-                }
+                className={`
+                  ${
+                    value.error
+                      ? styles.error
+                      : "border-black/50 dark:border-white/50"
+                  }
+
+                  ${styles.radioButton}
+                `}
               >
                 {option.label}
               </label>

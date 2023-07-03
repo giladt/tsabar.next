@@ -75,7 +75,13 @@ async function About() {
 
   return (
     <div className={styles.about}>
-      <Link href="/">
+      <Link
+        href="/"
+        role="button"
+        className="bg-black/25
+        hover:bg-black/50
+        text-black dark:text-white"
+      >
         <MdArrowBack />
         Back home
       </Link>
