@@ -1,5 +1,13 @@
-import dayjs, { type Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
+
+import { Octokit } from "@octokit/core";
+import { JSDOM } from "jsdom";
+import { marked } from "marked";
+import { mangle } from "marked-mangle";
+import { gfmHeadingId } from "marked-gfm-heading-id";
+import createDOMPurify from "dompurify";
+
 
 export const getData = async (iCalURL: string): Promise<DateRangeType[]> => {
   try {
@@ -51,3 +59,46 @@ export const parseICalData = (data: string[]) => {
 
   return events;
 };
+
+marked.use(mangle(), gfmHeadingId());
+
+export const getMdFileData = async (fileName: string) => {
+  try {
+    const githubConfig = {
+      type: "private",
+      ref: process.env.GITHUB_CONTENT_BRANCH,
+      token: process.env.GITHUB_CONTENT_TOKEN,
+      owner: process.env.GITHUB_CONTENT_OWNER || "",
+      repo: process.env.GITHUB_CONTENT_REPO || "",
+    };
+
+    const octokit = new Octokit({ auth: githubConfig.token });
+    const res = (
+      await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
+        ...githubConfig,
+        path: fileName,
+      })
+    ).data;
+    if (Array.isArray(res)) return;
+
+    const { download_url } = res;
+
+    if (!download_url)
+      throw new Error(`Error: Failed to retrieve page content from '${fileName}'.`);
+
+    const data = await fetch(download_url);
+    const pageContent = await data.text();
+
+    const window = new JSDOM("").window;
+    const DOMPurify = createDOMPurify(window);
+    const sanitizedHtml = DOMPurify.sanitize(marked(pageContent)).replaceAll(
+      /<a /g,
+      `<a target="_blank" rel="noreferrer noopener nofollow" `
+    );
+
+    return { data: sanitizedHtml };
+  } catch (error: unknown) {
+    throw new Error(`Error: '${fileName}' could not be fetched.`);
+  }
+};
+

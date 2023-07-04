@@ -1,58 +1,11 @@
 import { Metadata } from "next";
-import Link from "next/link";
-import { MdArrowBack } from "react-icons/md";
-import { Octokit } from "@octokit/core";
-import { JSDOM } from "jsdom";
-import { marked } from "marked";
-import { mangle } from "marked-mangle";
-import { gfmHeadingId } from "marked-gfm-heading-id";
-import createDOMPurify from "dompurify";
+import { MdHouse } from "react-icons/md";
 
 import styles from "./about.module.scss";
 import { Button } from "@/components/button";
+import { getMdFileData } from "@/utils/data-handlers";
 
-export const revalidate = 0;
-marked.use(mangle(), gfmHeadingId());
-
-const fetchPageContent = async () => {
-  try {
-    const githubConfig = {
-      type: "private",
-      ref: process.env.GITHUB_CONTENT_BRANCH,
-      token: process.env.GITHUB_CONTENT_TOKEN,
-      owner: process.env.GITHUB_CONTENT_OWNER || "",
-      repo: process.env.GITHUB_CONTENT_REPO || "",
-    };
-
-    const octokit = new Octokit({ auth: githubConfig.token });
-    const res = (
-      await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
-        ...githubConfig,
-        path: "about.md",
-      })
-    ).data;
-    if (Array.isArray(res)) return;
-
-    const { download_url } = res;
-
-    if (!download_url)
-      throw new Error(`Error: Failed to retrieve page content.`);
-
-    const data = await fetch(download_url);
-    const pageContent = await data.text();
-
-    const window = new JSDOM("").window;
-    const DOMPurify = createDOMPurify(window);
-    const sanitizedHtml = DOMPurify.sanitize(marked(pageContent)).replaceAll(
-      /<a /g,
-      `<a target="_blank" rel="noreferrer noopener nofollow" `
-    );
-
-    return { data: sanitizedHtml };
-  } catch (error: unknown) {
-    throw new Error("Error: About page content could not be fetched.");
-  }
-};
+export const revalidate = 60 * 60; // Revalidate all fetches once an hour;
 
 export const metadata: Metadata = {
   title: "About",
@@ -72,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 async function About() {
-  const data = await fetchPageContent();
+  const data = await getMdFileData("about.md");
 
   return (
     <div className={styles.about}>
