@@ -3,14 +3,14 @@ import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 
 import { NextThemeProvider } from "@/components/provider/provider";
-import { ThemeSwitcher } from "@/components/theme-switcher/theme-switcher";
 import GoogleAnalytics from "@/components/google/analytics";
 import CookieBanner from "@/components/cookie-banner/cookie-banner";
+import { Footer } from "@/components/footer/footer";
+import { Button } from "@/components/button";
+import Fonts from "@/utils/fonts";
 
 import styles from "./layout.module.scss";
 import "./globals.css";
-import { Footer } from "@/components/footer/footer";
-import Fonts from "@/utils/fonts";
 
 export const dynamicParams = false;
 
@@ -46,7 +46,7 @@ export default async function RootLayout({
       <body suppressHydrationWarning={true}>
         <NextThemeProvider>
           <div className={styles.page}>
-            <ThemeSwitcher />
+            <Button.ThemeSwitch />
             {children}
           </div>
           <Footer />

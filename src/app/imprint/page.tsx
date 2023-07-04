@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Button } from "@/components/button";
 import Link from "next/link";
 import { MdArrowBack } from "react-icons/md";
 import { Octokit } from "@octokit/core";
@@ -75,16 +76,9 @@ async function Imprint() {
 
   return (
     <div className={styles.imprint}>
-      <Link
-        href="/"
-        role="button"
-        className="bg-black/25
-        hover:bg-black/50
-        text-black dark:text-white"
-      >
-        <MdArrowBack />
-        Back home
-      </Link>
+      <Button.Back href="/">
+        <MdHouse />
+      </Button.Back>
 
       <br />
       <main dangerouslySetInnerHTML={{ __html: data?.data || "" }} />

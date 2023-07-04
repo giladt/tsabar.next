@@ -9,6 +9,7 @@ import { gfmHeadingId } from "marked-gfm-heading-id";
 import createDOMPurify from "dompurify";
 
 import styles from "./about.module.scss";
+import { Button } from "@/components/button";
 
 export const revalidate = 0;
 marked.use(mangle(), gfmHeadingId());
@@ -75,16 +76,9 @@ async function About() {
 
   return (
     <div className={styles.about}>
-      <Link
-        href="/"
-        role="button"
-        className="bg-black/25
-        hover:bg-black/50
-        text-black dark:text-white"
-      >
-        <MdArrowBack />
-        Back home
-      </Link>
+      <Button.Back href="/">
+        <MdHouse />
+      </Button.Back>
       <br />
       <main dangerouslySetInnerHTML={{ __html: data?.data || "" }} />
     </div>
