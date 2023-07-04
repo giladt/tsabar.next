@@ -38,6 +38,17 @@
     font-bold;
   }
 
+  a[target="_blank"] {
+    @apply gap-1;
+    &:after {
+      @apply content-["\2197"] 
+        text-primary-dark text-[0.5rem] leading-3 
+        font-bold font-karla
+        outline outline-2 outline-primary-dark 
+        rounded-[0.175rem] px-[0.15rem];
+    }
+  }
+
   [align="center"] {
     margin-left: auto;
     margin-right: auto;

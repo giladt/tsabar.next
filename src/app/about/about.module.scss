@@ -1,9 +1,5 @@
 .about {
   @apply max-sm:p-4;
-  & > a[role="button"] {
-    @apply fixed top-2 left-2 h-9 px-2 rounded-full z-10
-      flex items-center gap-1;
-  }
   main {
     @apply flex flex-col gap-2 mt-10;
     h1,
@@ -22,14 +18,6 @@
     }
     p {
       @apply overflow-hidden text-ellipsis py-2;
-    }
-    a[target="_blank"] {
-      @apply gap-1;
-      &:after {
-        @apply -translate-x-1 -translate-y-1 text-xs 
-          text-primary-dark content-["\e89e"];
-        font-family: "Material Symbols Rounded";
-      }
     }
   }
 }

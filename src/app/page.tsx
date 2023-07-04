@@ -72,7 +72,6 @@ async function Home() {
             <span>Wilhelmshavener Straße 9, </span>
             <span>10551 Berlin, DE</span>
           </address>
-          <TbExternalLink />
         </Link>
       </section>
     </main>
