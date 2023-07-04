@@ -46,13 +46,14 @@ export default function GoogleMaps({
   }
   return (
     <div className={styles.mapContainer}>
-      <LoadScript
-        googleMapsApiKey={googleMapsApiKey}
-        mapIds={["e1acf1f72565fcfc", "21b6c08e77b1f04a"]}
-        loadingElement={<MapLoad />}
-      >
-        <Map coordinates={center} zoom={zoom} />
-      </LoadScript>
+      {(typeof google === "undefined" && (
+        <LoadScript
+          googleMapsApiKey={googleMapsApiKey}
+          loadingElement={<MapLoad />}
+        >
+          <Map coordinates={center} zoom={zoom} />
+        </LoadScript>
+      )) || <Map coordinates={center} zoom={zoom} />}
     </div>
   );
 }

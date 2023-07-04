@@ -79,7 +79,7 @@ export const getMdFileData = async (fileName: string) => {
         path: fileName,
       })
     ).data;
-    if (Array.isArray(res)) return;
+    if (Array.isArray(res)) return null;
 
     const { download_url } = res;
 

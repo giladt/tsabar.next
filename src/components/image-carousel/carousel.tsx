@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import styles from "./carousel.module.scss";
+import Image from "next/image";
 
 type TImage = {
   id: string;
@@ -30,9 +31,14 @@ export function Carousel({ images }: TCarouselProps) {
       centerSlidePercentage={100}
       useKeyboardArrows
     >
-      {images.map((image: TImage) => (
+      {images.map((image: TImage, index: number) => (
         <div key={uuidv4()} className={styles.images}>
-          <img src={wfImageUrl(image.id, "lg")} alt={image.description || ""} />
+          <Image
+            src={wfImageUrl(image.id, "lg")}
+            alt={image.description || ""}
+            fill
+            priority={index === 0}
+          />
         </div>
       ))}
     </ReactResponsiveCarousel>

@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import { MdHouse } from "react-icons/md";
 
-import styles from "./about.module.scss";
 import { Button } from "@/components/button";
 import { getMdFileData } from "@/utils/data-handlers";
+
+import styles from "./about.module.scss";
 
 export const revalidate = 60 * 60; // Revalidate all fetches once an hour;
 
@@ -32,6 +33,7 @@ async function About() {
       <Button.Back href="/">
         <MdHouse />
       </Button.Back>
+
       <br />
       <main dangerouslySetInnerHTML={{ __html: data?.data || "" }} />
     </div>
