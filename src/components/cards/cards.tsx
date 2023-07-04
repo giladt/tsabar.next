@@ -3,7 +3,7 @@ import styles from "./cards.module.scss";
 import apartments from "@/assets/apartments.json";
 
 type TCardsProps = {};
-export default async function Cards({}: TCardsProps) {
+export default function Cards({}: TCardsProps) {
   return (
     <section
       id="cards"
