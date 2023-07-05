@@ -27,15 +27,17 @@ export const Footer = () => {
             <Link
               key={uuidv4()}
               href={url}
-              className={styles[url === currentPath ? "active" : ""]}
+              className={`${styles[url === currentPath ? "active" : ""]} ${
+                styles.navigationRoute
+              }`}
             >
-              <span>{label}</span>
-              <span>|</span>
+              <span className={styles.navigationLabel}>{label}</span>
+              <span className={styles.navigationDivider}>|</span>
             </Link>
           );
         })}
       </span>
-      <span>© TSABAR.net 2023</span>
+      <span className={styles.copyright}>© TSABAR.net 2023</span>
     </footer>
   );
 };

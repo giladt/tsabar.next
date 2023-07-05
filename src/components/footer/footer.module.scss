@@ -1,25 +1,29 @@
 .footer {
-  @apply flex h-8 px-2 mt-5 justify-between
-    max-w-screen-md m-auto items-center text-sm
+  @apply flex flex-wrap h-auto p-2 justify-between
+    max-w-screen-md mx-auto items-center text-sm
     fixed bg-inherit left-0 right-0 bottom-0 z-10;
   .love {
-    @apply max-[420px]:hidden;
+    @apply max-[512px]:hidden whitespace-nowrap text-xs;
   }
   .navigation {
-    @apply flex ml-auto items-center mr-1;
-
-    & > a {
+    @apply flex ml-auto max-[512px]:mr-auto items-center mr-1;
+    .navigationRoute {
       @apply flex items-center;
-      & > span {
-        @apply mx-1;
+      &:hover,
+      &.active {
+        .navigationLabel {
+          @apply opacity-100;
+        }
       }
-      &:hover > :first-child {
-        @apply font-bold;
+      .navigationLabel {
+        @apply opacity-75;
+      }
+      .navigationDivider {
+        @apply mx-1;
       }
     }
   }
-
-  .active {
-    @apply font-extrabold;
+  .copyright {
+    @apply whitespace-nowrap text-xs;
   }
 }
