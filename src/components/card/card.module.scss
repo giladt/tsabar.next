@@ -10,13 +10,6 @@
     .card__gallery {
       @apply overflow-hidden rounded-md cursor-pointer shadow-lg;
     }
-    a[role="button"] {
-      @apply flex justify-center mt-5 p-1 w-full 
-        rounded-md outline outline-primary-dark 
-        hover:bg-primary-dark hover:text-black 
-        hover:shadow-md decoration-0
-        focus:bg-primary-dark focus:text-black;
-    }
   }
 
   .card__fs_gallery_image {

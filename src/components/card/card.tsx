@@ -9,6 +9,7 @@ import { wfImageUrl } from "@/utils/images";
 
 import styles from "./card.module.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { LinkBtn } from "../button";
 
 type TCardProps = {
   url: string;
@@ -53,9 +54,7 @@ export default function Card({ url, name, info, images }: TCardProps) {
       <div className={styles.card__info}>
         <h3>{name}</h3>
         {info && <p>{info}</p>}
-        <Link role="button" type="button" href={url}>
-          More details
-        </Link>
+        <LinkBtn.CTX route={url}>More Details</LinkBtn.CTX>
       </div>
     </section>
   );
