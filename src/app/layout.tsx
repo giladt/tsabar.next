@@ -6,7 +6,7 @@ import { NextThemeProvider } from "@/components/provider/provider";
 import GoogleAnalytics from "@/components/google/analytics";
 import CookieBanner from "@/components/cookie-banner/cookie-banner";
 import { Footer } from "@/components/footer/footer";
-import { Button } from "@/components/button";
+import { LinkBtn } from "@/components/button";
 import Fonts from "@/utils/fonts";
 
 import styles from "./layout.module.scss";
@@ -46,7 +46,7 @@ export default async function RootLayout({
       <body suppressHydrationWarning={true}>
         <NextThemeProvider>
           <div className={styles.page}>
-            <Button.ThemeSwitch />
+            <LinkBtn.ThemeSwitch />
             {children}
           </div>
           <Footer />

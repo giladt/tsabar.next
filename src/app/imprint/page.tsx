@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { MdHouse } from "react-icons/md";
 
-import { Button } from "@/components/button";
+import { LinkBtn } from "@/components/button";
 import { getMdFileData } from "@/utils/data-handlers";
 
 import styles from "./imprint.module.scss";
@@ -30,9 +30,9 @@ async function Imprint() {
 
   return (
     <div className={styles.imprint}>
-      <Button.Back href="/">
+      <LinkBtn.NavigationIcon href="/">
         <MdHouse />
-      </Button.Back>
+      </LinkBtn.NavigationIcon>
 
       <br />
       <main dangerouslySetInnerHTML={{ __html: data?.data || "" }} />

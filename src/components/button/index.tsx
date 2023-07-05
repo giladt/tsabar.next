@@ -1,7 +1,9 @@
-import { Back } from "./back/back";
+import { ActionButton } from "./action/action";
+import { NavigationIconButton } from "./back/back";
 import { ThemeSwitcher } from "./theme-switcher/theme-switcher";
 
-export const Button = {
-  Back: Back,
+export const LinkBtn = {
+  CTX: ActionButton,
+  NavigationIcon: NavigationIconButton,
   ThemeSwitch: ThemeSwitcher,
 };
