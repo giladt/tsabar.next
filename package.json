@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo --show-all",
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbo --show-all",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -28,7 +29,6 @@
     "marked-mangle": "^1.1.0",
     "next": "13.4.7",
     "next-themes": "^0.2.1",
-    "node-ical": "^0.16.0",
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -39,7 +39,6 @@
     "sharp": "^0.32.1",
     "tailwindcss": "3.3.2",
     "the-new-css-reset": "^1.8.4",
-    "typescript": "5.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -53,6 +52,7 @@
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",
     "@types/uuid": "^9.0.1",
+    "typescript": "5.0",
     "postcss-import": "^15.1.0"
   }
 }
