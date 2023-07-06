@@ -4,7 +4,6 @@ import { Carousel as ReactResponsiveCarousel } from "react-responsive-carousel";
 import { v4 as uuidv4 } from "uuid";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import styles from "./carousel.module.scss";
 import Image from "next/image";
 
 type TImage = {
@@ -20,7 +19,7 @@ type TCarouselProps = {
 export function Carousel({ images }: TCarouselProps) {
   return (
     <ReactResponsiveCarousel
-      className={styles.carousel}
+      className="h-[clamp(81svh,500px,calc(100svh-5rem))]"
       ariaLabel={`Apartment photos.`}
       showThumbs={false}
       showIndicators={true}
@@ -32,12 +31,17 @@ export function Carousel({ images }: TCarouselProps) {
       useKeyboardArrows
     >
       {images.map((image: TImage, index: number) => (
-        <div key={uuidv4()} className={styles.images}>
+        <div
+          key={uuidv4()}
+          className="h-[clamp(81svh,500px,calc(100svh-5rem))]
+          flex w-full items-center relative"
+        >
           <Image
             src={wfImageUrl(image.id, "lg")}
             alt={image.description || ""}
             fill
             priority={index === 0}
+            className="w-full h-full object-cover object-center bg-slate-700"
           />
         </div>
       ))}

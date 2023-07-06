@@ -1,7 +1,0 @@
-@tailwind components;
-
-@layer components {
-  .cards {
-    @apply container flex flex-wrap gap-6 justify-around;
-  }
-}

@@ -3,7 +3,6 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 
-import styles from "./footer.module.scss";
 import { TbHome } from "react-icons/tb";
 import { IconType } from "react-icons/lib";
 
@@ -15,29 +14,48 @@ const footerLinks: TFooterLinks = [
   ["/imprint", "Imprint"],
 ];
 
-export const Footer = () => {
-  const currentPath = usePathname();
+const Love = () => (
+  <span className="max-[512px]:hidden whitespace-nowrap text-xs">
+    Made with 💓 in Berlin
+  </span>
+);
 
+const Copyright = () => (
+  <span className="whitespace-nowrap text-xs">© TSABAR.net 2023</span>
+);
+
+const Navigation = () => {
+  const currentPath = usePathname();
   return (
-    <footer className={styles.footer} suppressHydrationWarning={true}>
-      <span className={styles.love}>Made with 💓 in Berlin</span>
-      <span className={styles.navigation}>
-        {footerLinks.map(([url, label]) => {
-          return (
-            <Link
-              key={uuidv4()}
-              href={url}
-              className={`${styles[url === currentPath ? "active" : ""]} ${
-                styles.navigationRoute
-              }`}
+    <span className="flex ml-auto max-[512px]:mr-auto items-center mr-1">
+      {footerLinks.map(([url, label]) => {
+        return (
+          <Link key={uuidv4()} href={url} className="flex items-center">
+            <span
+              className={url === currentPath ? "opacity-100" : "opacity-75"}
             >
-              <span className={styles.navigationLabel}>{label}</span>
-              <span className={styles.navigationDivider}>|</span>
-            </Link>
-          );
-        })}
-      </span>
-      <span className={styles.copyright}>© TSABAR.net 2023</span>
+              {label}
+            </span>
+            <span className="mx-1">|</span>
+          </Link>
+        );
+      })}
+    </span>
+  );
+};
+
+export const Footer = () => {
+  return (
+    <footer
+      className="flex flex-wrap h-auto p-2 justify-between
+        max-w-screen-md mx-auto items-center text-sm
+        fixed bg-inherit left-0 right-0 bottom-0 z-10
+      "
+      suppressHydrationWarning={true}
+    >
+      <Love />
+      <Navigation />
+      <Copyright />
     </footer>
   );
 };

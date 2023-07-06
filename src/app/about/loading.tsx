@@ -1,10 +1,9 @@
 import { LinkBtn } from "@/components/button";
-import styles from "./about.module.scss";
 import { MdHouse } from "react-icons/md";
 
 export default function Loading() {
   return (
-    <div className={styles.about}>
+    <div className="max-sm:p-4">
       <LinkBtn.NavigationIcon href="/">
         <MdHouse />
       </LinkBtn.NavigationIcon>

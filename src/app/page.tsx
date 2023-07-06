@@ -1,11 +1,8 @@
 import { Metadata } from "next";
-import { TbExternalLink } from "react-icons/tb";
+import Link from "next/link";
 
 import Cards from "@/components/cards/cards";
 import GoogleMaps from "@/components/google/map";
-
-import styles from "./page.module.scss";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   robots: {
@@ -26,14 +23,14 @@ export const metadata: Metadata = {
 async function Home() {
   return (
     <main className="md:justify-center">
-      <header className={styles.header}>
-        <h2>Le Petit Moabit</h2>
-        <h1>
+      <header className="text-center my-14 max-md:px-5">
+        <h2 className="font-script text-6xl mb-7">Le Petit Moabit</h2>
+        <h1 className="font-karla text-2xl">
           Modern, fully furnished, all-inclusive apartments for rent in the
           heart of Berlin
         </h1>
       </header>
-      <section className={styles.section}>
+      <section className="flex flex-col py-5 max-md:px-5 gap-2">
         <h3>Welcome to your new home!</h3>
         <p>
           These charming one bedroom apartments are located in the heart of
@@ -54,7 +51,7 @@ async function Home() {
         </p>
       </section>
       <Cards />
-      <section className={styles.section}>
+      <section className="flex flex-col py-5 max-md:px-5 gap-2">
         <GoogleMaps
           center={{
             lat: 52.529124,
@@ -67,8 +64,9 @@ async function Home() {
           title="Open on google maps"
           target="_blank"
           href="https://goo.gl/maps/pqVN4qM8mPQG2uhs6"
+          className="inline-flex"
         >
-          <address>
+          <address className="inline-flex flex-wrap">
             <span>Wilhelmshavener Straße 9, </span>
             <span>10551 Berlin, DE</span>
           </address>

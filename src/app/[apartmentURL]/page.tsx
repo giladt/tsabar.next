@@ -6,7 +6,6 @@ import { Carousel } from "@/components/image-carousel/carousel";
 import { TMdIcons, IApartmentData } from "@/utils/types.d";
 import apartmentsData from "@/assets/apartments.json";
 
-import styles from "./apartment.module.scss";
 import Inquiry from "@/components/forms/inquiry";
 import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
 import { getData, getMdFileData } from "@/utils/data-handlers";
@@ -75,13 +74,13 @@ export default async function Apartment({ params }: TPageParams) {
   debugger;
 
   return (
-    <main className={styles.main}>
+    <main className="md:justify-center">
       {images && (
-        <section className={styles.carousel}>
+        <section className="overflow-hidden -mx-[calc(50svw-50%)] w-[calc(100svw-8px)]">
           <Carousel images={images} />
         </section>
       )}
-      <header className={styles.header}>
+      <header className="text-center mt-3 mb-14 max-md:px-5">
         <h1>{name}</h1>
         <h2>
           Le Petit Moabit
@@ -92,16 +91,22 @@ export default async function Apartment({ params }: TPageParams) {
           </strong>
         </h2>
       </header>
-      <section className={styles.section}>
+      <section className="flex flex-col py-5 max-md:px-5 gap-2">
         {tags && (
-          <div className={styles.tags}>
+          <div className="flex justify-center gap-2 flex-wrap">
             {tags.map(
               ({ icon, text }: { icon: TMdIcons; text: string }, index) => {
                 const MdIcon = ReactMdIcon[icon];
                 return (
-                  <span key={`tag-${index}`} className={styles.tag}>
-                    <MdIcon className={styles.tag__icon} />
-                    <div className={styles.tag__text}>{text}</div>
+                  <span
+                    key={`tag-${index}`}
+                    className="inline-flex items-center gap-1 rounded-full 
+                      px-2 py-1 cursor-default font-semibold 
+                      bg-white/25 hover:bg-white/50
+                      transition-colors"
+                  >
+                    <MdIcon className="h-5 w-5" />
+                    <div>{text}</div>
                   </span>
                 );
               }
@@ -112,14 +117,12 @@ export default async function Apartment({ params }: TPageParams) {
 
       {description?.data && (
         <section
-          className={styles.section}
+          className="flex flex-col py-5 max-md:px-5 gap-2"
           dangerouslySetInnerHTML={{ __html: description.data }}
         />
       )}
 
-      <section
-        className={`${styles.section} max-sm:px-5 flex flex-col justify-center`}
-      >
+      <section className="flex flex-col py-5 max-md:px-5 gap-2 max-sm:px-5 flex flex-col justify-center">
         <h3>Inquiry</h3>
         <Inquiry bookings={bookings} />
       </section>

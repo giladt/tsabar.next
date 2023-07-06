@@ -1,26 +1,25 @@
 import { ReactNode } from "react";
-import styles from "./form-field.module.scss";
 
 type TFormFieldProps = {
   children: ReactNode;
-  forwardClassRef?: string;
   error?: string | null;
 };
 
-export default function FormField({
-  children,
-  forwardClassRef,
-  error = "",
-}: TFormFieldProps) {
+export default function FormField({ children, error = "" }: TFormFieldProps) {
   return (
-    <span
+    <fieldset
       className={`
-        ${styles.input_field} 
-        ${styles[forwardClassRef || ""]}
+        flex flex-col-reverse gap-0 grow relative
       `}
     >
-      <span className={(error && styles.error) || ""}>{error}</span>
+      <span
+        className={
+          (error && "h-0 m-0 p-0 text-sm text-tertiary-dark absolute") || ""
+        }
+      >
+        {error}
+      </span>
       {children}
-    </span>
+    </fieldset>
   );
 }

@@ -1,14 +1,12 @@
-import styles from "./apartment.module.scss";
-
 export default function Loading() {
   return (
-    <main className={styles.main}>
-      <section className={`${styles.carousel} animate-pulse`}>
+    <main className="md:justify-center">
+      <section className="overflow-hidden -mx-[calc(50svw-50%)] w-[calc(100svw-8px)] animate-pulse">
         <section className="w-full h-[clamp(81svh,500px,calc(100svh-5rem))] bg-gray-400 dark:bg-slate-600 flex justify-center items-center">
           Loading...
         </section>
       </section>
-      <header className={styles.header}>
+      <header className="text-center mt-3 mb-14 max-md:px-5">
         <h1>
           <div className="h-8 bg-slate-700 rounded"></div>
         </h1>

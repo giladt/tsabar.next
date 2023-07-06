@@ -3,13 +3,11 @@ import { Carousel } from "react-responsive-carousel";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 
+import { LinkBtn } from "@/components/button";
 import { wfImageUrl } from "@/utils/images";
 
-import styles from "./card.module.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { LinkBtn } from "../button";
 
 type TCardProps = {
   url: string;
@@ -26,9 +24,13 @@ export default function Card({ url, name, info, images }: TCardProps) {
   const router = useRouter();
 
   return (
-    <section className={styles.card}>
+    <section
+      className="max-w-xs relative flex flex-col
+        rounded-md cursor-default
+      "
+    >
       <Carousel
-        className={styles.card__gallery}
+        className="overflow-hidden rounded-md cursor-pointer shadow-lg"
         ariaLabel={`Apartment ${name} photos.`}
         showThumbs={false}
         showIndicators={false}
@@ -51,7 +53,7 @@ export default function Card({ url, name, info, images }: TCardProps) {
           />
         ))}
       </Carousel>
-      <div className={styles.card__info}>
+      <div className="p-2">
         <h3>{name}</h3>
         {info && <p>{info}</p>}
         <LinkBtn.CTX route={url}>More Details</LinkBtn.CTX>

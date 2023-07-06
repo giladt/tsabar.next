@@ -1,10 +1,9 @@
 import { LinkBtn } from "@/components/button";
-import styles from "./imprint.module.scss";
 import { MdHouse } from "react-icons/md";
 
 export default function Loading() {
   return (
-    <div className={styles.imprint}>
+    <div className="max-sm:p-4">
       <LinkBtn.NavigationIcon href="/">
         <MdHouse />
       </LinkBtn.NavigationIcon>

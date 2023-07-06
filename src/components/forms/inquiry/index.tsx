@@ -9,9 +9,7 @@ import dayjs, { Dayjs } from "dayjs";
 
 import FormField from "@/components/forms/form-input/form-field";
 import TextInput from "@/components/forms/form-input/text-input";
-
-import styles from "./inquiry.module.scss";
-import RadioInput from "../form-input/radio-input";
+import RadioInput from "@/components/forms/form-input/radio-input";
 
 type TInquiryProps = {
   bookings: DateRangeType[];
@@ -89,19 +87,6 @@ export default function Inquiry({ bookings }: TInquiryProps) {
       .startOf("month")
       .toDate();
 
-  const darkStyles = {
-    container: `dark:placeholder-primary-dark
-      dark:focus-within:border-primary-dark
-      dark:focus-visible:border-primary-dark
-      dark:text-white
-      dark:border-white/50
-    `,
-    input: `
-      dark:text-white 
-      dark:placeholder-white
-    `,
-  };
-
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -176,8 +161,8 @@ export default function Inquiry({ bookings }: TInquiryProps) {
 
   return (
     <>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <FormField error={value.date_inquiry.error}>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <FormField>
           <Datepicker
             primaryColor="teal"
             separator=" to "
@@ -185,14 +170,26 @@ export default function Inquiry({ bookings }: TInquiryProps) {
             showFooter
             displayFormat="DD/MM/YYYY"
             containerClassName={`
-            ${styles.container}
-            ${darkStyles.container}
-            ${value.date_inquiry.error ? styles.error : ""}
-          `}
+              relative transition-all duration-150
+              w-full flex items-center bg-transparent 
+              border-2 rounded-lg outline-none
+              disabled:opacity-40 disabled:cursor-not-allowed 
+              placeholder-primary-dark dark:placeholder-primary-dark
+              focus-within:border-primary-dark dark:focus-within:border-primary-dark
+              focus-visible:border-primary-dark dark:focus-visible:border-primary-dark
+              text-black dark:text-white
+              border-black/50 dark:border-white/50
+              ${value.date_inquiry.error ? "border-tertiary-dark" : ""}
+            `}
             inputClassName={`
-            ${styles.input}
-            ${darkStyles.input}
-          `}
+              relative transition-all duration-150
+              w-full py-2.5 pl-4 pr-14 
+              bg-transparent 
+              outline-none
+              disabled:opacity-40 disabled:cursor-not-allowed;
+              text-black placeholder-black
+              dark:text-white dark:placeholder-white
+            `}
             placeholder="Select wished stay dates"
             value={inquiryInput}
             startWeekOn="mon"
@@ -202,7 +199,7 @@ export default function Inquiry({ bookings }: TInquiryProps) {
             disabledDates={bookings}
           />
         </FormField>
-        <div>
+        <div className="flex flex-row gap-4 flex-wrap">
           <TextInput
             name="name_first"
             value={value.name_first}
@@ -242,7 +239,16 @@ export default function Inquiry({ bookings }: TInquiryProps) {
         />
 
         <FormField>
-          <button type="submit">Send your inquiry</button>
+          <button
+            type="submit"
+            className="p-2 mt-7 mb-8
+              border-2 border-solid border-primary-dark 
+              rounded-lg text-center hover:text-black
+              bg-transparent hover:bg-primary-dark
+            "
+          >
+            Send your inquiry
+          </button>
         </FormField>
       </form>
     </>

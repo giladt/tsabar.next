@@ -9,7 +9,6 @@ import { Footer } from "@/components/footer/footer";
 import { LinkBtn } from "@/components/button";
 import Fonts from "@/utils/fonts";
 
-import styles from "./layout.module.scss";
 import "./globals.css";
 
 export const dynamicParams = false;
@@ -45,7 +44,13 @@ export default async function RootLayout({
       <GoogleAnalytics GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`} />
       <body suppressHydrationWarning={true}>
         <NextThemeProvider>
-          <div className={styles.page}>
+          <div
+            className="flex flex-col justify-center
+              font-karla text-base
+              max-w-screen-md min-h-[calc(100svh-2rem)]
+              m-auto mb-20
+            "
+          >
             <LinkBtn.ThemeSwitch />
             {children}
           </div>

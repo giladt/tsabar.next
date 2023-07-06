@@ -38,26 +38,46 @@
     font-bold;
   }
 
+  h1 {
+    @apply font-script text-6xl mb-7;
+  }
+  h2 {
+    @apply font-normal text-2xl;
+  }
+  h3 {
+    @apply font-script font-bold text-4xl py-2;
+  }
+  h4 {
+    @apply font-bold text-xl pt-4;
+  }
+
+  strong {
+    @apply font-bold;
+  }
+
+  a {
+    @apply items-center 
+      text-black dark:text-white;
+    &:not([role="button"]):hover {
+      @apply underline 
+        decoration-teal-600 dark:decoration-teal-400 
+        decoration-2;
+    }
+  }
+
   a[target="_blank"] {
-    @apply gap-1;
     &:after {
-      @apply content-["\2197"] 
-        text-primary-dark text-[0.5rem] leading-3 
-        font-bold font-karla
+      @apply content-["\2197"] inline-block
+        text-primary-dark text-[0.7rem] leading-3 
+        font-bold font-karla no-underline
         outline outline-2 outline-primary-dark 
-        rounded-[0.175rem] px-[0.15rem];
+        rounded-[0.175rem] px-[0.15rem] ml-1;
     }
   }
 
   [align="center"] {
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .btn-root {
-    @apply flex justify-center items-center gap-2 
-      w-full h-10 rounded-lg whitespace-nowrap
-      active:ring-2 ring-offset-2 ring-black dark:ring-stone-400;
   }
 
   dialog:modal {
