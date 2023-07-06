@@ -7,11 +7,7 @@ type TFormFieldProps = {
 
 export default function FormField({ children, error = "" }: TFormFieldProps) {
   return (
-    <fieldset
-      className={`
-        flex flex-col-reverse gap-0 grow relative
-      `}
-    >
+    <fieldset className="flex flex-col-reverse gap-0 grow relative">
       <span
         className={
           (error && "h-0 m-0 p-0 text-sm text-tertiary-dark absolute") || ""

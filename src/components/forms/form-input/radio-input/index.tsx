@@ -1,4 +1,4 @@
-import { Fragment, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import FormField from "@/components/forms/form-input/form-field";
@@ -19,35 +19,27 @@ export default function RadioInput({
   value,
   onChange,
 }: TTextInputProps) {
-  const peers = options.map((option) => {
-    return {
-      id: `peer/${option.value}`,
-      checked: `peer-checked/${option.value}:bg-primary-dark peer-checked/${option.value}:text-black`,
-    };
-  });
-
   return (
     <FormField error={value.error}>
-      <div className="flex flex-row items-center w-full gap-4 mt-7">
+      <div className="flex flex-row items-center w-full gap-4 mt-5">
         {options.map((option) => {
           const id = `${name}-${option.value}`;
           return (
-            <Fragment key={uuidv4()}>
+            <label key={uuidv4()} htmlFor={id} className="w-full">
               <input
                 id={id}
-                className={`hidden ${peers[parseInt(option.value) - 1].id}`}
+                className={`hidden peer`}
                 type="radio"
                 name={name}
                 value={option.value}
                 checked={value.text === option.value}
                 onChange={onChange}
               />
-              <label
-                htmlFor={id}
+              <div
                 className={`
                   cursor-pointer
                   bg-transparent 
-                  ${peers[parseInt(option.value) - 1].checked} 
+                  peer-checked:bg-primary-dark peer-checked:text-black
                   w-full text-center
                   p-[0.625rem] 
                   rounded-lg border-2 border-solid 
@@ -60,8 +52,8 @@ export default function RadioInput({
                 `}
               >
                 {option.label}
-              </label>
-            </Fragment>
+              </div>
+            </label>
           );
         })}
       </div>
