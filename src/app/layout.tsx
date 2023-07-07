@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -41,8 +41,12 @@ export default async function RootLayout({
       suppressHydrationWarning={true}
       className={`${Fonts.roboto.variable} ${Fonts.dancing.variable} ${Fonts.karla.variable}`}
     >
-      <GoogleAnalytics GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`} />
       <body suppressHydrationWarning={true}>
+        <Suspense fallback={<span>Loading G-Analytics...</span>}>
+          <GoogleAnalytics
+            GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`}
+          />
+        </Suspense>
         <NextThemeProvider>
           <div
             className="flex flex-col justify-center
