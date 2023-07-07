@@ -1,6 +1,6 @@
 "use client";
 import { useTheme } from "next-themes";
-import { LoadScript, GoogleMap, MarkerF } from "@react-google-maps/api";
+import { LoadScriptNext, GoogleMap, MarkerF } from "@react-google-maps/api";
 import React from "react";
 import MapThemes from "./MapTheme";
 import { ImSpinner } from "react-icons/im";
@@ -44,16 +44,15 @@ export default function GoogleMaps({
   if (typeof googleMapsApiKey === "undefined") {
     return <MapLoadError message="Invalid or missing API key." />;
   }
+
   return (
     <div className={styles.mapContainer}>
-      {(typeof google === "undefined" && (
-        <LoadScript
-          googleMapsApiKey={googleMapsApiKey}
-          loadingElement={<MapLoad />}
-        >
-          <Map coordinates={center} zoom={zoom} />
-        </LoadScript>
-      )) || <Map coordinates={center} zoom={zoom} />}
+      <LoadScriptNext
+        googleMapsApiKey={googleMapsApiKey}
+        loadingElement={<MapLoad />}
+      >
+        <Map coordinates={center} zoom={zoom} />
+      </LoadScriptNext>
     </div>
   );
 }
