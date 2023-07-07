@@ -17,13 +17,14 @@ export default function CookieBanner() {
   useEffect(() => {
     const newValue = cookieConsent ? "granted" : "denied";
 
-    window.gtag("consent", "update", {
-      analytics_storage: newValue,
-    });
+    if (window.gtag) {
+      window.gtag("consent", "update", {
+        analytics_storage: newValue,
+      });
+      setLocalStorage("cookie_consent", cookieConsent);
 
-    setLocalStorage("cookie_consent", cookieConsent);
-
-    console.log("Cookie Consent: ", cookieConsent);
+      console.log("Cookie Consent: ", cookieConsent);
+    }
   }, [cookieConsent]);
 
   return (
@@ -33,29 +34,33 @@ export default function CookieBanner() {
       ${
         cookieConsent != null ? "translate-y-56" : "translate-y-0"
       } px-3 md:px-4 py-3 justify-between items-center flex-col sm:flex-row gap-4
-      bg-gray-700 rounded-lg shadow text-gray-200
+      bg-gray-300 dark:bg-gray-700 rounded-lg shadow z-50 text-gray-200
     `}
     >
       <div className="text-center">
         <Link href="/imprint#privacy-statement">
-          <p>
-            We use <span className="font-bold text-sky-400">cookies</span> on
-            our site.
-          </p>
+          We use{" "}
+          <span className="font-bold text-primary-light dark:text-primary-dark">
+            cookies
+          </span>{" "}
+          on our site.
         </Link>
       </div>
 
       <div className="flex gap-2">
         <button
-          className="px-5 py-2 text-gray-300 rounded-md 
-            hover:bg-gray-800 hover:text-white hover:font-bold"
+          className="px-5 py-2 rounded-md 
+            text-gray-700 dark:text-gray-300 
+            hover:bg-tertiary-dark
+            dark:hover:text-black"
           onClick={() => setCookieConsent(false)}
         >
           Decline
         </button>
         <button
-          className="px-5 py-2 text-white rounded-md bg-gray-900 
-            hover:bg-gray-500 hover:font-bold"
+          className="px-5 py-2 rounded-md 
+          text-white bg-gray-500 
+            hover:bg-primary-dark hover:text-black"
           onClick={() => setCookieConsent(true)}
         >
           Allow
