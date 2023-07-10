@@ -122,9 +122,9 @@ export default async function Apartment({ params }: TPageParams) {
         />
       )}
 
-      <section className="flex flex-col py-5 max-md:px-5 gap-2 max-sm:px-5 flex flex-col justify-center">
+      <section className="flex flex-col py-5 max-md:px-5 gap-2 max-sm:px-5 justify-center">
         <h3>Inquiry</h3>
-        <Inquiry bookings={bookings} />
+        <Inquiry apartment={{ id, name }} bookings={bookings} />
       </section>
     </main>
   );

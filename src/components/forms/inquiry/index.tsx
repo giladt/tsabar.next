@@ -1,5 +1,12 @@
 "use client";
-import { useState, useEffect, FormEvent, ChangeEvent, FocusEvent } from "react";
+import {
+  useState,
+  useEffect,
+  FormEvent,
+  ChangeEvent,
+  FocusEvent,
+  useRef,
+} from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import {
   DateRangeType,
@@ -10,9 +17,13 @@ import dayjs, { Dayjs } from "dayjs";
 import FormField from "@/components/forms/form-input/form-field";
 import TextInput from "@/components/forms/form-input/text-input";
 import RadioInput from "@/components/forms/form-input/radio-input";
+import { Dialog } from "@/components/dialog/dialog";
+import { Button } from "@/components/button";
+import { SendConfirmation } from "../sendConfirmationDialog";
 
 type TInquiryProps = {
   bookings: DateRangeType[];
+  apartment: { id: number; name: string };
 };
 
 export type TFields =
@@ -20,19 +31,23 @@ export type TFields =
   | "name_first"
   | "name_last"
   | "tenants"
-  | "date_inquiry";
+  | "comment"
+  | "date_inquiry"
+  | "apartment";
 
 export type TValue = { text: string; isDirty: boolean; error?: string };
 
-export default function Inquiry({ bookings }: TInquiryProps) {
+export default function Inquiry({ apartment, bookings }: TInquiryProps) {
   const today: Dayjs = dayjs();
   const minDate = today.toDate();
+  const ref = useRef<HTMLDialogElement>(null);
 
   const [inquiryInput, setInquiryInput] = useState<DateValueType>({
     startDate: null,
     endDate: null,
   });
 
+  const [response, setResponse] = useState<number | null>(null);
   const [value, setValue] = useState<{
     [name in TFields]: TValue;
   }>({
@@ -40,7 +55,9 @@ export default function Inquiry({ bookings }: TInquiryProps) {
     name_first: { text: "", isDirty: false, error: "" },
     name_last: { text: "", isDirty: false, error: "" },
     tenants: { text: "", isDirty: false, error: "" },
+    comment: { text: "", isDirty: false, error: "" },
     date_inquiry: { text: "", isDirty: false, error: "" },
+    apartment: { text: "", isDirty: false, error: "" },
   });
 
   const ValidEmail =
@@ -78,7 +95,21 @@ export default function Inquiry({ bookings }: TInquiryProps) {
         });
       }
     });
+    setValue((prev) => {
+      return {
+        ...prev,
+        apartment: {
+          text: `WE${apartment.id} (${apartment.name})`,
+          isDirty: true,
+          error: "",
+        },
+      };
+    });
+    if (isValid) {
+      ref.current?.showModal();
+    }
   };
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const firstDateOfMonth = (date: Dayjs) =>
     dayjs()
@@ -87,9 +118,9 @@ export default function Inquiry({ bookings }: TInquiryProps) {
       .startOf("month")
       .toDate();
 
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = event.target;
 
     setValue((prev) => {
@@ -129,13 +160,13 @@ export default function Inquiry({ bookings }: TInquiryProps) {
         date_inquiry: {
           text:
             `${value?.startDate?.toString() || ""}|${
-              value?.startDate?.toString() || ""
+              value?.endDate?.toString() || ""
             }` || "",
           isDirty: true,
           error: doValidation(
             "date_inquiry",
             `${value?.startDate?.toString() || ""}${
-              value?.startDate?.toString() || ""
+              value?.endDate?.toString() || ""
             }`
           ),
         },
@@ -149,6 +180,27 @@ export default function Inquiry({ bookings }: TInquiryProps) {
     setIsMobile(checkIsMobile(window.innerWidth));
   };
 
+  const clearForm = () => {
+    const emptyField: TValue = {
+      text: "",
+      isDirty: false,
+      error: undefined,
+    };
+    const emptyForm: {
+      [name in TFields]: TValue;
+    } = {
+      email: emptyField,
+      name_first: emptyField,
+      name_last: emptyField,
+      tenants: emptyField,
+      comment: emptyField,
+      date_inquiry: emptyField,
+      apartment: emptyField,
+    };
+    setValue(emptyForm);
+    setInquiryInput({ startDate: null, endDate: null });
+  };
+
   useEffect(() => {
     if (window) {
       handleWindowResize();
@@ -158,6 +210,15 @@ export default function Inquiry({ bookings }: TInquiryProps) {
       };
     }
   }, []);
+
+  useEffect(() => {
+    if (response && ref?.current && response === 200) {
+      ref.current.close();
+      clearForm();
+      // toast("Inquiry sent successfully.");
+    }
+    return setResponse(null);
+  }, [response]);
 
   return (
     <>
@@ -239,18 +300,16 @@ export default function Inquiry({ bookings }: TInquiryProps) {
         />
 
         <FormField>
-          <button
-            type="submit"
-            className="p-2 mt-7 mb-8
-              border-2 border-solid border-primary-dark 
-              rounded-lg text-center hover:text-black
-              bg-transparent hover:bg-primary-dark
-            "
-          >
-            Send your inquiry
-          </button>
+          <Button type="submit">Send your inquiry</Button>
         </FormField>
       </form>
+      <Dialog ref={ref}>
+        <SendConfirmation
+          value={value}
+          handleChange={handleChange}
+          setResponse={setResponse}
+        />
+      </Dialog>
     </>
   );
 }
