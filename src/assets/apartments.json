@@ -1,6 +1,7 @@
 [
   {
     "id": 4,
+    "url": "le-soleil",
     "name": "Le Soleil",
     "info": "A bright and cosy apartment. Wonderful balcony to relax after a long day at work.",
     "images": [
@@ -57,6 +58,7 @@
   },
   {
     "id": 7,
+    "url": "la-lune",
     "name": "La Lune",
     "info": "New! Designer apartment. Equipped with every bit of what you'll need.",
     "images": [

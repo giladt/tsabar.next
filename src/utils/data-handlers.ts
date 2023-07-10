@@ -1,63 +1,40 @@
-import dayjs, { type Dayjs } from "dayjs";
-import { MONTHS } from "@/utils/types.d";
-import { TBookings } from "@/utils/types.d";
+import dayjs from "dayjs";
+import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
 
-export const getData = async (icalUrl: string) => {
+import { Octokit } from "@octokit/core";
+import { JSDOM } from "jsdom";
+import { marked } from "marked";
+import { mangle } from "marked-mangle";
+import { gfmHeadingId } from "marked-gfm-heading-id";
+import createDOMPurify from "dompurify";
+
+
+export const getData = async (iCalURL: string): Promise<DateRangeType[]> => {
   try {
-    const parsedBookings: TBookings = {};
-    const res = await fetch(icalUrl, { next: { revalidate: 60 } })
+    const res = await fetch(iCalURL, { next: { revalidate: 60 } });
     const data = await (res).text();
     const events = parseICalData(data.split("\n"));
 
-    if (!events || !Object.entries(events).length) return {};
-    if (events[0].start.isBefore(dayjs())) events[0].start = events[0].start.subtract(1, "month");
 
-    for (let event of events) {
-      if (!event || !event.start || !event.end) continue;
+    if (!events || !Object.entries(events).length) return [];
 
-      let day = event.start;
-      while (day <= event.end) {
-        const firstDateOfMonth = dayjs()
-          .year(day.year())
-          .month(day.month())
-          .startOf("month");
-        const lastDateOfMonth = dayjs()
-          .year(day.year())
-          .month(day.month())
-          .endOf("month");
-
-        if (!parsedBookings[day.year()]) {
-          parsedBookings[day.year()] = {};
-        }
-        if (!parsedBookings[day.year()][MONTHS[day.month()]]) {
-          parsedBookings[day.year()][MONTHS[day.month()]] = [];
-        }
-        parsedBookings[day.year()][MONTHS[day.month()]].push({
-          start: event.start.isAfter(firstDateOfMonth)
-            ? event.start
-            : firstDateOfMonth,
-          end: event.end.isBefore(lastDateOfMonth)
-            ? event.end
-            : lastDateOfMonth,
-        });
-
-        day = day.add(1, "month");
-      }
-    }
+    const parsedBookings = events.map((event: DateRangeType) => {
+      return { startDate: event.startDate, endDate: event.endDate };
+    })
 
     return parsedBookings;
   } catch (err) {
     console.log({ err });
-    return {};
+    return [];
   }
 };
 
 export const parseICalData = (data: string[]) => {
-  const events: { start: Dayjs; end: Dayjs }[] = [];
+  const events: DateRangeType[] = [];
   let isEvent: boolean = false;
-  let event: { start: Dayjs; end: Dayjs } = {
-    start: dayjs(),
-    end: dayjs(),
+  let event: DateRangeType = {
+    startDate: null,
+    endDate: null,
   };
 
   for (let lineIndex = 0; lineIndex < data.length; lineIndex++) {
@@ -65,7 +42,7 @@ export const parseICalData = (data: string[]) => {
     if (line.includes("BEGIN:VEVENT")) {
       isEvent = true;
     } else if (isEvent && line.includes("END:VEVENT")) {
-      events.push(event);
+      events.push({ ...event });
       isEvent = false;
     } else if (isEvent) {
       const match = /(?<=DT)(.*)(?=;).*(?<=DATE:)(.*)(?=)/g.exec(line);
@@ -73,14 +50,55 @@ export const parseICalData = (data: string[]) => {
       if (match) {
         const [_, key, value]: string[] = match;
 
-        const eventKey = key.toLowerCase() as "start" | "end";
-        const eventValue = dayjs(value);
-
-        event[eventKey] = eventValue;
+        key.toLowerCase() === "start"
+          ? event.startDate = dayjs(value).toDate()
+          : event.endDate = dayjs(value).subtract(1, "day").toDate();
       }
     }
   }
 
   return events;
+};
+
+marked.use(mangle(), gfmHeadingId());
+
+export const getMdFileData = async (fileName: string) => {
+  try {
+    const githubConfig = {
+      type: "private",
+      ref: process.env.GITHUB_CONTENT_BRANCH,
+      token: process.env.GITHUB_CONTENT_TOKEN,
+      owner: process.env.GITHUB_CONTENT_OWNER || "",
+      repo: process.env.GITHUB_CONTENT_REPO || "",
+    };
+
+    const octokit = new Octokit({ auth: githubConfig.token });
+    const res = (
+      await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
+        ...githubConfig,
+        path: fileName,
+      })
+    ).data;
+    if (Array.isArray(res)) return null;
+
+    const { download_url } = res;
+
+    if (!download_url)
+      throw new Error(`Error: Failed to retrieve page content from '${fileName}'.`);
+
+    const data = await fetch(download_url);
+    const pageContent = await data.text();
+
+    const window = new JSDOM("").window;
+    const DOMPurify = createDOMPurify(window);
+    const sanitizedHtml = DOMPurify.sanitize(marked(pageContent)).replaceAll(
+      /<a /g,
+      `<a target="_blank" rel="noreferrer noopener nofollow" `
+    );
+
+    return { data: sanitizedHtml };
+  } catch (error: unknown) {
+    throw new Error(`Error: '${fileName}' could not be fetched.`);
+  }
 };
 

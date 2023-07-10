@@ -1,41 +1,32 @@
-import "./globals.css";
-import { type ReactNode } from "react";
-import { Roboto } from "next/font/google";
+import { Suspense, type ReactNode } from "react";
+import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+
 import { NextThemeProvider } from "@/components/provider/provider";
-import { ThemeSwitcher } from "@/components/theme-switcher/theme-switcher";
-import styles from "./layout.module.scss";
-import Link from "next/link";
+import GoogleAnalytics from "@/components/google/analytics";
+import CookieBanner from "@/components/cookie-banner/cookie-banner";
+import { Footer } from "@/components/footer/footer";
+import { LinkBtn } from "@/components/button";
+import Fonts from "@/utils/fonts";
 
-const roboto = Roboto({ subsets: ["latin"], weight: "400", preload: true });
+import "./globals.css";
 
-export const metadata = {
+export const dynamicParams = false;
+
+export const metadata: Metadata = {
   title: {
     default:
-      "Le Petit Moabit - Furnished apartments for rent in the heart of Berlin Moabit",
+      "🏠 Le Petit Moabit | Furnished apartments for rent in the heart of Berlin Moabit",
     template: "%s | Le Petit Moabit",
   },
   description:
     "Need a place to stay in Berlin? Search no more! Furnished, fully-equipped, all-inclusive one-room apartments for rent in the heart of Berlin - Moabit.",
   creator: "Family Tsabar",
-  keywords: [
-    "rent",
-    "apartment",
-    "berlin",
-    "bedroom",
-    "mitte",
-    "tiergarten",
-    "furnished",
-    "sleep",
-    "wunderflats",
-    "airbnb",
-    "homelike",
-  ],
+  metadataBase: new URL("https://tsabar.net"),
   icons: {
     icon: "./favicon.ico",
   },
-  generator: "Next.js",
-  applicationName: "Next.js",
+  applicationName: "Le Petit Moabit | Furnished Apartments Rental | Berlin, DE",
   referrer: "origin-when-cross-origin",
 };
 
@@ -45,25 +36,32 @@ export default async function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={roboto.className}>
+    <html
+      lang="en"
+      suppressHydrationWarning={true}
+      className={`${Fonts.roboto.variable} ${Fonts.dancing.variable} ${Fonts.karla.variable}`}
+    >
+      <body suppressHydrationWarning={true}>
+        <Suspense fallback={<span>Loading G-Analytics...</span>}>
+          <GoogleAnalytics
+            GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`}
+          />
+        </Suspense>
         <NextThemeProvider>
-          <div className={styles.page}>
-            <ThemeSwitcher />
+          <div
+            className="flex flex-col justify-center
+              font-karla text-base
+              max-w-screen-md min-h-[calc(100svh-2rem)]
+              m-auto mb-20
+            "
+          >
+            <LinkBtn.ThemeSwitch />
             {children}
           </div>
-          <footer className={styles.footer}>
-            <div>
-              <small>Made with 💓 in Berlin</small>
-            </div>
-            <div>
-              <Link href="/imprint">Imprint</Link>
-              {" | "}
-              <small>© TSABAR.net 2023</small>
-            </div>
-          </footer>
+          <Footer />
         </NextThemeProvider>
         <Analytics />
+        <CookieBanner />
       </body>
     </html>
   );
