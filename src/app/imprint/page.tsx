@@ -1,6 +1,10 @@
 import { Metadata } from "next";
-import Link from "next/link";
-import { MdArrowBack } from "react-icons/md";
+import { MdHouse } from "react-icons/md";
+
+import { LinkBtn } from "@/components/button";
+import { getMdFileData } from "@/utils/data-handlers";
+
+export const revalidate = 60 * 60; // Revalidate all fetches once an hour;
 
 export const metadata: Metadata = {
   title: "Imprint",
@@ -14,26 +18,35 @@ export const metadata: Metadata = {
       nocache: true,
     },
   },
+  alternates: {
+    canonical: "/imprint",
+  },
 };
 
-function Imprint() {
+async function Imprint() {
+  const data = await getMdFileData("imprint.md");
+
   return (
-    <main>
-      <h1>Imprint</h1>
-      <p>{process.env.IMPRINT_OWNER_NAME}</p>
-      <p>{process.env.IMPRINT_HOME_ADDRESS}</p>
-      <p>{process.env.IMPRINT_EMAIL_ADDRESS}</p>
+    <div className="max-sm:p-4">
+      <LinkBtn.NavigationIcon href="/">
+        <MdHouse />
+      </LinkBtn.NavigationIcon>
+
       <br />
-      <Link href="/" className="flex">
-        <span
-          className="flex items-center gap-2 border-b border-b-transparent border-dashed
-        hover:border-b-gray-500"
-        >
-          <MdArrowBack />
-          Back home
-        </span>
-      </Link>
-    </main>
+      <main
+        className="flex flex-col gap-2 mt-10
+          prose prose-img:my-2
+          prose-headings:mt-8 text-black dark:text-white
+          prose-strong:font-bold prose-strong:text-inherit
+          prose-ul:flex prose-ul:flex-wrap prose-ul:gap-2
+          prose-ul:list-none prose-ul:p-0 prose-ul:m-0
+          prose-li:rounded-md prose-li:outline-1 prose-li:outline-dashed prose-li:px-1
+          prose-p:overflow-hidden prose-p:text-ellipsis prose-p:py-2 prose-p:m-0
+          prose-a:no-underline
+        "
+        dangerouslySetInnerHTML={{ __html: data?.data || "" }}
+      />
+    </div>
   );
 }
 export default Imprint;
