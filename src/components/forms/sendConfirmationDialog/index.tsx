@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, ChangeEvent } from "react";
+import { Dispatch, SetStateAction, ChangeEvent, useState } from "react";
 import { Button } from "@/components/button";
 import { TFields, TValue } from "@/components/forms/inquiry";
 import dayjs from "dayjs";
@@ -17,6 +17,7 @@ export const SendConfirmation = ({
   setResponse: Dispatch<SetStateAction<number | null>>;
 }) => {
   const [startDate, endDate] = value.date_inquiry.text.split("|");
+  const [isLoading, setIsLoading] = useState<boolean>();
 
   const handleSendInquiry = async () => {
     let body: { [key in keyof typeof value]?: string } = {};
@@ -33,7 +34,10 @@ export const SendConfirmation = ({
       body: JSON.stringify(body),
     };
 
+    setIsLoading(true);
     const res = await fetch("/api/actions/inquiry", options);
+    setIsLoading(false);
+
     setResponse(res.status);
   };
 
@@ -73,7 +77,11 @@ export const SendConfirmation = ({
           </fieldset>
         )}
       </div>
-      <Button onClick={handleSendInquiry} title="Confirm inquiry submission">
+      <Button
+        onClick={handleSendInquiry}
+        title="Confirm inquiry submission"
+        isLoading={isLoading}
+      >
         Confirm
       </Button>
     </>

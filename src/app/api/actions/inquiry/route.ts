@@ -18,9 +18,9 @@ export async function POST(request: NextRequest) {
     if (instanceOfTData(body)) {
 
       const [start, end] = body.date_inquiry.split("|");
-      console.log({ body, start, end, mailOptions });
       const isSent = await transporter.sendMail({
         ...mailOptions,
+        replyTo: body.email,
         subject: "New inquiry from Le-Petit-Moabit",
         text: "A new inquiry in HTML format.",
         html: `
