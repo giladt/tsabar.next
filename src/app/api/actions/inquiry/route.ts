@@ -1,4 +1,4 @@
-import { TFields, TValue } from "@/components/forms/inquiry";
+import { TFields } from "@/components/forms/inquiry";
 import { mailOptions, transporter } from "@/utils/transporter";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,17 +8,13 @@ function instanceOfTData(object: any): object is TData {
 
 type TData = { [name in TFields]: string };
 
-export async function GET(request: NextRequest) {
-  return NextResponse.json({ status: 200, data: "Inquiry" })
-}
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     if (instanceOfTData(body)) {
 
       const [start, end] = body.date_inquiry.split("|");
-      const isSent = await transporter.sendMail({
+      await transporter.sendMail({
         ...mailOptions,
         replyTo: body.email,
         subject: "New inquiry from Le-Petit-Moabit",
@@ -37,19 +33,19 @@ export async function POST(request: NextRequest) {
           </div>
         `
       })
-      console.log({ isSent });
-      return new Response(
+
+      return new NextResponse(
         JSON.stringify(body),
         {
           status: 200,
         }
       );
     } else {
-      return new Response("Bad request.", { status: 400 })
+      return new NextResponse("Bad request.", { status: 400 })
     }
   }
   catch (error: unknown) {
     console.log({ error });
-    return new Response("Server Error.", { status: 500 })
+    return new NextResponse("Server Error.", { status: 500 })
   }
 }
