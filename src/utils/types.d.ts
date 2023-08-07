@@ -29,8 +29,8 @@ export const MONTHS = [
   "December",
 ];
 
-type TApartment = "Le Soleil" | "La Lune";
-export type TApartments = TApartment[];
+// type TApartment = "Le Soleil" | "La Lune";
+export type TApartments = [];
 
 export interface IApartmentData {
   id: number;

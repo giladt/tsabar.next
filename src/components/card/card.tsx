@@ -45,7 +45,8 @@ export default function Card({ url, name, info, images }: TCardProps) {
         {images.map((image) => (
           <Image
             key={uuidv4()}
-            src={wfImageUrl(image.id, "th")}
+            // src={wfImageUrl(image.id, "th")}
+            src={image.id}
             alt={image.description || ""}
             width={320}
             height={320}

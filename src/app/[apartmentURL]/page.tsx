@@ -65,7 +65,10 @@ export default async function Apartment({ params }: TPageParams) {
   }.ics?s=${process.env["ICAL_SECRET_APT_" + id]}`;
   const bookings: DateRangeType[] = await getData(iCalURL);
 
-  const apartmentIdStr = "00" + id.toString();
+  const apartmentIdStr =
+    "00" +
+    /*temp*/ (id !== 4 && id !== 7 ? 4 : id) /*temp*/
+      .toString();
   const descriptionFileName = `we${apartmentIdStr.substring(
     apartmentIdStr.length - 2
   )}.md`;
