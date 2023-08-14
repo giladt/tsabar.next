@@ -54,8 +54,8 @@ async function Home() {
       <section className="flex flex-col py-5 max-md:px-5 gap-2">
         <GoogleMaps
           center={{
-            lat: 52.529124,
-            lng: 13.341555,
+            lat: 52.529,
+            lng: 13.341,
           }}
           zoom={14}
           googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}
@@ -67,7 +67,7 @@ async function Home() {
           className="inline-flex"
         >
           <address className="inline-flex flex-wrap">
-            <span>Wilhelmshavener Straße 9, </span>
+            <span>Wilhelmshavener Straße,&nbsp;</span>
             <span>10551 Berlin, DE</span>
           </address>
         </Link>

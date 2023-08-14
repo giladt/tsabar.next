@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
     <main className="md:justify-center">
-      <section className="overflow-hidden -mx-[calc(50svw-50%)] w-[calc(100svw-8px)] animate-pulse">
+      <section className="overflow-hidden -mx-[calc(50svw-50%)] w-[calc(100svw-9px)] animate-pulse">
         <section className="w-full h-[clamp(81svh,500px,calc(100svh-5rem))] bg-gray-400 dark:bg-slate-600 flex justify-center items-center">
           Loading...
         </section>
