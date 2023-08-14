@@ -65,7 +65,7 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
 
   const doValidation = (field: TFields, value: string): string => {
     switch (true) {
-      case field === "date_inquiry" && !value.length:
+      case field === "date_inquiry" && value.length <= 1:
       case field === "name_first" && !value.length:
       case field === "name_last" && !value.length:
       case field === "email" && !value.length:
@@ -165,7 +165,7 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
           isDirty: true,
           error: doValidation(
             "date_inquiry",
-            `${dateValue?.startDate?.toString() || ""}${
+            `${dateValue?.startDate?.toString() || ""}|${
               dateValue?.endDate?.toString() || ""
             }`
           ),
