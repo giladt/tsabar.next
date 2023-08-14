@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description:
     "Need a place to stay in Berlin? Search no more! Furnished, fully-equipped, all-inclusive one-room apartments for rent in the heart of Berlin - Moabit.",
   creator: "Family Tsabar",
-  metadataBase: new URL("https://tsabar.net"),
+  metadataBase: new URL("https://www.tsabar.net"),
   icons: {
     icon: "./favicon.ico",
   },

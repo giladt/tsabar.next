@@ -71,12 +71,11 @@ export default async function Apartment({ params }: TPageParams) {
   )}.md`;
 
   const description = await getMdFileData(descriptionFileName);
-  debugger;
 
   return (
     <main className="md:justify-center">
       {images && (
-        <section className="overflow-hidden -mx-[calc(50svw-50%)] w-[calc(100svw-8px)]">
+        <section className="overflow-hidden -mx-[calc(50svw-50%)] w-[calc(100svw-9px)]">
           <Carousel images={images} />
         </section>
       )}

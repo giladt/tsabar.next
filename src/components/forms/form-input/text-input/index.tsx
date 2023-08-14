@@ -1,6 +1,7 @@
 import { HTMLInputTypeAttribute, ChangeEvent, FocusEvent } from "react";
 import FormField from "@/components/forms/form-input/form-field";
 import { TFields } from "@/components/forms/inquiry";
+import { TAutoCompleteAttr } from "@/utils/types";
 
 type TValue = { text: string; isDirty: boolean; error?: string };
 
@@ -9,6 +10,7 @@ type TTextInputProps = {
   placeholder?: string;
   label: string;
   type?: HTMLInputTypeAttribute;
+  autoComplete?: TAutoCompleteAttr;
   min?: number | undefined;
   max?: number | undefined;
   value: TValue;
@@ -24,12 +26,14 @@ export default function TextInput({
   value,
   onChange,
   onBlur,
+  autoComplete = "on",
   min,
   max,
 }: TTextInputProps) {
   return (
     <FormField error={value.error}>
       <input
+        id={name}
         type={type}
         name={name}
         placeholder={placeholder}
@@ -37,6 +41,7 @@ export default function TextInput({
         value={value.text as string}
         onChange={onChange}
         onBlur={onBlur}
+        autoComplete={autoComplete}
         min={min}
         max={max}
         className={`peer 
