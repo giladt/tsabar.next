@@ -42,7 +42,8 @@ export default function GoogleAnalytics({
             });
 
             gtag('config', '${GA_MEASUREMENT_ID}', {
-              page_path: window.location.pathname,
+              'page_path': window.location.pathname,
+              'anonymize_ip': true,
             })
           `,
         }}
