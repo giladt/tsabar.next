@@ -1,4 +1,4 @@
-import { TFields, TValue } from "@/components/forms/inquiry";
+import { TFields } from "@/components/forms/inquiry";
 import { mailOptions, transporter } from "@/utils/transporter";
 import { NextRequest, NextResponse } from "next/server";
 
