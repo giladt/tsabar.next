@@ -28,7 +28,7 @@
     "marked": "^5.1.0",
     "marked-gfm-heading-id": "^3.0.4",
     "marked-mangle": "^1.1.0",
-    "next": "13.4.7",
+    "next": "13.5.4",
     "next-themes": "^0.2.1",
     "nodemailer": "^6.9.3",
     "postcss": "8.4.31",
