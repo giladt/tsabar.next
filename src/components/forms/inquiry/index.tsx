@@ -65,7 +65,7 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
 
   const doValidation = (field: TFields, value: string): string => {
     switch (true) {
-      case field === "date_inquiry" && !value.length:
+      case field === "date_inquiry" && value.length <= 1:
       case field === "name_first" && !value.length:
       case field === "name_last" && !value.length:
       case field === "email" && !value.length:
@@ -150,23 +150,23 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
   };
 
   const handleDateChange = (
-    value: DateValueType,
+    dateValue: DateValueType,
     e?: HTMLInputElement | null | undefined
   ) => {
-    setInquiryInput(value);
+    setInquiryInput(dateValue);
     setValue((prev) => {
       return {
         ...prev,
         date_inquiry: {
           text:
-            `${value?.startDate?.toString() || ""}|${
-              value?.endDate?.toString() || ""
+            `${dateValue?.startDate?.toString() || ""}|${
+              dateValue?.endDate?.toString() || ""
             }` || "",
           isDirty: true,
           error: doValidation(
             "date_inquiry",
-            `${value?.startDate?.toString() || ""}${
-              value?.endDate?.toString() || ""
+            `${dateValue?.startDate?.toString() || ""}|${
+              dateValue?.endDate?.toString() || ""
             }`
           ),
         },
@@ -225,6 +225,7 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <FormField>
           <Datepicker
+            inputId="date-picker"
             primaryColor="teal"
             separator=" to "
             useRange={!isMobile}
@@ -236,11 +237,16 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
               border-2 rounded-lg outline-none
               disabled:opacity-40 disabled:cursor-not-allowed 
               placeholder-primary-dark dark:placeholder-primary-dark
-              focus-within:border-primary-dark dark:focus-within:border-primary-dark
-              focus-visible:border-primary-dark dark:focus-visible:border-primary-dark
+              ${
+                value.date_inquiry.error
+                  ? "border-tertiary-dark"
+                  : `
+                    border-black/50 dark:border-white/50
+                    focus-within:border-primary-dark dark:focus-within:border-primary-dark
+                    focus-visible:border-primary-dark dark:focus-visible:border-primary-dark
+                  `
+              }
               text-black dark:text-white
-              border-black/50 dark:border-white/50
-              ${value.date_inquiry.error ? "border-tertiary-dark" : ""}
             `}
             inputClassName={`
               relative transition-all duration-150
@@ -259,6 +265,9 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
             onChange={handleDateChange}
             disabledDates={bookings}
           />
+          <span className="h-0 m-0 p-0 text-sm text-tertiary-dark absolute">
+            {value.date_inquiry.error}
+          </span>
         </FormField>
         <div className="flex flex-row gap-4 flex-wrap">
           <TextInput
@@ -267,6 +276,7 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
             onChange={handleChange}
             onBlur={handleBlur}
             label="First Name"
+            autoComplete="given-name"
           />
           <TextInput
             name="name_last"
@@ -274,6 +284,7 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
             onChange={handleChange}
             onBlur={handleBlur}
             label="Last Name"
+            autoComplete="family-name"
           />
         </div>
 
@@ -284,6 +295,7 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
           onBlur={handleBlur}
           label="E-Mail"
           type="email"
+          autoComplete="email"
         />
 
         <RadioInput

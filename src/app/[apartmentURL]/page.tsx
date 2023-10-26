@@ -71,7 +71,6 @@ export default async function Apartment({ params }: TPageParams) {
   )}.md`;
 
   const description = await getMdFileData(descriptionFileName);
-  debugger;
 
   return (
     <main className="md:justify-center">
