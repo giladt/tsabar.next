@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     if (instanceOfTData(body)) {
 
       const [start, end] = body.date_inquiry.split("|");
-      const isSent = await transporter.sendMail({
+      await transporter.sendMail({
         ...mailOptions,
         replyTo: body.email,
         subject: "New inquiry from Le-Petit-Moabit",
@@ -37,7 +37,6 @@ export async function POST(request: NextRequest) {
           </div>
         `
       })
-      console.log({ isSent });
       return new Response(
         JSON.stringify(body),
         {
