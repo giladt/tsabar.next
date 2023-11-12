@@ -47,6 +47,11 @@ export type TBookings = {
   [year: string]: { [month: string]: TBooking[] }
 };
 
+export type Coordinates = {
+  lat: number;
+  lng: number;
+};
+
 export type TAutoCompleteAttr =
   "on" | // The browser is allowed to automatically complete the input. No guidance is provided as to the type of data expected in the field, so the browser may use its own judgement.
   "name" | // The field expects the value to be a person's full name. Using "name" rather than breaking the name down into its components is generally preferred because it avoids dealing with the wide diversity of human names and how they are structured; however, you can use the following autocomplete values if you do need to break the name down into its components:

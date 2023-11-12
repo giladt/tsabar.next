@@ -4,12 +4,9 @@ import { LoadScriptNext, GoogleMap, CircleF } from "@react-google-maps/api";
 import React from "react";
 import MapThemes from "./MapTheme";
 import { ImSpinner } from "react-icons/im";
+import { Coordinates } from "@/utils/types";
 import styles from "./google-map.module.scss";
 
-type Coordinates = {
-  lat: number;
-  lng: number;
-};
 type MapProps = {
   coordinates: Coordinates;
   zoom: number;
