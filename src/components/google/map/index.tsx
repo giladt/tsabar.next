@@ -1,6 +1,6 @@
 "use client";
 import { useTheme } from "next-themes";
-import { LoadScriptNext, GoogleMap, Circle } from "@react-google-maps/api";
+import { LoadScriptNext, GoogleMap, CircleF } from "@react-google-maps/api";
 import React from "react";
 import MapThemes from "./MapTheme";
 import { ImSpinner } from "react-icons/im";
@@ -73,8 +73,8 @@ const Map = ({ coordinates, zoom }: MapProps) => {
 
   return (
     <GoogleMap mapContainerClassName={styles.map} options={mapOptions}>
-      {coordinates.lat !== 0 && coordinates.lng !== 0 && (
-        <Circle
+      {coordinates.lat && coordinates.lng && (
+        <CircleF
           center={coordinates}
           radius={350}
           options={{
