@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 import Cards from "@/components/cards/cards";
+import Logo from "@/assets/logo.svg";
 import GoogleMaps from "@/components/google/map";
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ async function Home() {
   return (
     <main className="md:justify-center">
       <header className="text-center my-14 max-md:px-5">
+        <Logo className="w-[250px] mx-auto" />
         <h2 className="font-script text-6xl mb-7">Le Petit Moabit</h2>
         <h1 className="font-karla text-2xl">
           Modern, fully furnished, all-inclusive apartments for rent in the
