@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, ChangeEvent, useState } from "react";
 import { Button } from "@/components/button";
 import { TFields, TValue } from "@/components/forms/inquiry";
-import dayjs from "dayjs";
+import { format } from "date-fns";
 
 const MESSAGE_MAX_LENGTH = 2500;
 
@@ -45,8 +45,17 @@ export const SendConfirmation = ({
     <>
       <h3>You are about to send the following inquiry details:</h3>
       <div className="text-left">
-        <p>Contract begin: {dayjs(startDate).format("DD/MM/YYYY")}</p>
-        <p>Contract end: {dayjs(endDate).format("DD/MM/YYYY")}</p>
+        {startDate?.length && (
+          <p>
+            Contract begin:{" "}
+            {format(new Date(startDate), "MMMM do, yyyy (EEEE)")}
+          </p>
+        )}
+        {endDate?.length && (
+          <p>
+            Contract end: {format(new Date(endDate), "MMMM do yyyy (EEEE)")}
+          </p>
+        )}
         <p>
           Main tenant: {value.name_first.text} {value.name_last.text}
         </p>

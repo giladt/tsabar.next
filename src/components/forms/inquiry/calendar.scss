@@ -1,0 +1,63 @@
+.rdrDateDisplayWrapper,
+.MyCalendar {
+  @apply rounded-lg bg-slate-200 dark:bg-slate-700 relative;
+}
+.rdrMonthAndYearWrapper {
+  @apply absolute flex w-full h-full p-0 m-0;
+  .rdrMonthAndYearPickers {
+    @apply hidden;
+  }
+}
+.rdrMonths {
+  @apply flex flex-wrap justify-center items-center;
+}
+.rdrDateDisplayItem {
+  @apply bg-transparent shadow-none border-primary-light dark:border-primary-dark;
+}
+.rdrWeekDay {
+  @apply leading-10;
+}
+.rdrDay {
+  @apply rounded-lg h-10;
+  &:not(.rdrDayPassive, .rdrDayDisabled) > .rdrDayNumber > span {
+    @apply text-primary-light dark:text-primary-dark font-bold;
+  }
+  &.rdrDayPassive > .rdrDayNumber > span {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+  &.rdrDayDisabled {
+    @apply bg-transparent;
+    & > .rdrDayNumber > span {
+      @apply text-tertiary-light dark:text-tertiary-dark;
+    }
+  }
+}
+.rdrMonthPicker > select,
+.rdrYearPicker > select {
+  @apply text-black dark:text-white rounded-lg border-2 border-solid border-primary-light dark:border-primary-dark py-1 px-4;
+}
+
+.rdrMonthAndYearPickers select {
+  @apply bg-none;
+}
+
+.rdrNextPrevButton {
+  @apply flex justify-center items-center;
+  @apply bg-transparent border-solid border-2 border-primary-light dark:border-primary-dark;
+  @apply hover:bg-primary-light hover:dark:bg-primary-dark;
+  i {
+    @apply border-transparent m-auto;
+  }
+  &.rdrNextButton i {
+    @apply border-l-primary-light dark:border-l-primary-dark;
+  }
+  &.rdrPprevButton i {
+    @apply border-r-primary-light dark:border-r-primary-dark;
+  }
+  &.rdrNextButton:hover i {
+    @apply border-l-white dark:border-l-black;
+  }
+  &.rdrPprevButton:hover i {
+    @apply border-r-white dark:border-r-black;
+  }
+}

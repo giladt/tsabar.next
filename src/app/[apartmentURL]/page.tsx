@@ -7,8 +7,8 @@ import { TMdIcons, IApartmentData } from "@/utils/types.d";
 import apartmentsData from "@/assets/apartments.json";
 
 import Inquiry from "@/components/forms/inquiry";
-import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
 import { getData, getMdFileData } from "@/utils/data-handlers";
+import { RangeKeyDict } from "react-date-range";
 
 type TApartmentURLProps = {
   apartmentURL: string;
@@ -49,6 +49,31 @@ export function generateMetadata({ params }: TPageParams): Metadata {
   };
 }
 
+async function getApartmentBookingFromICal(
+  id: number
+): Promise<RangeKeyDict["bookings"][]> {
+  const iCalURL = `https://www.airbnb.com/calendar/ical/${
+    process.env["ICAL_ID_APT_" + id]
+  }.ics?s=${process.env["ICAL_SECRET_APT_" + id]}`;
+
+  const bookings = await getData(iCalURL);
+  if (!bookings[0]?.startDate || isNaN(+bookings[0].startDate)) {
+    return [];
+  }
+  return bookings;
+}
+
+async function getApartmentDescriptionFromFile(
+  id: number
+): Promise<{ data: string } | null> {
+  const apartmentIdStr = "00" + id.toString();
+  const descriptionFileName = `we${apartmentIdStr.substring(
+    apartmentIdStr.length - 2
+  )}.md`;
+
+  return await getMdFileData(descriptionFileName);
+}
+
 export default async function Apartment({ params }: TPageParams) {
   const { apartmentURL } = params;
 
@@ -60,17 +85,9 @@ export default async function Apartment({ params }: TPageParams) {
 
   const { id, name, images, tags } = data;
 
-  const iCalURL = `https://www.airbnb.com/calendar/ical/${
-    process.env["ICAL_ID_APT_" + id]
-  }.ics?s=${process.env["ICAL_SECRET_APT_" + id]}`;
-  const bookings: DateRangeType[] = await getData(iCalURL);
+  const bookings = await getApartmentBookingFromICal(id);
 
-  const apartmentIdStr = "00" + id.toString();
-  const descriptionFileName = `we${apartmentIdStr.substring(
-    apartmentIdStr.length - 2
-  )}.md`;
-
-  const description = await getMdFileData(descriptionFileName);
+  const description = await getApartmentDescriptionFromFile(id);
 
   return (
     <main className="md:justify-center">
@@ -90,8 +107,9 @@ export default async function Apartment({ params }: TPageParams) {
           </strong>
         </h2>
       </header>
-      <section className="flex flex-col py-5 max-md:px-5 gap-2">
-        {tags && (
+
+      {tags?.length && (
+        <section className="flex flex-col py-5 max-md:px-5 gap-2">
           <div className="flex justify-center gap-2 flex-wrap">
             {tags.map(
               ({ icon, text }: { icon: TMdIcons; text: string }, index) => {
@@ -111,8 +129,15 @@ export default async function Apartment({ params }: TPageParams) {
               }
             )}
           </div>
-        )}
-      </section>
+        </section>
+      )}
+
+      {bookings && (
+        <section className="flex flex-col py-5 max-md:px-5 gap-2 max-sm:px-5 justify-center">
+          <h3>Availability</h3>
+          <Inquiry apartment={{ id, name }} bookings={bookings} />
+        </section>
+      )}
 
       {description?.data && (
         <section
@@ -120,11 +145,6 @@ export default async function Apartment({ params }: TPageParams) {
           dangerouslySetInnerHTML={{ __html: description.data }}
         />
       )}
-
-      <section className="flex flex-col py-5 max-md:px-5 gap-2 max-sm:px-5 justify-center">
-        <h3>Inquiry</h3>
-        <Inquiry apartment={{ id, name }} bookings={bookings} />
-      </section>
     </main>
   );
 }
