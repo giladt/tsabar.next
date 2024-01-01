@@ -1,3 +1,4 @@
+import { RangeKeyDict } from "react-date-range";
 import * as ReactMdIcon from "react-icons/md";
 
 export type TMdIcons = keyof typeof ReactMdIcon;
@@ -7,8 +8,6 @@ type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] exte
   : Enumerate<N, [...Acc, Acc['length']]>
 
 export type Range<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
-
-type TDateItem = { currentMonth: boolean, today: boolean, date: Dayjs, booked: boolean }
 
 type TMonth = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December";
 
@@ -38,13 +37,13 @@ export interface IApartmentData {
   name: string;
   info: string;
   images: { id: string; description?: string }[];
-  bookings: TBookings;
+  bookings: RangeKeyDict["bookings"][];
   tags?: { icon: TMdIcons, text: string }[];
 }
 
-export type TBooking = { start: Dayjs; end: Dayjs };
-export type TBookings = {
-  [year: string]: { [month: string]: TBooking[] }
+export type Coordinates = {
+  lat: number;
+  lng: number;
 };
 
 export type TAutoCompleteAttr =

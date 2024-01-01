@@ -33,8 +33,7 @@ export async function POST(request: NextRequest) {
           </div>
         `
       })
-
-      return new NextResponse(
+      return new Response(
         JSON.stringify(body),
         {
           status: 200,

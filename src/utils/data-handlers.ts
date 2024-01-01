@@ -1,28 +1,21 @@
-import dayjs from "dayjs";
-import { DateRangeType } from "react-tailwindcss-datepicker/dist/types";
-
 import { Octokit } from "@octokit/core";
 import { JSDOM } from "jsdom";
 import { marked } from "marked";
 import { mangle } from "marked-mangle";
 import { gfmHeadingId } from "marked-gfm-heading-id";
 import createDOMPurify from "dompurify";
+import { RangeKeyDict } from "react-date-range";
+import { subDays, toDate } from "date-fns";
 
-
-export const getData = async (iCalURL: string): Promise<DateRangeType[]> => {
+export const getData = async (iCalURL: string): Promise<RangeKeyDict["bookings"][]> => {
   try {
     const res = await fetch(iCalURL, { next: { revalidate: 60 } });
     const data = await (res).text();
-    const events = parseICalData(data.split("\n"));
+    const eventsStringArray = data.split("\n");
+    if (!eventsStringArray.length) return [];
+    const events = parseICalData(eventsStringArray);
 
-
-    if (!events || !Object.entries(events).length) return [];
-
-    const parsedBookings = events.map((event: DateRangeType) => {
-      return { startDate: event.startDate, endDate: event.endDate };
-    })
-
-    return parsedBookings;
+    return events;
   } catch (err) {
     console.log({ err });
     return [];
@@ -30,34 +23,38 @@ export const getData = async (iCalURL: string): Promise<DateRangeType[]> => {
 };
 
 export const parseICalData = (data: string[]) => {
-  const events: DateRangeType[] = [];
+  const events: RangeKeyDict["bookings"][] = [];
   let isEvent: boolean = false;
-  let event: DateRangeType = {
-    startDate: null,
-    endDate: null,
+  const event: RangeKeyDict["bookings"] = {
+    startDate: undefined,
+    endDate: new Date(""),
+    key: "bookings"
   };
 
+  if (!data?.length) return [];
   for (let lineIndex = 0; lineIndex < data.length; lineIndex++) {
     const line = data[lineIndex].trim();
     if (line.includes("BEGIN:VEVENT")) {
       isEvent = true;
     } else if (isEvent && line.includes("END:VEVENT")) {
-      events.push({ ...event });
+      events.push(event);
       isEvent = false;
+    } else if (line.includes("END:VCALENDAR")) {
+      return events;
     } else if (isEvent) {
       const match = /(?<=DT)(.*)(?=;).*(?<=DATE:)(.*)(?=)/g.exec(line);
 
-      if (match) {
+      if (!!match) {
         const [_, key, value]: string[] = match;
-
+        const [year, month, day] = [value.slice(0, 4), value.slice(4, 6), value.slice(6, 8)]
         key.toLowerCase() === "start"
-          ? event.startDate = dayjs(value).toDate()
-          : event.endDate = dayjs(value).subtract(1, "day").toDate();
+          ? event.startDate = new Date(`${year}-${month}-${day}`)
+          : event.endDate = subDays(new Date(`${year}-${month}-${day}`), 1);
       }
     }
   }
 
-  return events;
+  throw new Error("Parsing calendar failed");
 };
 
 marked.use(mangle(), gfmHeadingId());

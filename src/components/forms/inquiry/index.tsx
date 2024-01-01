@@ -7,12 +7,11 @@ import {
   FocusEvent,
   useRef,
 } from "react";
-import Datepicker from "react-tailwindcss-datepicker";
-import {
-  DateRangeType,
-  DateValueType,
-} from "react-tailwindcss-datepicker/dist/types";
-import dayjs, { Dayjs } from "dayjs";
+import { DateRange, RangeKeyDict } from "react-date-range";
+import { addDays, format, isBefore } from "date-fns";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import "@/components/forms/inquiry/calendar.scss";
 
 import FormField from "@/components/forms/form-input/form-field";
 import TextInput from "@/components/forms/form-input/text-input";
@@ -22,9 +21,11 @@ import { Button } from "@/components/button";
 import { SendConfirmation } from "../sendConfirmationDialog";
 
 type TInquiryProps = {
-  bookings: DateRangeType[];
+  bookings: RangeKeyDict["bookings"][];
   apartment: { id: number; name: string };
 };
+
+const dates: Date[] = [];
 
 export type TFields =
   | "email"
@@ -38,13 +39,12 @@ export type TFields =
 export type TValue = { text: string; isDirty: boolean; error?: string };
 
 export default function Inquiry({ apartment, bookings }: TInquiryProps) {
-  const today: Dayjs = dayjs();
-  const minDate = today.toDate();
   const ref = useRef<HTMLDialogElement>(null);
 
-  const [inquiryInput, setInquiryInput] = useState<DateValueType>({
-    startDate: null,
-    endDate: null,
+  const [inquiryInput, setInquiryInput] = useState<RangeKeyDict["selection"]>({
+    startDate: undefined,
+    endDate: new Date(""),
+    key: "selection",
   });
 
   const [response, setResponse] = useState<number | null>(null);
@@ -109,14 +109,6 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
       ref.current?.showModal();
     }
   };
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  const firstDateOfMonth = (date: Dayjs) =>
-    dayjs()
-      .year(date.get("year"))
-      .month(date.get("month"))
-      .startOf("month")
-      .toDate();
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -150,34 +142,29 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
   };
 
   const handleDateChange = (
-    dateValue: DateValueType,
+    ranges: RangeKeyDict,
     e?: HTMLInputElement | null | undefined
   ) => {
-    setInquiryInput(dateValue);
+    const { selection } = ranges;
+    setInquiryInput(selection);
     setValue((prev) => {
       return {
         ...prev,
         date_inquiry: {
           text:
-            `${dateValue?.startDate?.toString() || ""}|${
-              dateValue?.endDate?.toString() || ""
+            `${selection.startDate?.toString() || ""}|${
+              selection.endDate?.toString() || ""
             }` || "",
           isDirty: true,
           error: doValidation(
             "date_inquiry",
-            `${dateValue?.startDate?.toString() || ""}|${
-              dateValue?.endDate?.toString() || ""
+            `${selection.startDate?.toString() || ""}|${
+              selection.endDate?.toString() || ""
             }`
           ),
         },
       };
     });
-  };
-
-  const handleWindowResize = () => {
-    const checkIsMobile = (windowWidth: number): boolean => windowWidth <= 768;
-
-    setIsMobile(checkIsMobile(window.innerWidth));
   };
 
   const clearForm = () => {
@@ -198,18 +185,23 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
       apartment: emptyField,
     };
     setValue(emptyForm);
-    setInquiryInput({ startDate: null, endDate: null });
+    setInquiryInput({
+      startDate: undefined,
+      endDate: new Date(""),
+      key: "selection",
+    });
   };
 
-  useEffect(() => {
-    if (window) {
-      handleWindowResize();
-      window.addEventListener("resize", handleWindowResize);
-      return () => {
-        window.removeEventListener("resize", handleWindowResize);
-      };
+  dates.length = 0;
+  bookings.forEach((booking) => {
+    const { startDate, endDate } = booking;
+    let current = startDate || new Date();
+
+    while (isBefore(current, addDays(endDate || current, 1))) {
+      dates.push(current);
+      current = addDays(current, 1);
     }
-  }, []);
+  });
 
   useEffect(() => {
     if (response && ref?.current && response === 200) {
@@ -220,100 +212,90 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
     return setResponse(null);
   }, [response]);
 
+  const { startDate, endDate } = inquiryInput;
+
   return (
     <>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <FormField>
-          <Datepicker
-            inputId="date-picker"
-            primaryColor="teal"
-            separator=" to "
-            useRange={!isMobile}
-            showFooter
-            displayFormat="DD/MM/YYYY"
-            containerClassName={`
-              relative transition-all duration-150
-              w-full flex items-center bg-transparent 
-              border-2 rounded-lg outline-none
-              disabled:opacity-40 disabled:cursor-not-allowed 
-              placeholder-primary-dark dark:placeholder-primary-dark
-              ${
-                value.date_inquiry.error
-                  ? "border-tertiary-dark"
-                  : `
-                    border-black/50 dark:border-white/50
-                    focus-within:border-primary-dark dark:focus-within:border-primary-dark
-                    focus-visible:border-primary-dark dark:focus-visible:border-primary-dark
-                  `
-              }
-              text-black dark:text-white
-            `}
-            inputClassName={`
-              relative transition-all duration-150
-              w-full py-2.5 pl-4 pr-14 
-              bg-transparent 
-              outline-none
-              disabled:opacity-40 disabled:cursor-not-allowed;
-              text-black placeholder-black
-              dark:text-white dark:placeholder-white
-            `}
-            placeholder="Select wished stay dates"
-            value={inquiryInput}
-            startWeekOn="mon"
-            startFrom={firstDateOfMonth(today)}
-            minDate={minDate}
-            onChange={handleDateChange}
-            disabledDates={bookings}
-          />
-          <span className="h-0 m-0 p-0 text-sm text-tertiary-dark absolute">
-            {value.date_inquiry.error}
-          </span>
-        </FormField>
-        <div className="flex flex-row gap-4 flex-wrap">
-          <TextInput
-            name="name_first"
-            value={value.name_first}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            label="First Name"
-            autoComplete="given-name"
-          />
-          <TextInput
-            name="name_last"
-            value={value.name_last}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            label="Last Name"
-            autoComplete="family-name"
-          />
-        </div>
-
-        <TextInput
-          name="email"
-          value={value.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          label="E-Mail"
-          type="email"
-          autoComplete="email"
+        <DateRange
+          className="MyCalendar"
+          onChange={handleDateChange}
+          showMonthAndYearPickers={false}
+          moveRangeOnFirstSelection={false}
+          showDateDisplay={false}
+          months={2}
+          preventSnapRefocus={true}
+          minDate={new Date()}
+          maxDate={addDays(new Date(), 365 * 2)}
+          dragSelectionEnabled={true}
+          ranges={[inquiryInput]}
+          rangeColors={["#07004d40"]}
+          weekStartsOn={1}
+          disabledDates={dates}
+          direction="horizontal"
         />
+        {(startDate &&
+          startDate instanceof Date &&
+          endDate &&
+          endDate instanceof Date && (
+            <>
+              <div className="flex flex-row gap-4 flex-wrap">
+                <TextInput
+                  name="name_first"
+                  value={value.name_first}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  label="First Name"
+                  autoComplete="given-name"
+                />
+                <TextInput
+                  name="name_last"
+                  value={value.name_last}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  label="Last Name"
+                  autoComplete="family-name"
+                />
+              </div>
 
-        <RadioInput
-          name="tenants"
-          value={value.tenants}
-          onChange={(e) => {
-            handleChange(e);
-            handleBlur(e as FocusEvent<HTMLInputElement>);
-          }}
-          options={[
-            { value: "1", label: "1 Tenant" },
-            { value: "2", label: "2 Tenants" },
-          ]}
-        />
+              <TextInput
+                name="email"
+                value={value.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                label="E-Mail"
+                type="email"
+                autoComplete="email"
+              />
 
-        <FormField>
-          <Button type="submit">Send your inquiry</Button>
-        </FormField>
+              <RadioInput
+                name="tenants"
+                value={value.tenants}
+                onChange={(e) => {
+                  handleChange(e);
+                  handleBlur(e as FocusEvent<HTMLInputElement>);
+                }}
+                options={[
+                  { value: "1", label: "1 Tenant" },
+                  { value: "2", label: "2 Tenants" },
+                ]}
+              />
+
+              <FormField>
+                <div className="flex gap-4 justify-end">
+                  <Button type="reset" onClick={clearForm}>
+                    Reset
+                  </Button>
+                  <Button type="submit">Send your inquiry</Button>
+                </div>
+              </FormField>
+            </>
+          )) || (
+          <div>
+            To inquire about this apartment, please select your desired stay
+            dates.
+          </div>
+        )}
       </form>
       <Dialog ref={ref}>
         <SendConfirmation
