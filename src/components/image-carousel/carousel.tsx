@@ -1,8 +1,11 @@
 "use client";
 import { wfImageUrl } from "@/utils/images";
-import { Carousel as ReactResponsiveCarousel } from "react-responsive-carousel";
+// import { Carousel as ReactResponsiveCarousel } from "react-responsive-carousel";
 import { v4 as uuidv4 } from "uuid";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Slider, { type Settings } from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import Image from "next/image";
 
@@ -17,34 +20,30 @@ type TCarouselProps = {
 };
 
 export function Carousel({ images }: TCarouselProps) {
+  const settings: Settings = {
+    infinite: true,
+    speed: 250,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    variableWidth: true,
+    centerMode: true,
+    lazyLoad: "progressive",
+  };
+
+  const CarouselImages = images.map((image: TImage, index: number) => (
+    <Image
+      key={uuidv4()}
+      className="h-[50svh] md:h-[81svh] w-full"
+      src={wfImageUrl(image.id, "lg")}
+      alt={image.description || ""}
+      width={1000}
+      height={700}
+      priority={index === 0}
+    />
+  ));
   return (
-    <ReactResponsiveCarousel
-      className="h-[clamp(81svh,500px,calc(100svh-5rem))]"
-      ariaLabel={`Apartment photos.`}
-      showThumbs={false}
-      showIndicators={true}
-      showStatus={false}
-      showArrows={true}
-      emulateTouch={true}
-      centerMode={true}
-      centerSlidePercentage={100}
-      useKeyboardArrows
-    >
-      {images.map((image: TImage, index: number) => (
-        <div
-          key={uuidv4()}
-          className="h-[clamp(81svh,500px,calc(100svh-5rem))]
-          flex w-full items-center relative"
-        >
-          <Image
-            src={wfImageUrl(image.id, "lg")}
-            alt={image.description || ""}
-            fill
-            priority={index === 0}
-            className="w-full h-full object-cover object-center bg-slate-700"
-          />
-        </div>
-      ))}
-    </ReactResponsiveCarousel>
+    <Slider {...settings} className="h-[50svh] md:h-[81svh] w-full">
+      {...CarouselImages}
+    </Slider>
   );
 }
