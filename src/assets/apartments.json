@@ -6,12 +6,20 @@
     "info": "A bright and cosy apartment. Wonderful balcony to relax after a long day at work.",
     "images": [
       {
-        "id": "mmA5tEUkUSTyuGYfNQD81",
+        "id": "tsuThgafp5zOWnibX8z9G",
         "description": "Living room",
         "priority": true
       },
       {
-        "id": "BQ7IP_ZmkhH1hjpgMb6VB",
+        "id": "oyyJbGR55j7wM1gV42kgN",
+        "description": "Living room"
+      },
+      {
+        "id": "mDDAXYAYiEXDV-LIeVnp3",
+        "description": "Living room"
+      },
+      {
+        "id": "JlY9EtLgdrsYCQYUgsUeE",
         "description": "Living room"
       },
       {
@@ -19,7 +27,15 @@
         "description": "Flowers"
       },
       {
-        "id": "4OE5KX41OgoElTBKdh0ll",
+        "id": "cvUgVbTwHuVcAw4WwLOrH",
+        "description": "Kitchen"
+      },
+      {
+        "id": "YAxmzVH8_MzKtYhbdw_b3",
+        "description": "Kitchen"
+      },
+      {
+        "id": "pNldrAF6FnGTfTJubvt7r",
         "description": "Kitchen"
       },
       {
@@ -27,12 +43,16 @@
         "description": "Sweets"
       },
       {
-        "id": "B7iXfM0u21SxS0QZMja_U",
+        "id": "lD-DRu3rYEsvk-qaWuZ71",
         "description": "Bathroom"
       },
       {
-        "id": "S2HJTU7A_xdmwrhprIPhC",
+        "id": "n85ItegwSaVfCefzLH6iX",
         "description": "Corridor"
+      },
+      {
+        "id": "ou3m1nhOFUPi_9iiOT6xN",
+        "description": "Balcony"
       },
       {
         "id": "rwb3nr9PIy1PSAHmV8ohs",
