@@ -63,13 +63,13 @@
     "info": "New! Designer apartment. Equipped with every bit of what you'll need.",
     "images": [
       {
+        "id": "1MXiIzsgDmwQ_fn78TsR3",
+        "description": "Living room"
+      },
+      {
         "id": "xGBUbNWOKQbeZTFJtHdlB",
         "description": "Living room",
         "priority": true
-      },
-      {
-        "id": "vEpshEHlEH-SNL2Z390To",
-        "description": "Yellow flower"
       },
       {
         "id": "YEj-DhIVJecJTjEAUEGb9",
@@ -78,6 +78,10 @@
       {
         "id": "2Y4tujwv6tubwJhCRys35",
         "description": "Side board"
+      },
+      {
+        "id": "vEpshEHlEH-SNL2Z390To",
+        "description": "Yellow flower"
       },
       {
         "id": "DWTeZryIESV_eJOKm-Ial",
