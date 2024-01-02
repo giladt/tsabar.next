@@ -197,7 +197,7 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
     const { startDate, endDate } = booking;
     let current = startDate || new Date();
 
-    while (isBefore(current, addDays(endDate || current, 1))) {
+    while (isBefore(current, endDate || addDays(current, 1))) {
       dates.push(current);
       current = addDays(current, 1);
     }
