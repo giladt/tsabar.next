@@ -1,13 +1,8 @@
 "use client";
-import { Carousel } from "react-responsive-carousel";
-import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
+import { Carousel } from "@/components/image-carousel/carousel";
 import { LinkBtn } from "@/components/button";
-import { wfImageUrl } from "@/utils/images";
-
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 type TCardProps = {
   url: string;
@@ -30,29 +25,17 @@ export default function Card({ url, name, info, images }: TCardProps) {
       "
     >
       <Carousel
-        className="overflow-hidden rounded-md cursor-pointer shadow-lg"
+        size={{ w: 320, h: 320, type: "th" }}
+        classNames={{
+          wrapper: "overflow-hidden sm:rounded-md cursor-pointer shadow-lg",
+          image: "h-full w-auto not:md:w-full mx-auto",
+        }}
         ariaLabel={`Apartment ${name} photos.`}
-        showThumbs={false}
-        showIndicators={false}
-        showStatus={false}
-        showArrows={true}
-        onClickItem={(index: number) => {
+        onClick={() => {
           router.push(`/${url}`);
         }}
-        emulateTouch={true}
-        useKeyboardArrows
-      >
-        {images.map((image) => (
-          <Image
-            key={uuidv4()}
-            src={wfImageUrl(image.id, "th")}
-            alt={image.description || ""}
-            width={320}
-            height={320}
-            priority={image.priority || false}
-          />
-        ))}
-      </Carousel>
+        images={images}
+      />
       <div className="p-2">
         <h3>{name}</h3>
         {info && <p>{info}</p>}

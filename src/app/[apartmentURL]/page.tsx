@@ -92,8 +92,17 @@ export default async function Apartment({ params }: TPageParams) {
   return (
     <main className="md:justify-center">
       {images && (
-        <section className="overflow-hidden -mx-[calc(50svw-50%)] w-[calc(100svw-9px)]">
-          <Carousel images={images} />
+        <section className="overflow-hidden -mx-[calc(50svw-50%)] md:w-[calc(100svw-9px)]">
+          <Carousel
+            size={{ w: 1980, h: 1080, type: "lg" }}
+            images={images}
+            classNames={{
+              wrapper:
+                "h-full max-h-[80svh] md:max-h-[90svh] relative bg-black/50 shadow-xl shadow-black dark:shadow-white",
+              image: "!max-h-[80svh] !md:max-h-[90svh] !w-[unset] !h-[unset]",
+            }}
+            ariaLabel="Apartment photos"
+          />
         </section>
       )}
       <header className="text-center mt-3 mb-14 max-md:px-5">
