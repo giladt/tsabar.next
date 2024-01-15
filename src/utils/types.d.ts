@@ -1,7 +1,7 @@
 import { RangeKeyDict } from "react-date-range";
 import * as ReactMdIcon from "react-icons/md";
 
-export type TMdIcons = keyof typeof ReactMdIcon;
+export type TMdIcons = keyof (typeof ReactMdIcon);
 
 type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
   ? Acc[number]
@@ -9,29 +9,7 @@ type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] exte
 
 export type Range<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
 
-type TMonth = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December";
-
-export const DAYS = ["S", "M", "T", "W", "T", "F", "S"];
-
-export const MONTHS = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-type TApartment = "Le Soleil" | "La Lune";
-export type TApartments = TApartment[];
-
-export interface IApartmentData {
+export type TApartmentData = {
   id: number;
   url: string;
   name: string;
