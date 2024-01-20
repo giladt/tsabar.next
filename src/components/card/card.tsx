@@ -11,12 +11,17 @@ import {
 
 type TCardProps = {
   url: string;
-  name: string;
+  heading: { name: string };
   description: string;
   images: TCarouselImage[];
 };
 
-export default function Card({ url, name, description, images }: TCardProps) {
+export default function Card({
+  url,
+  heading,
+  description,
+  images,
+}: TCardProps) {
   const router = useRouter();
 
   return (
@@ -27,7 +32,7 @@ export default function Card({ url, name, description, images }: TCardProps) {
     >
       <Carousel
         wrapperTWStyles="overflow-hidden sm:rounded-md cursor-pointer shadow-lg"
-        ariaLabel={`Apartment ${name} photos.`}
+        ariaLabel={`Apartment ${heading.name} photos.`}
         onClick={() => {
           router.push(`/${url}`);
         }}
@@ -43,7 +48,7 @@ export default function Card({ url, name, description, images }: TCardProps) {
         ))}
       </Carousel>
       <div className="p-2">
-        <h3>{name}</h3>
+        <h3>{heading.name}</h3>
         {description && <p>{description}</p>}
         <LinkBtn.CTX route={url}>More Details</LinkBtn.CTX>
       </div>
