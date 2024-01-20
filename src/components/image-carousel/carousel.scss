@@ -1,3 +1,9 @@
-.carousel .slide {
-  margin: auto;
+.carousel.carousel-slider,
+.carousel .slider-wrapper {
+  height: inherit;
+}
+
+.carousel .slider-wrapper.axis-horizontal .slider {
+  height: inherit;
+  align-items: center;
 }

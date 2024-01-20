@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from "react";
 import { MdArrowBack } from "react-icons/md";
 
 type TNavigationIconButtonProps = {
-  children?: ReactNode | string;
+  children: ReactNode;
   href?: string;
   preIcon?: ReactElement<HTMLOrSVGElement>;
   surIcon?: ReactElement<HTMLOrSVGElement>;

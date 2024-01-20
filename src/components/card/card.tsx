@@ -1,21 +1,22 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
 
 import { Carousel } from "@/components/image-carousel/carousel";
 import { LinkBtn } from "@/components/button";
+import {
+  CarouselImage,
+  type TCarouselImage,
+} from "../image-carousel/carousel-image";
 
 type TCardProps = {
   url: string;
   name: string;
-  info: string;
-  images: {
-    id: string;
-    description?: string;
-    priority?: boolean;
-  }[];
+  description: string;
+  images: TCarouselImage[];
 };
 
-export default function Card({ url, name, info, images }: TCardProps) {
+export default function Card({ url, name, description, images }: TCardProps) {
   const router = useRouter();
 
   return (
@@ -25,20 +26,25 @@ export default function Card({ url, name, info, images }: TCardProps) {
       "
     >
       <Carousel
-        size={{ w: 320, h: 320, type: "th" }}
-        classNames={{
-          wrapper: "overflow-hidden sm:rounded-md cursor-pointer shadow-lg",
-          image: "h-full w-auto not:md:w-full mx-auto",
-        }}
+        wrapperTWStyles="overflow-hidden sm:rounded-md cursor-pointer shadow-lg"
         ariaLabel={`Apartment ${name} photos.`}
         onClick={() => {
           router.push(`/${url}`);
         }}
-        images={images}
-      />
+      >
+        {images.map((image: TCarouselImage, index: number) => (
+          <CarouselImage
+            key={uuidv4()}
+            image={image}
+            styles="h-full w-auto not:md:w-full mx-auto"
+            size={{ w: 320, h: 320, type: "th" }}
+            index={index}
+          />
+        ))}
+      </Carousel>
       <div className="p-2">
         <h3>{name}</h3>
-        {info && <p>{info}</p>}
+        {description && <p>{description}</p>}
         <LinkBtn.CTX route={url}>More Details</LinkBtn.CTX>
       </div>
     </section>

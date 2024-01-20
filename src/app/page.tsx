@@ -1,10 +1,11 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { v4 as uuidv4 } from "uuid";
 
+import Logo from "@/assets/logo.svg";
 import Cards from "@/components/cards/cards";
 import GoogleMaps from "@/components/google/map";
 import type { Coordinates } from "@/utils/types";
-import Logo from "@/assets/logo.svg";
 
 export const metadata: Metadata = {
   robots: {
@@ -36,36 +37,38 @@ function PageHead({ headerText, subText }: TPageHeadProps) {
   );
 }
 
-function PageDescription() {
+type TPageDescriptionProps = {
+  content: {
+    header?: string;
+    paragraphs?: string[];
+  }[];
+};
+
+function PageDescription({ content }: TPageDescriptionProps) {
   return (
-    <section className="flex flex-col py-5 max-md:px-5 gap-2">
-      <h3>Welcome to your new home!</h3>
-      <p>
-        These charming one bedroom apartments are located in the heart of
-        Moabit, Berlin. The apartments are fully furnished and equipped with
-        everything you need to make your stay comfortable and enjoyable.
-      </p>
-      <p>
-        The apartments features a cozy living room, a fully equipped kitchen, a
-        comfortable bedroom with a double bed and a modern bathroom.
-      </p>
-      <p>
-        The apartments are located in a quiet and peaceful neighborhood in
-        Moabit, yet close to all the amenities you need. You will find plenty of
-        shops, restaurants, cafes and bars within walking distance. The
-        apartment is also well connected to public transportation, making it
-        easy to explore the city. Book your stay today and experience the best
-        of Berlin!
-      </p>
-    </section>
+    <>
+      {content.map((sec) => (
+        <section
+          key={uuidv4()}
+          className="flex flex-col py-5 max-md:px-5 gap-2"
+        >
+          <h3>{sec.header}</h3>
+          {sec.paragraphs?.map((par) => (
+            <p key={uuidv4()}>{par}</p>
+          ))}
+        </section>
+      ))}
+    </>
   );
 }
 
 type TPageMapProps = {
   center: Coordinates;
+  address: JSX.Element;
+  googleMapsUrl: string;
 };
 
-function PageMap({ center }: TPageMapProps) {
+function PageMap({ center, address, googleMapsUrl }: TPageMapProps) {
   return (
     <section className="flex flex-col py-5 max-md:px-5 gap-2">
       <GoogleMaps
@@ -76,22 +79,62 @@ function PageMap({ center }: TPageMapProps) {
       <Link
         title="Open on google maps"
         target="_blank"
-        href="https://goo.gl/maps/pqVN4qM8mPQG2uhs6"
+        href={googleMapsUrl}
         className="inline-flex"
       >
-        <address className="inline-flex flex-wrap">
-          <span>Wilhelmshavener Straße,&nbsp;</span>
-          <span>10551 Berlin, DE</span>
-        </address>
+        <address className="inline-flex flex-wrap">{address}</address>
       </Link>
     </section>
   );
 }
 
-const mapCenter: Coordinates = {
+const PAGE_DESCRIPTION_PROPS = {
+  content: [
+    {
+      header: "Welcome to your new home!",
+      paragraphs: [
+        `
+      These charming one bedroom apartments are located in the heart of
+      Moabit, Berlin. The apartments are fully furnished and equipped with
+      everything you need to make your stay comfortable and enjoyable.
+    `,
+        `
+      The apartments features a cozy living room, a fully equipped kitchen, a
+      comfortable bedroom with a double bed and a modern bathroom.
+    `,
+        `
+      The apartments are located in a quiet and peaceful neighborhood in
+      Moabit, yet close to all the amenities you need. You will find plenty of
+      shops, restaurants, cafes and bars within walking distance. The
+      apartment is also well connected to public transportation, making it
+      easy to explore the city. Book your stay today and experience the best
+      of Berlin!
+    `,
+      ],
+    },
+    {},
+  ],
+} satisfies TPageDescriptionProps;
+
+const MAP_CENTER: Coordinates = {
   lat: 52.529,
   lng: 13.341,
 };
+
+const MAP_ADDRESS: JSX.Element = (
+  <>
+    <span>Wilhelmshavener Straße,&nbsp;</span>
+    <span>10551 Berlin, DE</span>
+  </>
+);
+
+const MAP_URL = "https://goo.gl/maps/pqVN4qM8mPQG2uhs6";
+
+const MAP_PROPS = {
+  center: MAP_CENTER,
+  address: MAP_ADDRESS,
+  googleMapsUrl: MAP_URL,
+} as TPageMapProps;
 
 async function Home() {
   return (
@@ -103,9 +146,9 @@ async function Home() {
           subText="Modern, fully furnished, all-inclusive apartments for rent in the heart of Berlin"
         />
       </header>
-      <PageDescription />
+      <PageDescription {...PAGE_DESCRIPTION_PROPS} />
       <Cards />
-      <PageMap center={mapCenter} />
+      <PageMap {...MAP_PROPS} />
     </main>
   );
 }

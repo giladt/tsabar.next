@@ -2,8 +2,12 @@
   {
     "id": 4,
     "url": "le-soleil",
-    "name": "Le Soleil",
-    "info": "A bright and cosy apartment. Wonderful balcony to relax after a long day at work.",
+    "heading": {
+      "name": "Le Soleil",
+      "title": "Le Petit Moabit",
+      "description": "Modern, fully furnished, all-inclusive apartments for rent in the heart of Berlin"
+    },
+    "description": "A bright and cosy apartment. Wonderful balcony to relax after a long day at work.",
     "images": [
       {
         "id": "tsuThgafp5zOWnibX8z9G",
@@ -79,8 +83,12 @@
   {
     "id": 7,
     "url": "la-lune",
-    "name": "La Lune",
-    "info": "New! Designer apartment. Equipped with every bit of what you'll need.",
+    "heading": {
+      "name": "La Lune",
+      "title": "Le Petit Moabit",
+      "description": "Modern, fully furnished, all-inclusive apartments for rent in the heart of Berlin"
+    },
+    "description": "New! Designer apartment. Equipped with every bit of what you'll need.",
     "images": [
       {
         "id": "1MXiIzsgDmwQ_fn78TsR3",
