@@ -1,19 +1,15 @@
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { RangeKeyDict } from "react-date-range";
 import * as ReactMdIcon from "react-icons/md";
-import { v4 as uuidv4 } from "uuid";
 
-import { Carousel } from "@/components/image-carousel/carousel";
+import { getData, getMdFileData } from "@/utils/data-handlers";
 import { TMdIcons } from "@/utils/types.d";
-import apartmentsData from "@/assets/apartments.json";
 
 import Inquiry from "@/components/forms/inquiry";
-import { getData, getMdFileData } from "@/utils/data-handlers";
-import { RangeKeyDict } from "react-date-range";
-import {
-  CarouselImage,
-  TCarouselImage,
-} from "@/components/image-carousel/carousel-image";
+import { ImageGallery } from "@/components/Gallery";
+
+import apartmentsData from "@/assets/apartments.json";
 
 type TApartmentURLProps = {
   apartmentURL: string;
@@ -22,8 +18,6 @@ type TApartmentURLProps = {
 type TPageParams = {
   params: TApartmentURLProps;
 };
-
-type TApartmentData = (typeof apartmentsData)[0];
 
 export function generateStaticParams(): TApartmentURLProps[] {
   return apartmentsData.map(
@@ -75,24 +69,7 @@ export default async function Apartment({ params }: TPageParams) {
 
   return (
     <main className="md:justify-center">
-      {images && (
-        <section className="overflow-hidden -mx-[calc(50svw-50%)] md:w-[calc(100svw-9px)]">
-          <Carousel
-            wrapperTWStyles="h-[80svh] md:h-[90svh] relative bg-black/50 shadow-xl shadow-black dark:shadow-white"
-            ariaLabel="Apartment photos"
-          >
-            {images.map((image: TCarouselImage, index: number) => (
-              <CarouselImage
-                key={uuidv4()}
-                image={image}
-                styles="object-contain object-center"
-                size={{ w: 1980, h: 1080, type: "lg" }}
-                index={index}
-              />
-            ))}
-          </Carousel>
-        </section>
-      )}
+      {images && <ImageGallery images={images} />}
 
       {heading && (
         <header className="text-center mt-3 mb-14 max-md:px-5">

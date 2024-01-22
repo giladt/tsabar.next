@@ -11,59 +11,93 @@
     "images": [
       {
         "id": "tsuThgafp5zOWnibX8z9G",
+        "width": 1280,
+        "height": 720,
         "description": "Living room",
         "priority": true
       },
       {
         "id": "oyyJbGR55j7wM1gV42kgN",
+        "width": 1280,
+        "height": 720,
         "description": "Living room"
       },
       {
         "id": "mDDAXYAYiEXDV-LIeVnp3",
+        "width": 1280,
+        "height": 2276,
         "description": "Living room"
       },
       {
         "id": "JlY9EtLgdrsYCQYUgsUeE",
+        "width": 1280,
+        "height": 720,
         "description": "Living room"
       },
       {
         "id": "YHqCtg1xhgQ2kkOUKAPuG",
+        "width": 1280,
+        "height": 960,
         "description": "Flowers"
       },
       {
         "id": "cvUgVbTwHuVcAw4WwLOrH",
+        "width": 1280,
+        "height": 720,
         "description": "Kitchen"
       },
       {
         "id": "YAxmzVH8_MzKtYhbdw_b3",
+        "width": 1280,
+        "height": 720,
         "description": "Kitchen"
       },
       {
         "id": "pNldrAF6FnGTfTJubvt7r",
+        "width": 1280,
+        "height": 720,
         "description": "Kitchen"
       },
       {
         "id": "VlXdia_SUxhXx-QZAkEdO",
+        "width": 1280,
+        "height": 853,
         "description": "Sweets"
       },
       {
         "id": "lD-DRu3rYEsvk-qaWuZ71",
+        "width": 1280,
+        "height": 2276,
         "description": "Bathroom"
       },
       {
         "id": "n85ItegwSaVfCefzLH6iX",
+        "width": 1280,
+        "height": 2276,
         "description": "Corridor"
       },
       {
         "id": "ou3m1nhOFUPi_9iiOT6xN",
+        "width": 1280,
+        "height": 1707,
         "description": "Balcony"
       },
       {
         "id": "rwb3nr9PIy1PSAHmV8ohs",
+        "width": 1280,
+        "height": 960,
         "description": "Street"
       },
       {
         "id": "Vy9j0SAWa9JsGQa34kSTI",
+        "width": 1280,
+        "height": 1707,
+        "description": "Street"
+      },
+      {
+        "id": "MkEEgck0eEA32DS3_gh63",
+        "width": 1280,
+        "height": 720,
         "description": "Street"
       }
     ],
@@ -92,47 +126,75 @@
     "images": [
       {
         "id": "1MXiIzsgDmwQ_fn78TsR3",
+        "width": 1280,
+        "height": 720,
         "description": "Living room"
       },
       {
         "id": "xGBUbNWOKQbeZTFJtHdlB",
+        "width": 1280,
+        "height": 720,
         "description": "Living room",
         "priority": true
       },
       {
         "id": "YEj-DhIVJecJTjEAUEGb9",
+        "width": 1280,
+        "height": 720,
         "description": "Work space"
       },
       {
         "id": "2Y4tujwv6tubwJhCRys35",
+        "width": 1280,
+        "height": 720,
         "description": "Side board"
       },
       {
         "id": "vEpshEHlEH-SNL2Z390To",
+        "width": 1280,
+        "height": 720,
         "description": "Yellow flower"
       },
       {
         "id": "DWTeZryIESV_eJOKm-Ial",
+        "width": 1280,
+        "height": 720,
         "description": "Kitchen"
       },
       {
         "id": "xZ16L0QgY_pXFR4NaZL70",
+        "width": 1280,
+        "height": 2276,
         "description": "Kitchen"
       },
       {
         "id": "vJmfOCM75MZM7UnehNLtD",
+        "width": 1280,
+        "height": 2276,
         "description": "Bathroom"
       },
       {
         "id": "AdVivu0a_FQDZBDnVUSw1",
+        "width": 1280,
+        "height": 720,
         "description": "Balcony"
       },
       {
         "id": "rwb3nr9PIy1PSAHmV8ohs",
+        "width": 1280,
+        "height": 960,
         "description": "Street"
       },
       {
         "id": "Vy9j0SAWa9JsGQa34kSTI",
+        "width": 1280,
+        "height": 1707,
+        "description": "Street"
+      },
+      {
+        "id": "MkEEgck0eEA32DS3_gh63",
+        "width": 1280,
+        "height": 720,
         "description": "Street"
       }
     ],

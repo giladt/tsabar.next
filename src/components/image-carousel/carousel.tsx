@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactChild, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import {
   CarouselProps,
   Carousel as ReactResponsiveCarousel,
