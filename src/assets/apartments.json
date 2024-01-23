@@ -11,15 +11,15 @@
     "images": [
       {
         "id": "tsuThgafp5zOWnibX8z9G",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Living room",
         "priority": true
       },
       {
         "id": "oyyJbGR55j7wM1gV42kgN",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Living room"
       },
       {
@@ -30,32 +30,32 @@
       },
       {
         "id": "JlY9EtLgdrsYCQYUgsUeE",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Living room"
       },
       {
         "id": "YHqCtg1xhgQ2kkOUKAPuG",
-        "width": 1280,
-        "height": 960,
+        "width": 2560,
+        "height": 1920,
         "description": "Flowers"
       },
       {
         "id": "cvUgVbTwHuVcAw4WwLOrH",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Kitchen"
       },
       {
         "id": "YAxmzVH8_MzKtYhbdw_b3",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Kitchen"
       },
       {
         "id": "pNldrAF6FnGTfTJubvt7r",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Kitchen"
       },
       {
@@ -98,7 +98,67 @@
         "id": "MkEEgck0eEA32DS3_gh63",
         "width": 1280,
         "height": 720,
-        "description": "Street"
+        "description": "Surroundings"
+      },
+      {
+        "id": "AcfPC7JUL59epzA6sM4tJ",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "hPMCN_Vbaki3vWOaL3LUt",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "gfNts7v8vEcPgXhj0bIIi",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "bJT53EfEkxLo3brRTKPLM",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "HHLyiEH9tuo9h2aFH7UsT",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "TFtEM0octrwUUDwoBP7LS",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "RqjJ7nIptMw2Mn5DuhlYL",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "pZNrD2Bc0vJlIXgNY0orJ",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "s1ouetpRBNe4PXg5nxpvO",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "-fUsFf-qNhMuYyHHZJSJU",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
       }
     ],
     "bookings": {},
@@ -126,39 +186,39 @@
     "images": [
       {
         "id": "1MXiIzsgDmwQ_fn78TsR3",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Living room"
       },
       {
         "id": "xGBUbNWOKQbeZTFJtHdlB",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Living room",
         "priority": true
       },
       {
         "id": "YEj-DhIVJecJTjEAUEGb9",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Work space"
       },
       {
         "id": "2Y4tujwv6tubwJhCRys35",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Side board"
       },
       {
         "id": "vEpshEHlEH-SNL2Z390To",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Yellow flower"
       },
       {
         "id": "DWTeZryIESV_eJOKm-Ial",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Kitchen"
       },
       {
@@ -175,27 +235,87 @@
       },
       {
         "id": "AdVivu0a_FQDZBDnVUSw1",
-        "width": 1280,
-        "height": 720,
+        "width": 2560,
+        "height": 1440,
         "description": "Balcony"
       },
       {
         "id": "rwb3nr9PIy1PSAHmV8ohs",
-        "width": 1280,
-        "height": 960,
+        "width": 1920,
+        "height": 2560,
         "description": "Street"
       },
       {
         "id": "Vy9j0SAWa9JsGQa34kSTI",
-        "width": 1280,
-        "height": 1707,
+        "width": 1707,
+        "height": 1280,
         "description": "Street"
       },
       {
         "id": "MkEEgck0eEA32DS3_gh63",
+        "width": 2560,
+        "height": 1440,
+        "description": "Surroundings"
+      },
+      {
+        "id": "AcfPC7JUL59epzA6sM4tJ",
         "width": 1280,
         "height": 720,
-        "description": "Street"
+        "description": "Surroundings"
+      },
+      {
+        "id": "hPMCN_Vbaki3vWOaL3LUt",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "gfNts7v8vEcPgXhj0bIIi",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "bJT53EfEkxLo3brRTKPLM",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "HHLyiEH9tuo9h2aFH7UsT",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "TFtEM0octrwUUDwoBP7LS",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "RqjJ7nIptMw2Mn5DuhlYL",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "pZNrD2Bc0vJlIXgNY0orJ",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "s1ouetpRBNe4PXg5nxpvO",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
+      },
+      {
+        "id": "-fUsFf-qNhMuYyHHZJSJU",
+        "width": 1280,
+        "height": 720,
+        "description": "Surroundings"
       }
     ],
     "bookings": {},
