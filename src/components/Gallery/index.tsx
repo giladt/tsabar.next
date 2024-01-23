@@ -3,8 +3,9 @@ import { Gallery, Image } from "react-grid-gallery";
 import Lightbox from "react-18-image-lightbox";
 import "react-18-image-lightbox/style.css";
 
-import { useState, type FC, useEffect, useMemo } from "react";
+import { useState, type FC } from "react";
 import { wfImageUrl } from "@/utils/images";
+import { useGalleryObserveResize } from "@/hooks/gallery";
 
 type TCustomImage = Image & {
   original: string;
@@ -34,25 +35,7 @@ export const ImageGallery: FC<
   });
 
   const [index, setIndex] = useState(-1);
-  const [tileHeight, setTileHeight] = useState<number>(250);
-  const [containerHeight, setContainerHeight] = useState<string>("h-[80svh]");
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      // setTileHeight(250);
-      // setContainerHeight(`h-[80svh]`);
-
-      return;
-    }
-    window.onresize = () => {
-      setTileHeight((window.innerHeight * 0.8) / 3);
-      setContainerHeight(`h-[${3 * tileHeight + 3 * 4}]`);
-    };
-    return () => {
-      window.onresize = null;
-    };
-  }, []);
-
+  const { tileHeight } = useGalleryObserveResize(80);
   const currentImage = newImages[index];
   const nextIndex = (index + 1) % newImages.length;
   const nextImage = newImages[nextIndex] || currentImage;
@@ -66,7 +49,7 @@ export const ImageGallery: FC<
 
   return (
     <div
-      className={`gallery-wrapper bg-black/50 overflow-hidden -mx-[calc(50svw-50%)] md:w-[calc(100svw-9px)] ${containerHeight}`}
+      className={`gallery-wrapper bg-black/50 overflow-hidden -mx-[calc(50svw-50%)] md:w-[calc(100svw-9px)] h-[80svh]`}
     >
       <Gallery
         enableImageSelection={false}
