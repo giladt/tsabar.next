@@ -42,7 +42,13 @@ export default async function RootLayout({
       className={`${Fonts.roboto.variable} ${Fonts.dancing.variable} ${Fonts.karla.variable}`}
     >
       <body suppressHydrationWarning={true}>
-        <Suspense fallback={<span>Loading G-Analytics...</span>}>
+        <Suspense
+          fallback={
+            <span className="absolute px-4 bottom-4 left-2 bg-black/50 rounded-md">
+              Loading G-Analytics...
+            </span>
+          }
+        >
           <GoogleAnalytics
             GA_MEASUREMENT_ID={`${process.env.GA_MEASUREMENT_ID}`}
           />
