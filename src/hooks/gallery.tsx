@@ -20,7 +20,7 @@ export const useGalleryObserveResize = (containerHeightSVH: number) => {
     return () => {
       window.onresize = null;
     };
-  }, []);
+  }, [containerHeightSVH]);
 
   return { tileHeight: tileHeightPX };
 };
