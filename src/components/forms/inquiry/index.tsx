@@ -216,7 +216,11 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
 
   return (
     <>
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <form
+        data-testid="inquiry-form"
+        className="flex flex-col gap-4"
+        onSubmit={handleSubmit}
+      >
         <DateRange
           className="MyCalendar"
           onChange={handleDateChange}
