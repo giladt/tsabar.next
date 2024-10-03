@@ -1,10 +1,14 @@
-import { wfImageUrl } from "@/utils/images";
+"use client"
+import { localImageUrl, wfImageUrl } from "@/utils/images";
 import Image from "next/image";
 
 export type TCarouselImage = {
   id: string;
   description?: string;
   priority?: boolean;
+  isLocal: boolean;
+  width: number;
+  height: number;
 };
 
 /**
@@ -35,7 +39,7 @@ export const CarouselImage = ({
   index,
 }: TCarouselImageProps) => (
   <Image
-    src={wfImageUrl(image.id, size.type)}
+    src={image.isLocal ? localImageUrl(image.id) : wfImageUrl(image.id, size.type)}
     alt={image.description || ""}
     width={size.w}
     height={size.h}

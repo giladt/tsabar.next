@@ -1,13 +1,14 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { v4 as uuidv4 } from "uuid";
+import { v5 as uuidv5 } from "uuid";
 
-import { Carousel } from "@/components/image-carousel/carousel";
+// import { Carousel } from "@/components/image-carousel/carousel";
 import { LinkBtn } from "@/components/button";
 import {
   CarouselImage,
   type TCarouselImage,
 } from "../image-carousel/carousel-image";
+import useEmblaCarousel from 'embla-carousel-react'
 
 type TCardProps = {
   url: string;
@@ -16,6 +17,7 @@ type TCardProps = {
   images: TCarouselImage[];
 };
 
+
 export default function Card({
   url,
   heading,
@@ -23,6 +25,7 @@ export default function Card({
   images,
 }: TCardProps) {
   const router = useRouter();
+  const [emblaRef] = useEmblaCarousel()
 
   return (
     <section
@@ -30,8 +33,28 @@ export default function Card({
         rounded-md cursor-default
       "
     >
+    <div
+      className="overflow-hidden rounded-md" 
+      ref={emblaRef}
+      onClick={() => {
+        router.push(`/${url}`);
+      }}
+    >
+      <div className="flex cursor-pointer shadow-lg h-[320px] w-[320px] relative">
+        {images.map((image: TCarouselImage, index: number) => (
+          <CarouselImage
+            key={uuidv5(`image-${image.id}-${index}`, uuidv5.URL)}
+            image={image}
+            styles="flex-0"
+            size={{ w: Math.max(320 * image.width / image.height), h: Math.max(320 * image.height / image.width), type: "th" }}
+            index={index}
+          />
+        ))}
+      </div>
+    </div>
+{/* 
       <Carousel
-        wrapperTWStyles="overflow-hidden sm:rounded-md cursor-pointer shadow-lg"
+        wrapperTWStyles="overflow-hidden sm:rounded-md cursor-pointer shadow-lg relative"
         ariaLabel={`Apartment ${heading.name} photos.`}
         onClick={() => {
           router.push(`/${url}`);
@@ -46,7 +69,7 @@ export default function Card({
             index={index}
           />
         ))}
-      </Carousel>
+      </Carousel> */}
       <div className="p-2">
         <h3>{heading.name}</h3>
         {description && <p>{description}</p>}
