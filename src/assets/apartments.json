@@ -14,7 +14,7 @@
         "isLocal": true,
         "width": 2048,
         "height": 1536,
-        "description": "LivingRoom"
+        "description": "Living Room"
       },
       {
         "id": "Bed01",
@@ -31,39 +31,46 @@
         "description": "Living room"
       },
       {
+        "id": "WorkingSpace01",
+        "isLocal": true,
+        "width": 3072,
+        "height": 1728,
+        "description": "Working Space"
+      },
+      {
         "id": "LivingRoom02",
         "isLocal": true,
         "width": 4032,
         "height": 3024,
-        "description": "LivingRoom"
+        "description": "Living Room"
       },
       {
         "id": "LivingRoom03",
         "isLocal": true,
         "width": 4032,
         "height": 3024,
-        "description": "LivingRoom"
+        "description": "Living Room"
       },
       {
         "id": "LivingRoom04",
         "isLocal": true,
         "width": 3072,
         "height": 1728,
-        "description": "LivingRoom"
+        "description": "Living Room"
       },
       {
         "id": "LivingRoom05",
         "isLocal": true,
         "width": 3072,
         "height": 1728,
-        "description": "LivingRoom"
+        "description": "Living Room"
       },
       {
         "id": "LivingRoom06",
         "isLocal": true,
         "width": 3072,
         "height": 1728,
-        "description": "LivingRoom"
+        "description": "Living Room"
       },
       {
         "id": "Bathroom01",
@@ -136,13 +143,6 @@
         "description": "Street"
       },
       {
-        "id": "WorkingSpace01",
-        "isLocal": true,
-        "width": 1307,
-        "height": 1728,
-        "description": "Working Space"
-      },
-      {
         "id": "Area01",
         "isLocal": true,
         "width": 1440,
@@ -156,21 +156,21 @@
         "isLocal": true,
         "width": 1440,
         "height": 810,
-        "description": "Surroundingsm"
+        "description": "Surroundings"
       },
       {
         "id": "Area03",
         "isLocal": true,
         "width": 1440,
         "height": 810,
-        "description": "Surroundingsm"
+        "description": "Surroundings"
       },
       {
         "id": "Area04",
         "isLocal": true,
         "width": 1440,
         "height": 958,
-        "description": "Surroundingsm"
+        "description": "Surroundings"
       },
       {
         "id": "Area05",
@@ -209,13 +209,6 @@
       },
       {
         "id": "Area10",
-        "isLocal": true,
-        "width": 3072,
-        "height": 1728,
-        "description": "Surroundings"
-      },
-      {
-        "id": "Area11",
         "isLocal": true,
         "width": 3072,
         "height": 1728,
