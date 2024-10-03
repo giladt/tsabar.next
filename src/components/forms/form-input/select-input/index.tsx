@@ -13,7 +13,7 @@ export default function SelectInput(
 ) {
   return (
     <FormField>
-      <select name={name} placeholder={placeholder} title={label}>
+      <select name={name} aria-placeholder={placeholder} title={label}>
         {placeholder && <option value="">Please select</option>}
         {children}
       </select>

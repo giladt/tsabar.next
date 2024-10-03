@@ -4,7 +4,7 @@ import Lightbox from "react-18-image-lightbox";
 import "react-18-image-lightbox/style.css";
 
 import { useState, type FC } from "react";
-import { wfImageUrl } from "@/utils/images";
+import { localImageUrl, wfImageUrl } from "@/utils/images";
 import { useGalleryObserveResize } from "@/hooks/gallery";
 
 type TCustomImage = Image & {
@@ -21,12 +21,13 @@ export const ImageGallery: FC<
     description: string;
     width: number;
     height: number;
+    isLocal: boolean;
   }>
 > = ({ images }) => {
   const newImages: TCustomImage[] = images.map((image) => {
     return {
-      src: wfImageUrl(image.id, "lg"),
-      original: wfImageUrl(image.id, "lg"),
+      src: image.isLocal ? localImageUrl(image.id) : wfImageUrl(image.id, "lg"),
+      original: image.isLocal ? localImageUrl(image.id) : wfImageUrl(image.id, "lg"),
       width: image.width,
       height: image.height,
       alt: image.description,
@@ -47,6 +48,10 @@ export const ImageGallery: FC<
   const handleMovePrev = () => setIndex(prevIndex);
   const handleMoveNext = () => setIndex(nextIndex);
 
+  const { original, src, caption } = currentImage || { original: "", src: "", caption: "" }; 
+  const { original: nextImageOriginal, src: nextThumb } = nextImage || { original: "", src: "", caption: "" };
+  const { original: prevImageOriginal, src: prevThumb } = prevImage || { original: "", src: "", caption: "" };
+
   return (
     <div
       className={`gallery-wrapper bg-black/50 overflow-hidden -mx-[calc(50svw-50%)] md:w-[calc(100svw-9px)] h-[80svh]`}
@@ -58,18 +63,20 @@ export const ImageGallery: FC<
         maxRows={3}
         onClick={handleClick}
       />
-      {currentImage?.original && (
+      {original && (
         <Lightbox
-          mainSrc={currentImage.original}
-          nextSrc={nextImage.original}
-          prevSrc={prevImage.original}
-          mainSrcThumbnail={currentImage.src}
-          nextSrcThumbnail={nextImage.src}
-          prevSrcThumbnail={prevImage.src}
+          closeLabel="Close"
+          clickOutsideToClose
+          mainSrc={original}
+          nextSrc={nextImageOriginal}
+          prevSrc={prevImageOriginal}
+          mainSrcThumbnail={src}
+          nextSrcThumbnail={nextThumb}
+          prevSrcThumbnail={prevThumb}
           onCloseRequest={handleClose}
           onMovePrevRequest={handleMovePrev}
           onMoveNextRequest={handleMoveNext}
-          imageCaption={currentImage.caption}
+          imageCaption={caption}
         />
       )}
     </div>

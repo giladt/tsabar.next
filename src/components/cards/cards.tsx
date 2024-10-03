@@ -1,8 +1,7 @@
 import Card from "@/components/card/card";
 import apartments from "@/assets/apartments.json";
 
-type TCardsProps = {};
-export default function Cards({}: TCardsProps) {
+export default function Cards() {
   return (
     <section
       id="cards"

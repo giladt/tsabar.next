@@ -40,8 +40,7 @@ export const Carousel = ({
 
   return (
     <ReactResponsiveCarousel {...carouselOptions}>
-      {/* 
-      // @ts-ignore: deprecated type */}
+      {/* @ts-expect-error deprecated type */}
       {children}
     </ReactResponsiveCarousel>
   );

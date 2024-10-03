@@ -10,154 +10,215 @@
     "description": "A bright and cosy apartment. Wonderful balcony to relax after a long day at work.",
     "images": [
       {
-        "id": "tsuThgafp5zOWnibX8z9G",
-        "width": 2560,
-        "height": 1440,
-        "description": "Living room",
-        "priority": true
+        "id": "LivingRoom01",
+        "isLocal": true,
+        "width": 2048,
+        "height": 1536,
+        "description": "LivingRoom"
       },
       {
-        "id": "oyyJbGR55j7wM1gV42kgN",
-        "width": 2560,
-        "height": 1440,
+        "id": "Bed01",
+        "isLocal": true,
+        "width": 4032,
+        "height": 3024,
+        "description": "Double Bed"
+      },
+      {
+        "id": "Clock01",
+        "isLocal": true,
+        "width": 2674,
+        "height": 1728,
         "description": "Living room"
       },
       {
-        "id": "mDDAXYAYiEXDV-LIeVnp3",
-        "width": 1280,
-        "height": 2276,
-        "description": "Living room"
+        "id": "LivingRoom02",
+        "isLocal": true,
+        "width": 4032,
+        "height": 3024,
+        "description": "LivingRoom"
       },
       {
-        "id": "JlY9EtLgdrsYCQYUgsUeE",
-        "width": 2560,
-        "height": 1440,
-        "description": "Living room"
+        "id": "LivingRoom03",
+        "isLocal": true,
+        "width": 4032,
+        "height": 3024,
+        "description": "LivingRoom"
       },
       {
-        "id": "YHqCtg1xhgQ2kkOUKAPuG",
-        "width": 2560,
-        "height": 1920,
-        "description": "Flowers"
+        "id": "LivingRoom04",
+        "isLocal": true,
+        "width": 3072,
+        "height": 1728,
+        "description": "LivingRoom"
       },
       {
-        "id": "cvUgVbTwHuVcAw4WwLOrH",
-        "width": 2560,
-        "height": 1440,
-        "description": "Kitchen"
+        "id": "LivingRoom05",
+        "isLocal": true,
+        "width": 3072,
+        "height": 1728,
+        "description": "LivingRoom"
       },
       {
-        "id": "YAxmzVH8_MzKtYhbdw_b3",
-        "width": 2560,
-        "height": 1440,
-        "description": "Kitchen"
+        "id": "LivingRoom06",
+        "isLocal": true,
+        "width": 3072,
+        "height": 1728,
+        "description": "LivingRoom"
       },
       {
-        "id": "pNldrAF6FnGTfTJubvt7r",
-        "width": 2560,
-        "height": 1440,
-        "description": "Kitchen"
-      },
-      {
-        "id": "VlXdia_SUxhXx-QZAkEdO",
-        "width": 1280,
-        "height": 853,
-        "description": "Sweets"
-      },
-      {
-        "id": "lD-DRu3rYEsvk-qaWuZ71",
-        "width": 1280,
-        "height": 2276,
+        "id": "Bathroom01",
+        "isLocal": true,
+        "width": 1536,
+        "height": 2048,
         "description": "Bathroom"
       },
       {
-        "id": "n85ItegwSaVfCefzLH6iX",
-        "width": 1280,
-        "height": 2276,
+        "id": "Corridor01",
+        "isLocal": true,
+        "width": 3024,
+        "height": 4032,
         "description": "Corridor"
       },
       {
-        "id": "ou3m1nhOFUPi_9iiOT6xN",
-        "width": 1280,
-        "height": 1707,
+        "id": "Corridor02",
+        "isLocal": true,
+        "width": 2247,
+        "height": 4032,
+        "description": "Corridor"
+      },
+      {
+        "id": "Kitchen01",
+        "isLocal": true,
+        "width": 1536,
+        "height": 2048,
+        "description": "Kitchen"
+      },
+      {
+        "id": "Kitchen02",
+        "isLocal": true,
+        "width": 1440,
+        "height": 960,
+        "description": "Kitchen"
+      },
+      {
+        "id": "Kitchen03",
+        "isLocal": true,
+        "width": 3072,
+        "height": 1728,
+        "description": "Kitchen"
+      },
+      {
+        "id": "Kitchen04",
+        "isLocal": true,
+        "width": 3072,
+        "height": 1728,
+        "description": "Kitchen"
+      },
+      {
+        "id": "Balcony01",
+        "isLocal": true,
+        "width": 1536,
+        "height": 2048,
         "description": "Balcony"
       },
       {
-        "id": "rwb3nr9PIy1PSAHmV8ohs",
-        "width": 1280,
-        "height": 960,
+        "id": "Street01",
+        "isLocal": true,
+        "width": 1350,
+        "height": 1834,
         "description": "Street"
       },
       {
-        "id": "Vy9j0SAWa9JsGQa34kSTI",
-        "width": 1280,
-        "height": 1707,
+        "id": "Street02",
+        "isLocal": true,
+        "width": 1359,
+        "height": 1023,
         "description": "Street"
       },
       {
-        "id": "MkEEgck0eEA32DS3_gh63",
-        "width": 1280,
-        "height": 720,
+        "id": "WorkingSpace01",
+        "isLocal": true,
+        "width": 1307,
+        "height": 1728,
+        "description": "Working Space"
+      },
+      {
+        "id": "Area01",
+        "isLocal": true,
+        "width": 1440,
+        "height": 958,
+        "description": "Surroundings",
+        "priority": true
+
+      },
+      {
+        "id": "Area02",
+        "isLocal": true,
+        "width": 1440,
+        "height": 810,
+        "description": "Surroundingsm"
+      },
+      {
+        "id": "Area03",
+        "isLocal": true,
+        "width": 1440,
+        "height": 810,
+        "description": "Surroundingsm"
+      },
+      {
+        "id": "Area04",
+        "isLocal": true,
+        "width": 1440,
+        "height": 958,
+        "description": "Surroundingsm"
+      },
+      {
+        "id": "Area05",
+        "isLocal": true,
+        "width": 1440,
+        "height": 2168,
         "description": "Surroundings"
       },
       {
-        "id": "AcfPC7JUL59epzA6sM4tJ",
-        "width": 1280,
-        "height": 720,
+        "id": "Area06",
+        "isLocal": true,
+        "width": 1440,
+        "height": 1080,
         "description": "Surroundings"
       },
       {
-        "id": "hPMCN_Vbaki3vWOaL3LUt",
-        "width": 1280,
-        "height": 720,
+        "id": "Area07",
+        "isLocal": true,
+        "width": 1440,
+        "height": 1080,
         "description": "Surroundings"
       },
       {
-        "id": "gfNts7v8vEcPgXhj0bIIi",
-        "width": 1280,
-        "height": 720,
+        "id": "Area08",
+        "isLocal": true,
+        "width": 1440,
+        "height": 1080,
         "description": "Surroundings"
       },
       {
-        "id": "bJT53EfEkxLo3brRTKPLM",
-        "width": 1280,
-        "height": 720,
+        "id": "Area09",
+        "isLocal": true,
+        "width": 1440,
+        "height": 1080,
         "description": "Surroundings"
       },
       {
-        "id": "HHLyiEH9tuo9h2aFH7UsT",
-        "width": 1280,
-        "height": 720,
+        "id": "Area10",
+        "isLocal": true,
+        "width": 3072,
+        "height": 1728,
         "description": "Surroundings"
       },
       {
-        "id": "TFtEM0octrwUUDwoBP7LS",
-        "width": 1280,
-        "height": 720,
-        "description": "Surroundings"
-      },
-      {
-        "id": "RqjJ7nIptMw2Mn5DuhlYL",
-        "width": 1280,
-        "height": 720,
-        "description": "Surroundings"
-      },
-      {
-        "id": "pZNrD2Bc0vJlIXgNY0orJ",
-        "width": 1280,
-        "height": 720,
-        "description": "Surroundings"
-      },
-      {
-        "id": "s1ouetpRBNe4PXg5nxpvO",
-        "width": 1280,
-        "height": 720,
-        "description": "Surroundings"
-      },
-      {
-        "id": "-fUsFf-qNhMuYyHHZJSJU",
-        "width": 1280,
-        "height": 720,
+        "id": "Area11",
+        "isLocal": true,
+        "width": 3072,
+        "height": 1728,
         "description": "Surroundings"
       }
     ],
@@ -186,12 +247,14 @@
     "images": [
       {
         "id": "1MXiIzsgDmwQ_fn78TsR3",
+        "isLocal": false,
         "width": 2560,
         "height": 1440,
         "description": "Living room"
       },
       {
         "id": "xGBUbNWOKQbeZTFJtHdlB",
+        "isLocal": false,
         "width": 2560,
         "height": 1440,
         "description": "Living room",
@@ -199,120 +262,140 @@
       },
       {
         "id": "YEj-DhIVJecJTjEAUEGb9",
+        "isLocal": false,
         "width": 2560,
         "height": 1440,
         "description": "Work space"
       },
       {
         "id": "2Y4tujwv6tubwJhCRys35",
+        "isLocal": false,
         "width": 2560,
         "height": 1440,
         "description": "Side board"
       },
       {
         "id": "vEpshEHlEH-SNL2Z390To",
+        "isLocal": false,
         "width": 2560,
         "height": 1440,
         "description": "Yellow flower"
       },
       {
         "id": "DWTeZryIESV_eJOKm-Ial",
+        "isLocal": false,
         "width": 2560,
         "height": 1440,
         "description": "Kitchen"
       },
       {
         "id": "xZ16L0QgY_pXFR4NaZL70",
+        "isLocal": false,
         "width": 1280,
         "height": 2276,
         "description": "Kitchen"
       },
       {
         "id": "vJmfOCM75MZM7UnehNLtD",
+        "isLocal": false,
         "width": 1280,
         "height": 2276,
         "description": "Bathroom"
       },
       {
         "id": "AdVivu0a_FQDZBDnVUSw1",
+        "isLocal": false,
         "width": 2560,
         "height": 1440,
         "description": "Balcony"
       },
       {
         "id": "rwb3nr9PIy1PSAHmV8ohs",
+        "isLocal": false,
         "width": 1920,
         "height": 2560,
         "description": "Street"
       },
       {
         "id": "Vy9j0SAWa9JsGQa34kSTI",
+        "isLocal": false,
         "width": 1707,
         "height": 1280,
         "description": "Street"
       },
       {
         "id": "MkEEgck0eEA32DS3_gh63",
+        "isLocal": false,
         "width": 2560,
         "height": 1440,
         "description": "Surroundings"
       },
       {
         "id": "AcfPC7JUL59epzA6sM4tJ",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
       },
       {
         "id": "hPMCN_Vbaki3vWOaL3LUt",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
       },
       {
         "id": "gfNts7v8vEcPgXhj0bIIi",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
       },
       {
         "id": "bJT53EfEkxLo3brRTKPLM",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
       },
       {
         "id": "HHLyiEH9tuo9h2aFH7UsT",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
       },
       {
         "id": "TFtEM0octrwUUDwoBP7LS",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
       },
       {
         "id": "RqjJ7nIptMw2Mn5DuhlYL",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
       },
       {
         "id": "pZNrD2Bc0vJlIXgNY0orJ",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
       },
       {
         "id": "s1ouetpRBNe4PXg5nxpvO",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
       },
       {
         "id": "-fUsFf-qNhMuYyHHZJSJU",
+        "isLocal": false,
         "width": 1280,
         "height": 720,
         "description": "Surroundings"
