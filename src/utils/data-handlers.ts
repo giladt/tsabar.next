@@ -5,7 +5,7 @@ import { mangle } from "marked-mangle";
 import { gfmHeadingId } from "marked-gfm-heading-id";
 import createDOMPurify from "dompurify";
 import { RangeKeyDict } from "react-date-range";
-import { subDays, toDate } from "date-fns";
+import { subDays } from "date-fns";
 
 export const getData = async (iCalURL: string): Promise<RangeKeyDict["bookings"][]> => {
   try {
@@ -45,11 +45,13 @@ export const parseICalData = (data: string[]) => {
       const match = /(?<=DT)(.*)(?=;).*(?<=DATE:)(.*)(?=)/g.exec(line);
 
       if (!!match) {
-        const [_, key, value]: string[] = match;
-        const [year, month, day] = [value.slice(0, 4), value.slice(4, 6), value.slice(6, 8)]
-        key.toLowerCase() === "start"
-          ? event.startDate = new Date(`${year}-${month}-${day}`)
-          : event.endDate = subDays(new Date(`${year}-${month}-${day}`), 1);
+        const [key, value]: string[] = match.slice(1);
+        const [ year, month, day ] = [value.slice(0, 4), value.slice(4, 6), value.slice(6, 8)];
+        if (key.toLowerCase() === "start") {
+          event.startDate = new Date(`${year}-${month}-${day}`)
+        } else {
+          event.endDate = subDays(new Date(`${year}-${month}-${day}`), 1);
+        }
       }
     }
   }
@@ -88,13 +90,15 @@ export const getMdFileData = async (fileName: string) => {
 
     const window = new JSDOM("").window;
     const DOMPurify = createDOMPurify(window);
-    const sanitizedHtml = DOMPurify.sanitize(marked(pageContent)).replaceAll(
+    const mdContent = await marked(pageContent)
+    const sanitizedHtml = DOMPurify.sanitize(mdContent).replaceAll(
       /<a /g,
       `<a target="_blank" rel="noreferrer noopener nofollow" `
     );
 
     return { data: sanitizedHtml };
   } catch (error: unknown) {
+    console.log({ error })
     throw new Error(`Error: '${fileName}' could not be fetched.`);
   }
 };

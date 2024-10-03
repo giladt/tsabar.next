@@ -2,7 +2,7 @@ import { TFields } from "@/components/forms/inquiry";
 import { mailOptions, transporter } from "@/utils/transporter";
 import { NextRequest, NextResponse } from "next/server";
 
-function instanceOfTData(object: any): object is TData {
+function instanceOfTData(object: TData): object is TData {
   return typeof object.email === "string";
 }
 

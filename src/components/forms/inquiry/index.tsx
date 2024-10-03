@@ -8,7 +8,7 @@ import {
   useRef,
 } from "react";
 import { DateRange, RangeKeyDict } from "react-date-range";
-import { addDays, format, isBefore } from "date-fns";
+import { addDays, isBefore } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import "@/components/forms/inquiry/calendar.scss";
@@ -143,7 +143,6 @@ export default function Inquiry({ apartment, bookings }: TInquiryProps) {
 
   const handleDateChange = (
     ranges: RangeKeyDict,
-    e?: HTMLInputElement | null | undefined
   ) => {
     const { selection } = ranges;
     setInquiryInput(selection);

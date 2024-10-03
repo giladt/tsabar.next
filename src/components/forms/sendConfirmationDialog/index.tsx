@@ -20,7 +20,7 @@ export const SendConfirmation = ({
   const [isLoading, setIsLoading] = useState<boolean>();
 
   const handleSendInquiry = async () => {
-    let body: { [key in keyof typeof value]?: string } = {};
+    const body: { [key in keyof typeof value]?: string } = {};
     Object.entries(value).forEach((entry) => {
       body[entry[0] as keyof typeof value] = entry[1].text;
     });
